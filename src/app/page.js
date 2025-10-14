@@ -1,103 +1,115 @@
-import Image from "next/image";
+import { getAllContent } from '@/lib/mdx';
+import HomeClient from '@/components/HomeClient';
 
-export default function Home() {
+export default async function Home() {
+  // Load all recipes to calculate dynamic counts
+  const allRecipes = await getAllContent('recipes');
+  
+  // Try to load articles (may not exist yet)
+  let allArticles = [];
+  try {
+    allArticles = await getAllContent('articles');
+  } catch (error) {
+    // Articles don't exist yet, use empty array
+    allArticles = [];
+  }
+
+  // Try to load authors (may not exist yet)
+  let allAuthors = [];
+  try {
+    allAuthors = await getAllContent('authors');
+  } catch (error) {
+    // Authors don't exist yet, use empty array
+    allAuthors = [];
+  }
+
+  // Get featured recipes first (prioritize featured: true)
+  const featuredMarked = allRecipes
+    .filter(r => r.featured === true)
+    .sort((a, b) => {
+      const dateA = new Date(a.publishedAt || 0);
+      const dateB = new Date(b.publishedAt || 0);
+      return dateB - dateA;
+    });
+
+  // If less than 12 featured, fill with latest non-featured recipes
+  let featuredRecipes = [...featuredMarked];
+  if (featuredRecipes.length < 12) {
+    const nonFeatured = allRecipes
+      .filter(r => !r.featured)
+      .sort((a, b) => {
+        const dateA = new Date(a.publishedAt || 0);
+        const dateB = new Date(b.publishedAt || 0);
+        return dateB - dateA;
+      });
+    
+    featuredRecipes.push(...nonFeatured.slice(0, 12 - featuredRecipes.length));
+  }
+
+  // Calculate recipe counts dynamically
+  const collections = [
+    {
+      title: 'Höstens favoriter',
+      description: 'Varma och mysiga rätter för hösten',
+      image: 'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=1200&q=80',
+      slug: 'hostens-favoriter',
+      recipes: allRecipes.filter(r => 
+        r.tags && (r.tags.includes('Höst') || r.tags.includes('Comfort food') || r.category === 'Grytor & Soppor' || r.category === 'Bakning')
+      ).length,
+    },
+    {
+      title: 'Snabb vardagsmat',
+      description: 'Klart på under 30 minuter',
+      image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=80',
+      slug: 'snabb-vardagsmat',
+      recipes: allRecipes.filter(r => r.totalTimeMinutes <= 30).length,
+    },
+    {
+      title: 'Vegetariska favoriter',
+      description: 'Grönt och gott hela veckan',
+      image: 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=1200&q=80',
+      slug: 'vegetariskt',
+      recipes: allRecipes.filter(r => r.category === 'Vegetariskt' || (r.tags && r.tags.includes('Vegetariskt'))).length,
+    },
+  ];
+
+  // Calculate tag counts dynamically
+  const tagCounts = {};
+  allRecipes.forEach(recipe => {
+    if (recipe.tags) {
+      recipe.tags.forEach(tag => {
+        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+      });
+    }
+  });
+
+  const popularTags = [
+    { name: 'Vardagsmat', slug: 'vardagsmat', image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80' },
+    { name: 'Vegetariskt', slug: 'vegetariskt', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80' },
+    { name: 'Bakning', slug: 'bakning', image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80' },
+    { name: 'Pasta', slug: 'pasta', image: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800&q=80' },
+    { name: 'Grillmat', slug: 'grillmat', image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80' },
+    { name: 'Desserter', slug: 'desserter', image: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&q=80' },
+    { name: 'Soppor', slug: 'soppor', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&q=80' },
+    { name: 'Sallader', slug: 'sallader', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80' },
+    { name: 'Kyckling', slug: 'kyckling', image: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=800&q=80' },
+    { name: 'Fisk', slug: 'fisk', image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80' },
+    { name: 'Snabb middag', slug: 'snabb-vardagsmat', image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80' },
+    { name: 'Glutenfritt', slug: 'glutenfritt', image: 'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=800&q=80' },
+  ].map(tag => ({
+    ...tag,
+    count: `${tagCounts[tag.name] || 0}+ recept`,
+  }));
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <HomeClient 
+      collections={collections}
+      popularTags={popularTags}
+      totalRecipes={allRecipes.length}
+      featuredRecipes={featuredRecipes}
+      allRecipes={allRecipes}
+      articles={allArticles}
+      authors={allAuthors}
+    />
   );
 }

@@ -1,0 +1,14 @@
+{
+  "name": "Emma Andersson",
+  "slug": "emma-andersson",
+  "bio": "Mat-entusiast och receptutvecklare med passion för svensk husmanskost och internationella smaker. Älskar att experimentera i köket och dela med sig av sina bästa recept.",
+  "avatar": {
+    "src": "/images/authors/emma.jpg",
+    "alt": "Emma Andersson"
+  },
+  "social": {
+    "instagram": "https://instagram.com/emma_lagar",
+    "pinterest": "https://pinterest.com/emmalagar"
+  }
+}
+

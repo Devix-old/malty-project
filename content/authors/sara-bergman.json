@@ -1,0 +1,14 @@
+{
+  "name": "Sara Bergman",
+  "slug": "sara-bergman",
+  "bio": "Kokkonsult och matskribent med fokus på hälsosam vardagsmat. Specialiserad på vegetariska rätter och asiatisk matlagning. Driver också egna matlagningskurser.",
+  "avatar": {
+    "src": "/images/authors/sara.jpg",
+    "alt": "Sara Bergman"
+  },
+  "social": {
+    "instagram": "https://instagram.com/saras_kok",
+    "youtube": "https://youtube.com/@saraskok"
+  }
+}
+
