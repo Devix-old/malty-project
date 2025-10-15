@@ -1,5 +1,6 @@
 import { getAllContent } from '@/lib/mdx';
 import RecipeListingClient from '@/components/recipe/RecipeListingClient';
+import { Suspense } from 'react';
 
 export const metadata = {
   title: 'Alla recept',
@@ -10,6 +11,10 @@ export default async function RecipesPage() {
   // Load all recipes from MDX files
   const recipes = await getAllContent('recipes');
 
-  return <RecipeListingClient initialRecipes={recipes} />;
+  return (
+    <Suspense>
+      <RecipeListingClient initialRecipes={recipes} />
+    </Suspense>
+  );
 }
 

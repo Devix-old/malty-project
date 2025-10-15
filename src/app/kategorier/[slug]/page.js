@@ -1,6 +1,7 @@
 import { getAllContent } from '@/lib/mdx';
 import RecipeListingClient from '@/components/recipe/RecipeListingClient';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 // Category mapping - slug to display name
 const categoryMap = {
@@ -81,11 +82,13 @@ export default async function CategoryPage({ params }) {
   });
 
   return (
-    <RecipeListingClient 
-      initialRecipes={categoryRecipes} 
-      categoryName={categoryName}
-      showHero={true}
-    />
+    <Suspense>
+      <RecipeListingClient 
+        initialRecipes={categoryRecipes} 
+        categoryName={categoryName}
+        showHero={true}
+      />
+    </Suspense>
   );
 }
 

@@ -16,6 +16,7 @@ import BlogContent from '@/components/blog/BlogContent';
 
 export default function BlogDetailClient({ frontmatter, content, slug, relatedArticles }) {
   const [copied, setCopied] = useState(false);
+  const [viewport, setViewport] = useState({ width: 0, height: 0 });
   const containerRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -34,9 +35,14 @@ export default function BlogDetailClient({ frontmatter, content, slug, relatedAr
   const heroY = useTransform(smoothProgress, [0, 1], ["0%", "30%"]);
   const heroOpacity = useTransform(smoothProgress, [0, 0.3], [1, 0]);
 
+  // Initialize viewport only on client to avoid SSR window usage
+  useEffect(() => {
+    setViewport({ width: window.innerWidth, height: window.innerHeight });
+  }, []);
+
   // Share functionality
   const handleShare = async (platform) => {
-    const url = window.location.href;
+    const url = typeof window !== 'undefined' ? window.location.href : '';
     const title = frontmatter.title;
 
     const shareUrls = {
@@ -46,11 +52,15 @@ export default function BlogDetailClient({ frontmatter, content, slug, relatedAr
     };
 
     if (platform === 'copy') {
-      await navigator.clipboard.writeText(url);
+      if (typeof navigator !== 'undefined' && navigator.clipboard) {
+        await navigator.clipboard.writeText(url);
+      }
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } else if (shareUrls[platform]) {
-      window.open(shareUrls[platform], '_blank', 'width=600,height=400');
+      if (typeof window !== 'undefined') {
+        window.open(shareUrls[platform], '_blank', 'width=600,height=400');
+      }
     }
   };
 
@@ -65,12 +75,12 @@ export default function BlogDetailClient({ frontmatter, content, slug, relatedAr
           <motion.div
             key={i}
             initial={{ 
-              x: Math.random() * window.innerWidth, 
-              y: Math.random() * window.innerHeight,
+              x: Math.random() * (viewport.width || 0), 
+              y: Math.random() * (viewport.height || 0),
               scale: 0
             }}
             animate={{
-              y: [null, Math.random() * window.innerHeight],
+              y: [null, Math.random() * (viewport.height || 0)],
               scale: [0, Math.random() * 0.5 + 0.3, 0],
               opacity: [0, 0.3, 0],
             }}
