@@ -5,22 +5,12 @@ import { Suspense } from 'react';
 
 // Category mapping - slug to display name
 const categoryMap = {
-  'hostens-favoriter': 'Höstens favoriter',
-  'snabb-vardagsmat': 'Snabb middag',
-  'vegetariskt': 'Vegetariskt',
-  'vardagsmat': 'Vardagsmat',
-  'bakning': 'Bakning',
-  'desserter': 'Desserter',
-  'pasta': 'Pasta',
-  'grillmat': 'Grillmat',
-  'soppor': 'Grytor & Soppor',
-  'sallader': 'Sallader',
-  'kyckling': 'Kyckling',
-  'fisk': 'Fisk & Skaldjur',
-  'glutenfritt': 'Glutenfritt',
-  'kott': 'Kött',
-  'frukost': 'Frukost',
-  'tillbehor': 'Tillbehör',
+  'kladdkaka': 'Kladdkaka',
+  'chokladboll': 'Chokladboll',
+  'appelpaj': 'Äppelpaj',
+  'cookies': 'Cookies',
+  'vafflor': 'Våfflor',
+  'pannkakor': 'Pannkakor',
 };
 
 // Generate static params for all categories
@@ -60,25 +50,32 @@ export default async function CategoryPage({ params }) {
   
   // Filter recipes by category
   const categoryRecipes = allRecipes.filter(recipe => {
-    // Special handling for collections (not real categories)
-    if (slug === 'hostens-favoriter') {
-      // Autumn favorites - soups, baking, comfort food
-      return recipe.tags && (
-        recipe.tags.includes('Höst') ||
-        recipe.tags.includes('Comfort food') ||
-        recipe.category === 'Grytor & Soppor' ||
-        recipe.category === 'Bakning'
-      );
+    // Filter by tags for our dessert categories
+    if (slug === 'kladdkaka') {
+      return recipe.tags && recipe.tags.includes('Kladdkaka');
     }
     
-    if (slug === 'snabb-vardagsmat') {
-      // Quick weekday meals - under 30 minutes
-      return recipe.totalTimeMinutes <= 30;
+    if (slug === 'chokladboll') {
+      return recipe.tags && recipe.tags.includes('Chokladboll');
     }
     
-    // For regular categories: only match by category field, NOT by tags
-    // This ensures each recipe appears only in its primary category
-    return recipe.category === categoryName;
+    if (slug === 'appelpaj') {
+      return recipe.tags && recipe.tags.includes('Äppelpaj');
+    }
+    
+    if (slug === 'cookies') {
+      return recipe.tags && recipe.tags.includes('Cookies');
+    }
+    
+    if (slug === 'vafflor') {
+      return recipe.tags && recipe.tags.includes('Våfflor');
+    }
+    
+    if (slug === 'pannkakor') {
+      return recipe.tags && recipe.tags.includes('Pannkakor');
+    }
+    
+    return false;
   });
 
   return (

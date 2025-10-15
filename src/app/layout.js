@@ -36,14 +36,14 @@ const crimson = Crimson_Text({
 
 export const metadata = {
   ...generateSiteMetadata({
-    title: 'Malty - Sveriges bästa receptsamling',
-    description: 'Hitta tusentals recept för vardag och fest. Från snabba vardagsmiddagar till imponerande bakverk. Malty har allt du behöver för att lyckas i köket.',
+    title: 'Malty - Sveriges bästa desserter och bakverk',
+    description: 'Upptäck fantastiska dessertrecept för alla tillfällen. Från klassisk kladdkaka till moderna chokladvåfflor. Malty har alla söta favoriter du behöver för att lyckas med bakning.',
     url: '/',
   }),
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://malty.se'),
   title: {
     template: '%s | Malty',
-    default: 'Malty - Sveriges bästa receptsamling',
+    default: 'Malty - Sveriges bästa desserter och bakverk',
   },
 };
 

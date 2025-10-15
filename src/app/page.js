@@ -49,27 +49,31 @@ export default async function Home() {
   // Calculate recipe counts dynamically
   const collections = [
     {
-      title: 'Höstens favoriter',
-      description: 'Varma och mysiga rätter för hösten',
-      image: 'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=1200&q=80',
-      slug: 'hostens-favoriter',
+      title: 'Kladdkaka',
+      description: 'Sveriges mest älskade chokladkaka i alla varianter',
+      image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1200&q=80',
+      slug: 'kladdkaka',
       recipes: allRecipes.filter(r => 
-        r.tags && (r.tags.includes('Höst') || r.tags.includes('Comfort food') || r.category === 'Grytor & Soppor' || r.category === 'Bakning')
+        r.tags && r.tags.includes('Kladdkaka')
       ).length,
     },
     {
-      title: 'Snabb vardagsmat',
-      description: 'Klart på under 30 minuter',
-      image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=80',
-      slug: 'snabb-vardagsmat',
-      recipes: allRecipes.filter(r => r.totalTimeMinutes <= 30).length,
+      title: 'Chokladboll',
+      description: 'Klassiska no-bake favoriter och moderna varianter',
+      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80',
+      slug: 'chokladboll',
+      recipes: allRecipes.filter(r => 
+        r.tags && r.tags.includes('Chokladboll')
+      ).length,
     },
     {
-      title: 'Vegetariska favoriter',
-      description: 'Grönt och gott hela veckan',
-      image: 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=1200&q=80',
-      slug: 'vegetariskt',
-      recipes: allRecipes.filter(r => r.category === 'Vegetariskt' || (r.tags && r.tags.includes('Vegetariskt'))).length,
+      title: 'Äppelpaj',
+      description: 'Klassisk svensk äppelpaj med smuldeg och söta äpplen',
+      image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=1200&q=80',
+      slug: 'appelpaj',
+      recipes: allRecipes.filter(r => 
+        r.tags && r.tags.includes('Äppelpaj')
+      ).length,
     },
   ];
 
@@ -84,18 +88,12 @@ export default async function Home() {
   });
 
   const popularTags = [
-    { name: 'Vardagsmat', slug: 'vardagsmat', image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80' },
-    { name: 'Vegetariskt', slug: 'vegetariskt', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80' },
-    { name: 'Bakning', slug: 'bakning', image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80' },
-    { name: 'Pasta', slug: 'pasta', image: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800&q=80' },
-    { name: 'Grillmat', slug: 'grillmat', image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80' },
-    { name: 'Desserter', slug: 'desserter', image: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&q=80' },
-    { name: 'Soppor', slug: 'soppor', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&q=80' },
-    { name: 'Sallader', slug: 'sallader', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80' },
-    { name: 'Kyckling', slug: 'kyckling', image: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=800&q=80' },
-    { name: 'Fisk', slug: 'fisk', image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80' },
-    { name: 'Snabb middag', slug: 'snabb-vardagsmat', image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80' },
-    { name: 'Glutenfritt', slug: 'glutenfritt', image: 'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=800&q=80' },
+    { name: 'Kladdkaka', slug: 'kladdkaka', image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80' },
+    { name: 'Chokladboll', slug: 'chokladboll', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80' },
+    { name: 'Äppelpaj', slug: 'appelpaj', image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=800&q=80' },
+    { name: 'Cookies', slug: 'cookies', image: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=800&q=80' },
+    { name: 'Våfflor', slug: 'vafflor', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=800&q=80' },
+    { name: 'Pannkakor', slug: 'pannkakor', image: 'https://images.unsplash.com/photo-1506084868230-bb9d95c24759?w=800&q=80' },
   ].map(tag => ({
     ...tag,
     count: `${tagCounts[tag.name] || 0}+ recept`,

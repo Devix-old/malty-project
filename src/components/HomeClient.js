@@ -7,7 +7,6 @@ import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import SearchBar from '@/components/ui/SearchBar';
 import Tag from '@/components/ui/Tag';
-import EditorialSplitSection from '@/components/ui/EditorialSplitSection';
 import FeaturedRecipes from '@/components/home/FeaturedRecipes';
 import Newsletter from '@/components/home/Newsletter';
 import BlogPreview from '@/components/home/BlogPreview';
@@ -31,19 +30,19 @@ export default function HomeClient({
 
   const heroSlides = [
     {
-      image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1920&q=80',
-      title: 'Upptäck fantastiska recept',
-      subtitle: `Över ${totalRecipes} provlagade recept som alltid lyckas`,
+      image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1920&q=80',
+      title: 'Upptäck fantastiska desserter',
+      subtitle: `Över ${totalRecipes} provlagade dessertrecept som alltid lyckas`,
     },
     {
-      image: 'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=1920&q=80',
-      title: 'Mat som inspirerar',
-      subtitle: 'Från snabba vardagsmiddagar till imponerande festmat',
+      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80',
+      title: 'Söta klassiker och moderna favoriter',
+      subtitle: 'Från klassisk kladdkaka till lyxiga chokladvåfflor',
     },
     {
-      image: 'https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=1920&q=80',
+      image: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=1920&q=80',
       title: 'Kreativitet i köket',
-      subtitle: 'Hitta inspiration för alla tillfällen och smaker',
+      subtitle: 'Hitta inspiration för alla söta tillfällen och smaker',
     },
   ];
 
@@ -340,8 +339,6 @@ export default function HomeClient({
       {/* Seasonal Inspiration - NEW SECTION */}
       <SeasonalInspiration recipes={allRecipes} />
 
-      {/* Editorial Split Sections - Breakfast + Sustainability */}
-      <EditorialSplitSection />
 
       {/* Blog Preview - NEW SECTION */}
       <BlogPreview articles={articles} />
@@ -362,9 +359,9 @@ export default function HomeClient({
               Välkommen till Malty
             </h2>
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
-              Vi är passionerade matälskare som älskar att dela med oss av våra favoritrecept. 
-              Hos oss hittar du allt från snabba vardagsmiddagar till imponerande festmat, 
-              alla testade och godkända. Vårt mål är att göra matlagning roligt, enkelt och tillgängligt för alla.
+              Vi är passionerade dessertälskare som älskar att dela med oss av våra favoritrecept. 
+              Hos oss hittar du allt från klassiska svenska desserter till moderna favoriter, 
+              alla testade och godkända. Vårt mål är att göra dessertbakning roligt, enkelt och tillgängligt för alla.
             </p>
             <Button
               variant="primary"
@@ -423,10 +420,10 @@ export default function HomeClient({
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Redo att börja laga mat?
+              Redo att börja baka desserter?
             </h2>
             <p className="text-xl mb-8 opacity-95">
-              Utforska våra hundratals recept och hitta din nästa favoriträtt idag.
+              Utforska våra hundratals dessertrecept och hitta din nästa favoritdessert idag.
             </p>
             <Button
               variant="secondary"

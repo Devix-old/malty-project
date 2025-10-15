@@ -7,30 +7,30 @@ import { Heart, Users, Target, Award, Sparkles, ChefHat, BookOpen, Mail } from '
 export default function OmClient() {
   const team = [
     {
-      name: 'Anna Bergström',
-      role: 'Grundare & Huvudkock',
+      name: 'Emma Andersson',
+      role: 'Grundare & Dessertexpert',
       image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80',
-      bio: 'Passionerad matlagare med fokus på vegetarisk matlagning och hållbarhet.',
+      bio: 'Passionerad dessertälskare med specialitet inom svenska klassiker som kladdkaka och chokladbollar.',
     },
     {
       name: 'Erik Lindström',
-      role: 'Receptutvecklare',
+      role: 'Bakningsutvecklare',
       image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80',
-      bio: 'Självlärd kock med kärlek för svensk husmanskost och moderna tolkningar.',
+      bio: 'Konditor med kärlek för moderna dessertvarianter och kreativa baktekniker.',
     },
     {
-      name: 'Maria Svensson',
-      role: 'Baknings expert',
+      name: 'Sara Bergman',
+      role: 'Dessertexpert',
       image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80',
-      bio: 'Konditor och bagare med specialitet inom desserter och bakverk.',
+      bio: 'Specialist inom klassiska svenska desserter och internationella favoriter som tiramisu och cheesecake.',
     },
   ];
 
   const values = [
     {
       icon: Heart,
-      title: 'Passion för mat',
-      description: 'Vi älskar mat och matlagning. Varje recept är noggrant testat och godkänt av vårt team innan vi delar det med dig.',
+      title: 'Passion för desserter',
+      description: 'Vi älskar desserter och bakning. Varje recept är noggrant testat och godkänt av vårt team innan vi delar det med dig.',
     },
     {
       icon: Users,
@@ -40,17 +40,17 @@ export default function OmClient() {
     {
       icon: Target,
       title: 'Tillgänglighet',
-      description: 'Matlagning ska vara roligt och enkelt för alla. Vi förenklar utan att kompromissa med smak eller kvalitet.',
+      description: 'Bakning ska vara roligt och enkelt för alla. Vi förenklar utan att kompromissa med smak eller kvalitet.',
     },
     {
       icon: Award,
       title: 'Kvalitet & äkthet',
-      description: 'Inga genvägar eller trick. Bara äkta recept med ingredienser du hittar i vanliga butiker.',
+      description: 'Inga genvägar eller trick. Bara äkta dessertrecept med ingredienser du hittar i vanliga butiker.',
     },
   ];
 
   const stats = [
-    { number: '100+', label: 'Provlagade recept' },
+    { number: '30+', label: 'Provlagade dessertrecept' },
     { number: '50K+', label: 'Månatliga läsare' },
     { number: '4.8', label: 'Genomsnittligt betyg' },
     { number: '2020', label: 'Grundat år' },
@@ -94,11 +94,11 @@ export default function OmClient() {
               className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#FF7A7A] via-[#FFA07A] to-[#6FCF97] bg-clip-text text-transparent"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              Mat som förenar
+              Söta stunder som förenar
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Vi tror på mattens kraft att samla människor. Sedan 2020 har vi delat recept, tips och glädje med tusentals matälskare.
+              Vi tror på dessertens kraft att samla människor. Sedan 2020 har vi delat recept, tips och glädje med tusentals dessertälskare.
             </p>
           </motion.div>
         </div>
