@@ -14,7 +14,7 @@ export default function Header() {
   const router = useRouter();
 
   const navigation = [
-    { name: 'hem', href: '/' },
+    { name: 'Hem', href: '/' },
     { name: 'Recept', href: '/recept' },
     { name: 'Blogg', href: '/blogg' },
     { name: 'Kategorier', href: '/kategorier' },
@@ -29,7 +29,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-sm">
+    <header className="absolute top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -50,7 +50,7 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 dark:text-gray-300 hover:text-[#FF7A7A] dark:hover:text-[#FFA07A] font-medium transition-colors"
+                className="text-white hover:text-[#FFA07A] font-medium transition-colors drop-shadow-lg"
               >
                 {item.name}
               </Link>
@@ -61,7 +61,7 @@ export default function Header() {
           <div className="flex items-center space-x-4">
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2 text-gray-600 hover:text-[#FF7A7A] hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+              className="p-2 text-white hover:text-[#FFA07A] hover:bg-white/10 rounded-lg transition-colors"
               aria-label="Sök"
             >
               <Search className="w-5 h-5" />
@@ -70,7 +70,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-gray-600 hover:text-[#FF7A7A] hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+              className="md:hidden p-2 text-white hover:text-[#FFA07A] hover:bg-white/10 rounded-lg transition-colors"
               aria-label="Meny"
             >
               {mobileMenuOpen ? (
@@ -104,7 +104,7 @@ export default function Header() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="md:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900"
+            className="md:hidden bg-white/95 backdrop-blur-sm border-t border-white/20"
           >
             <nav className="px-4 py-4 space-y-2" aria-label="Mobilnavigering">
               {navigation.map((item) => (
@@ -112,7 +112,7 @@ export default function Header() {
                   key={item.name}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg font-medium transition-colors"
+                  className="block px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg font-medium transition-colors"
                 >
                   {item.name}
                 </Link>

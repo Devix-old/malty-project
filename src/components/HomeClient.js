@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -14,6 +14,7 @@ import SocialProof from '@/components/home/SocialProof';
 import PopularThisWeek from '@/components/home/PopularThisWeek';
 import SeasonalInspiration from '@/components/home/SeasonalInspiration';
 import AuthorsSection from '@/components/home/AuthorsSection';
+import Header from '@/components/layout/Header';
 import { useRouter } from 'next/navigation';
 
 export default function HomeClient({ 
@@ -26,33 +27,9 @@ export default function HomeClient({
   authors
 }) {
   const router = useRouter();
-  const [currentSlide, setCurrentSlide] = useState(0);
 
-  const heroSlides = [
-    {
-      image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1920&q=80',
-      title: 'Upptäck fantastiska desserter',
-      subtitle: `Över ${totalRecipes} provlagade dessertrecept som alltid lyckas`,
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80',
-      title: 'Söta klassiker och moderna favoriter',
-      subtitle: 'Från klassisk kladdkaka till lyxiga chokladvåfflor',
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=1920&q=80',
-      title: 'Kreativitet i köket',
-      subtitle: 'Hitta inspiration för alla söta tillfällen och smaker',
-    },
-  ];
-
-  // Auto-slide effect - 7 seconds per slide
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 7000);
-    return () => clearInterval(interval);
-  }, [heroSlides.length]);
+  // Hero section with cookie background
+  const heroImage = '/images/nygräddade-kakor-med-strössel-hero-banner.webp';
 
   const handleSearch = (query) => {
     if (query.trim()) {
@@ -77,85 +54,119 @@ export default function HomeClient({
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section with Image Slider */}
-      <section className="relative h-[70vh] min-h-[500px] max-h-[800px] overflow-hidden">
-        {/* Background Image Slider */}
+      {/* Hero Section with Cookie Background */}
+      <section className="relative h-[35vh] min-h-[300px] max-h-[500px] overflow-hidden">
+        {/* Cookie Background Image */}
         <div className="absolute inset-0">
-          {heroSlides.map((slide, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0 }}
-              animate={{ 
-                opacity: currentSlide === index ? 1 : 0,
-                scale: currentSlide === index ? 1 : 1.1,
-              }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="absolute inset-0"
-              style={{ pointerEvents: currentSlide === index ? 'auto' : 'none' }}
-            >
-              <img
-                src={slide.image}
-                alt={slide.title}
+          <img
+            src={heroImage}
+            alt="Fresh baked cookies with sprinkles"
                 className="w-full h-full object-cover"
               />
-              {/* Reduced Overlay - More Image Visible */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-transparent"></div>
-              <div className="absolute inset-0 bg-black/20"></div>
-            </motion.div>
-          ))}
+          {/* Professional brightness and light overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-white/15"></div>
+          <div className="absolute inset-0 bg-gradient-radial from-white/10 via-transparent to-transparent"></div>
+          {/* Top shadow for header clarity */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent"></div>
+          {/* Subtle vignette for focus */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent" 
+               style={{ boxShadow: 'inset 0 0 100px rgba(255,255,255,0.3), inset 0 0 200px rgba(255,255,255,0.1)' }}></div>
         </div>
 
-        {/* Content - Title and Description Only */}
-        <div className="relative h-full flex items-center">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div className="max-w-4xl">
-              {/* Animated Title */}
+        {/* Header Overlay */}
+        <div className="absolute inset-0">
+          <Header />
+        </div>
+
+        {/* Centered Content */}
+        <div className="relative h-full flex items-center justify-center">
+          <div className="text-center px-4 sm:px-6 lg:px-8 mt-8">
+            {/* Main Title */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+            >
+              <h1 
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-3 md:mb-4 leading-[1.1] lowercase"
+                style={{ 
+                  fontFamily: "'Inter', 'Poppins', 'Montserrat', sans-serif",
+                  textShadow: '0 2px 4px rgba(255,255,255,0.9), 0 4px 8px rgba(255,255,255,0.7), 0 8px 16px rgba(255,255,255,0.5), 0 0 20px rgba(255,255,255,0.3)',
+                  letterSpacing: '-0.02em',
+                  filter: 'drop-shadow(0 1px 2px rgba(255,255,255,0.8))'
+                }}
+              >
+                låt oss baka något sött
+              </h1>
+
+              {/* CTA Button */}
               <motion.div
-                key={currentSlide}
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
               >
-                <motion.h1 
-                  className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.1]"
+                <Button
+                  onClick={() => router.push('/recept')}
+                  className="bg-[#C8B6FF] hover:bg-[#B5A0FF] text-white font-bold text-xs sm:text-sm px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 uppercase tracking-wider"
                   style={{ 
-                    fontFamily: "'Playfair Display', 'Cormorant Garamond', 'Georgia', serif",
-                    textShadow: '0 8px 30px rgba(0,0,0,0.6), 0 2px 10px rgba(0,0,0,0.4)',
-                    letterSpacing: '-0.02em'
+                    fontFamily: "'Inter', 'Poppins', 'Montserrat', sans-serif",
+                    boxShadow: '0 2px 8px rgba(200, 182, 255, 0.5), 0 4px 16px rgba(200, 182, 255, 0.3), 0 8px 32px rgba(200, 182, 255, 0.2), inset 0 1px 0 rgba(255,255,255,0.3)',
+                    filter: 'drop-shadow(0 1px 2px rgba(200, 182, 255, 0.4))'
                   }}
                 >
-                  {heroSlides[currentSlide].title}
-                </motion.h1>
-
-                <motion.p 
-                  className="text-lg md:text-xl text-white/90 leading-relaxed font-light max-w-2xl"
-                  style={{ 
-                    fontFamily: "'Inter', 'SF Pro Display', -apple-system, sans-serif",
-                    textShadow: '0 4px 15px rgba(0,0,0,0.6)',
-                    letterSpacing: '-0.01em'
-                  }}
-                >
-                  {heroSlides[currentSlide].subtitle}
-                </motion.p>
+                  SENASTE RECEPTEN
+                </Button>
               </motion.div>
-            </div>
+            </motion.div>
           </div>
         </div>
+      </section>
 
-        {/* Slide Indicators */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3 z-20">
-          {heroSlides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`transition-all duration-500 rounded-full ${
-                currentSlide === index 
-                  ? 'w-14 h-3 bg-white shadow-lg' 
-                  : 'w-3 h-3 bg-white/60 hover:bg-white/80 hover:scale-125'
-              }`}
-              aria-label={`Gå till bild ${index + 1}`}
-            />
-          ))}
+      {/* Top Categories Showcase */}
+      <section className="py-8 px-4 bg-gradient-to-b from-[#FFF8F3] via-[#FFF5EE] to-white">
+        <div className="max-w-7xl mx-auto">
+          {/* Category Circles Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            {collections.map((collection, index) => (
+              <motion.div
+                key={collection.slug}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="text-center group"
+              >
+                <Link
+                  href={`/kategorier/${collection.slug}`}
+                  className="block"
+                >
+                  {/* Free-form Image */}
+                  <motion.div
+                    className="relative w-40 h-40 md:w-48 md:h-48 mx-auto mb-3 flex items-center justify-center"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <img
+                      src={collection.image}
+                      alt={collection.title}
+                      className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </motion.div>
+
+                  {/* Category Name */}
+                  <h3 
+                    className="text-base md:text-lg font-medium text-gray-800 group-hover:text-[#FF7A7A] transition-colors duration-300"
+                    style={{ 
+                      fontFamily: "'Inter', 'Poppins', 'Montserrat', sans-serif"
+                    }}
+                  >
+                    {collection.title}
+                  </h3>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

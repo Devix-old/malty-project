@@ -51,28 +51,37 @@ export default async function Home() {
     {
       title: 'Kladdkaka',
       description: 'Sveriges mest älskade chokladkaka i alla varianter',
-      image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1200&q=80',
+      image: '/images/lyxig-chokladkaka-slice-med-korsbar-och-chokladchips.png',
       slug: 'kladdkaka',
       recipes: allRecipes.filter(r => 
         r.tags && r.tags.includes('Kladdkaka')
       ).length,
     },
     {
-      title: 'Chokladboll',
-      description: 'Klassiska no-bake favoriter och moderna varianter',
-      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80',
-      slug: 'chokladboll',
+      title: 'Cookies',
+      description: 'Mjuka och knapriga kakor för alla tillfällen',
+      image: '/images/utsokt-chokladchunk-kaka-sot-dessert.png',
+      slug: 'cookies',
       recipes: allRecipes.filter(r => 
-        r.tags && r.tags.includes('Chokladboll')
+        r.tags && r.tags.includes('Cookies')
       ).length,
     },
     {
       title: 'Äppelpaj',
       description: 'Klassisk svensk äppelpaj med smuldeg och söta äpplen',
-      image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=1200&q=80',
+      image: '/images/utsokt-kirapaj-slice-sot-dessert-fotografi.png',
       slug: 'appelpaj',
       recipes: allRecipes.filter(r => 
         r.tags && r.tags.includes('Äppelpaj')
+      ).length,
+    },
+    {
+      title: 'Chokladboll',
+      description: 'Klassiska no-bake favoriter och moderna varianter',
+      image: '/images/utsokt-sortiment-gourmet-chokladtrumfer.png',
+      slug: 'chokladboll',
+      recipes: allRecipes.filter(r => 
+        r.tags && r.tags.includes('Chokladboll')
       ).length,
     },
   ];

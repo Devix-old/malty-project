@@ -3,14 +3,12 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import { Clock, Users, ChefHat, Award, Flame, Utensils, AlertCircle, Archive, Wine, Lightbulb, ArrowRight, BookOpen, Timer } from 'lucide-react';
+import { ChefHat, Award, Flame, Utensils, AlertCircle, Archive, Wine, Lightbulb, ArrowRight, BookOpen, Timer } from 'lucide-react';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
-import Rating from '@/components/ui/Rating';
 import Tag from '@/components/ui/Tag';
 import IngredientsList from '@/components/recipe/IngredientsList';
 import RecipeSteps from '@/components/recipe/RecipeSteps';
 import RecipeCard from '@/components/recipe/RecipeCard';
-import RecipeActions from '@/components/recipe/RecipeActions';
 import JsonLd from '@/components/seo/JsonLd';
 import { generateRecipeSchema, generateBreadcrumbSchema } from '@/lib/seo';
 
@@ -156,96 +154,6 @@ export default async function RecipePage({ params }) {
 
         {/* Main Content Container */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10">
-          {/* Quick Stats Bar - Floating card */}
-          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-6 md:p-8 mb-8 border border-gray-100 dark:border-gray-800">
-            <div className="flex flex-wrap items-center justify-between gap-6">
-              {/* Author & Date */}
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-xl">
-                  {frontmatter.author.charAt(0)}
-                </div>
-                <div>
-                  <div 
-                    className="font-semibold text-gray-900 dark:text-white text-lg"
-                    style={{ fontFamily: 'var(--font-inter)' }}
-                  >
-                    {frontmatter.author}
-                  </div>
-                  <time 
-                    dateTime={frontmatter.publishedAt}
-                    className="text-sm text-gray-500 dark:text-gray-400"
-                  >
-                    {new Date(frontmatter.publishedAt).toLocaleDateString('sv-SE', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </time>
-                </div>
-              </div>
-
-              {/* Quick Stats */}
-              <div className="flex flex-wrap items-center gap-6 md:gap-8">
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
-                    <Clock className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">Tid</div>
-                    <div className="font-semibold text-gray-900 dark:text-white">{frontmatter.totalTimeMinutes} min</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                    <Users className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">Portioner</div>
-                    <div className="font-semibold text-gray-900 dark:text-white">{frontmatter.servings}</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <div className={`w-10 h-10 rounded-full ${difficulty.iconBg} flex items-center justify-center`}>
-                    <Award className={`w-5 h-5 ${difficulty.iconColor}`} />
-                  </div>
-                  <div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">Nivå</div>
-                    <div className={`font-semibold ${difficulty.textColor}`}>{frontmatter.difficulty}</div>
-                  </div>
-                </div>
-
-                {frontmatter.caloriesPerServing && (
-                  <div className="flex items-center gap-2">
-                    <div className="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
-                      <Flame className="w-5 h-5 text-orange-600 dark:text-orange-400" />
-                    </div>
-                    <div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">Kalorier</div>
-                      <div className="font-semibold text-gray-900 dark:text-white">{frontmatter.caloriesPerServing}</div>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Rating */}
-              {frontmatter.ratingAverage > 0 && (
-                <div className="ml-auto">
-                  <Rating 
-                    rating={frontmatter.ratingAverage} 
-                    count={frontmatter.ratingCount}
-                    size="lg"
-                  />
-                </div>
-              )}
-            </div>
-
-            {/* Action Buttons */}
-            <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-800">
-              <RecipeActions title={frontmatter.title} />
-            </div>
-          </div>
 
           {/* Breadcrumbs */}
           <div className="mb-8">
