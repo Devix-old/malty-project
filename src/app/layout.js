@@ -41,7 +41,7 @@ export const metadata = {
     url: '/',
     keywords: 'recept, bakning, dessert, kladdkaka, choklad, våfflor, pannkakor, svenska recept, matlagning, bakning, söta recept',
   }),
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://malty.se'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se'),
   title: {
     template: '%s | Malty',
     default: 'Malty - Sveriges bästa desserter och bakverk',

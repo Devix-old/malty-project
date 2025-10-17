@@ -2,7 +2,7 @@
  * SEO utility functions and JSON-LD schema generators
  */
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://malty.se';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se';
 const SITE_NAME = 'Malty';
 const SITE_DESCRIPTION = 'Sveriges bästa samling av recept och matlagningsguider. Hitta inspiration för vardagsmiddagar, bakning och festmat.';
 

@@ -2,7 +2,7 @@ import { getAllContent } from '@/lib/mdx';
 
 // Dynamic sitemap generation
 export default async function sitemap() {
-  const baseUrl = 'https://malty.se';
+  const baseUrl = 'https://bakstunden.se';
 
   // Static routes
   const staticRoutes = [

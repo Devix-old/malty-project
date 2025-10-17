@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://malty.se/sitemap.xml
+Sitemap: https://bakstunden.se/sitemap.xml
 
 # Disallow admin areas (if any)
 Disallow: /admin/

@@ -57,7 +57,7 @@ Create a `.env.local` file with:
 
 ```bash
 # Site Configuration
-NEXT_PUBLIC_SITE_URL=https://malty.se
+NEXT_PUBLIC_SITE_URL=https://bakstunden.se
 NEXT_PUBLIC_SITE_NAME=Malty
 
 # Google Search Console Verification
@@ -69,10 +69,10 @@ NEXT_PUBLIC_GA_ID=your_google_analytics_id_here
 
 ### 2. **Google Search Console Setup**
 1. Go to [Google Search Console](https://search.google.com/search-console)
-2. Add your property (https://malty.se)
+2. Add your property (https://bakstunden.se)
 3. Use the HTML file method for verification
 4. Upload the verification code to `/google-site-verification.html`
-5. Submit your sitemap: `https://malty.se/sitemap.xml`
+5. Submit your sitemap: `https://bakstunden.se/sitemap.xml`
 
 ### 3. **Additional SEO Tools**
 - **Google Analytics**: Track user behavior and conversions
