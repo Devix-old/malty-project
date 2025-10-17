@@ -74,6 +74,11 @@ export function generateMetadata({
       yandex: process.env.YANDEX_VERIFICATION,
       yahoo: process.env.YAHOO_VERIFICATION,
     },
+    other: {
+      'msapplication-TileColor': '#FF7A7A',
+      'theme-color': '#FF7A7A',
+      'google-site-verification': process.env.GOOGLE_SITE_VERIFICATION,
+    },
     category: type === 'article' ? 'Food & Cooking' : 'Food & Cooking',
   };
 

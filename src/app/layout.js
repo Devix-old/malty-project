@@ -62,6 +62,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="sv" dir="ltr">
       <head>
+        {/* Google Tag Manager */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5B3M9L45');`,
+          }}
+        />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
@@ -69,6 +79,16 @@ export default function RootLayout({ children }) {
         className={`${inter.variable} ${playfair.variable} ${lora.variable} ${crimson.variable} antialiased min-h-screen flex flex-col`}
         style={{ fontFamily: 'var(--font-inter)' }}
       >
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe 
+            src="https://www.googletagmanager.com/ns.html?id=GTM-5B3M9L45"
+            height="0" 
+            width="0" 
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        
         <a 
           href="#main-content" 
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-purple-600 focus:text-white focus:rounded-lg"
