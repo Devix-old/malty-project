@@ -32,9 +32,9 @@ export default async function Home() {
       return dateB - dateA;
     });
 
-  // If less than 12 featured, fill with latest non-featured recipes
+  // If less than 8 featured, fill with latest non-featured recipes
   let featuredRecipes = [...featuredMarked];
-  if (featuredRecipes.length < 12) {
+  if (featuredRecipes.length < 8) {
     const nonFeatured = allRecipes
       .filter(r => !r.featured)
       .sort((a, b) => {
@@ -43,7 +43,7 @@ export default async function Home() {
         return dateB - dateA;
       });
     
-    featuredRecipes.push(...nonFeatured.slice(0, 12 - featuredRecipes.length));
+    featuredRecipes.push(...nonFeatured.slice(0, 8 - featuredRecipes.length));
   }
 
   // Calculate recipe counts dynamically

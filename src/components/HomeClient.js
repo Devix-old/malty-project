@@ -8,7 +8,6 @@ import Button from '@/components/ui/Button';
 import SearchBar from '@/components/ui/SearchBar';
 import Tag from '@/components/ui/Tag';
 import FeaturedRecipes from '@/components/home/FeaturedRecipes';
-import Newsletter from '@/components/home/Newsletter';
 import BlogPreview from '@/components/home/BlogPreview';
 import SocialProof from '@/components/home/SocialProof';
 import PopularThisWeek from '@/components/home/PopularThisWeek';
@@ -55,7 +54,7 @@ export default function HomeClient({
   return (
     <div className="min-h-screen">
       {/* Hero Section with Cookie Background */}
-      <section className="relative h-[35vh] min-h-[300px] max-h-[500px] overflow-hidden">
+      <section className="relative h-[40vh] sm:h-[45vh] lg:h-[50vh] overflow-hidden">
         {/* Cookie Background Image */}
         <div className="absolute inset-0">
           <img
@@ -108,7 +107,7 @@ export default function HomeClient({
               >
                 <Button
                   onClick={() => router.push('/recept')}
-                  className="bg-[#C8B6FF] hover:bg-[#B5A0FF] text-white font-bold text-xs sm:text-sm px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 uppercase tracking-wider"
+                  className="bg-[#C8B6FF] hover:bg-[#B5A0FF] text-white font-bold text-xs sm:text-sm px-4 sm:px-5 py-2 sm:py-2.5 shadow-lg hover:shadow-xl transition-all duration-300 uppercase tracking-wider"
                   style={{ 
                     fontFamily: "'Inter', 'Poppins', 'Montserrat', sans-serif",
                     boxShadow: '0 2px 8px rgba(200, 182, 255, 0.5), 0 4px 16px rgba(200, 182, 255, 0.3), 0 8px 32px rgba(200, 182, 255, 0.2), inset 0 1px 0 rgba(255,255,255,0.3)',
@@ -124,7 +123,7 @@ export default function HomeClient({
       </section>
 
       {/* Top Categories Showcase */}
-      <section className="py-8 px-4 bg-gradient-to-b from-[#FFF8F3] via-[#FFF5EE] to-white">
+      <section className="h-[60vh] sm:h-[55vh] lg:h-[50vh] px-12 md:px-16 lg:px-20 xl:px-24 bg-gradient-to-b from-[#FFF8F3] via-[#FFF5EE] to-white flex items-center">
         <div className="max-w-7xl mx-auto">
           {/* Category Circles Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
@@ -173,105 +172,12 @@ export default function HomeClient({
       {/* Featured Recipes - NEW SECTION */}
       <FeaturedRecipes recipes={featuredRecipes} />
 
-      {/* Collections - Curated Recipe Collections */}
-      <section className="py-20 px-4 bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 
-                className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#FF7A7A] to-[#FFA07A] bg-clip-text text-transparent"
-                style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}
-              >
-                Utvalda samlingar
-              </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                Kurerade receptsamlingar för olika tillfällen
-              </p>
-            </motion.div>
-          </div>
-
-          {/* Collections Grid - Large Image Cards */}
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-            {collections.map((collection, index) => (
-              <motion.div
-                key={collection.slug}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <Link
-                  href={`/kategorier/${collection.slug}`}
-                  className="group block relative h-[450px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1"
-                >
-                  {/* Background Image */}
-                  <div className="absolute inset-0">
-                    <img
-                      src={collection.image}
-                      alt={collection.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-
-                  {/* Professional Bottom Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
-
-                  {/* Content - Bottom Aligned */}
-                  <div className="absolute inset-x-0 bottom-0 p-6">
-                    <div className="flex items-end justify-between gap-3 mb-4">
-                      {/* Title - Bottom Left */}
-                      <h3 
-                        className="text-2xl md:text-3xl font-bold text-white flex-1"
-                        style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, sans-serif",
-                          textShadow: '0 2px 15px rgba(0,0,0,0.7)',
-                          letterSpacing: '-0.01em'
-                        }}
-                      >
-                        {collection.title}
-                      </h3>
-
-                      {/* Recipe Count Badge - Far Right */}
-                      <span className="px-3 py-1.5 bg-white/90 backdrop-blur-sm text-gray-900 text-xs md:text-sm font-bold rounded-full shadow-lg whitespace-nowrap ml-auto">
-                        {collection.recipes}
-                      </span>
-                    </div>
-
-                    {/* Description */}
-                    <p 
-                      className="text-white/85 text-sm md:text-base leading-relaxed mb-3"
-                      style={{ 
-                        fontFamily: "'Inter', sans-serif",
-                        textShadow: '0 1px 8px rgba(0,0,0,0.6)'
-                      }}
-                    >
-                      {collection.description}
-                    </p>
-
-                    {/* Arrow Link */}
-                    <div className="flex items-center gap-2 text-white/90 group-hover:text-white group-hover:gap-3 transition-all">
-                      <span className="text-sm font-medium">Utforska samlingen</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Popular This Week - NEW SECTION */}
       <PopularThisWeek recipes={allRecipes} />
 
       {/* Popular Tags/Categories */}
-      <section className="py-16 px-4 bg-white dark:bg-gray-800">
+      <section className="py-32 px-12 md:px-16 lg:px-20 xl:px-24 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 
@@ -285,7 +191,7 @@ export default function HomeClient({
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
             {popularTags.map((tag, index) => (
               <motion.div
                 key={tag.name}
@@ -296,7 +202,7 @@ export default function HomeClient({
               >
                 <Link
                   href={`/kategorier/${tag.slug}`}
-                  className="group block relative aspect-square rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                  className="group block relative aspect-[4/3] overflow-hidden transition-all duration-300 transform hover:scale-105"
                 >
                   {/* Background Image */}
                   <div className="absolute inset-0">
@@ -308,25 +214,25 @@ export default function HomeClient({
                   </div>
 
                   {/* Minimal Overlay for Text Readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent group-hover:from-black/85 transition-all duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent group-hover:from-black/90 transition-all duration-300"></div>
 
                   {/* Content - Bottom Positioned */}
                   <div className="absolute inset-0 flex flex-col justify-end">
-                    <div className="p-4 flex items-end justify-between gap-3">
+                    <div className="p-3 flex items-end justify-between gap-2">
                       {/* Title - Bottom Left */}
-                      <h3 className="text-lg md:text-xl font-semibold text-white drop-shadow-lg flex-1" style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, sans-serif" }}>
+                      <h3 className="text-sm md:text-base font-semibold text-white drop-shadow-lg flex-1" style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, sans-serif" }}>
                         {tag.name}
                       </h3>
 
                       {/* Badge - Far Right */}
-                      <span className="px-3 py-1.5 bg-white/40 opacity-90 backdrop-blur-sm text-gray-900 text-xs md:text-sm font-bold rounded-full shadow-lg whitespace-nowrap ml-auto" style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, sans-serif" }}>
+                      <span className="px-2 py-0.5 bg-white/50 opacity-95 backdrop-blur-sm text-gray-900 text-xs font-semibold whitespace-nowrap ml-auto" style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, sans-serif" }}>
                         {tag.count}
                       </span>
                     </div>
                   </div>
 
                   {/* Hover Effect Border */}
-                  <div className="absolute inset-0 border-2 border-white/0 group-hover:border-white/50 rounded-2xl transition-all duration-300"></div>
+                  <div className="absolute inset-0 border-2 border-white/0 group-hover:border-white/60 transition-all duration-300"></div>
                 </Link>
               </motion.div>
             ))}
@@ -386,8 +292,6 @@ export default function HomeClient({
         </div>
       </section>
 
-      {/* Newsletter - NEW SECTION */}
-      <Newsletter />
 
       {/* Authors Section - NEW SECTION */}
       <AuthorsSection authors={authors} />

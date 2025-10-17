@@ -48,31 +48,31 @@ export default async function CategoryPage({ params }) {
   // Load all recipes
   const allRecipes = await getAllContent('recipes');
   
-  // Filter recipes by category
+  // Filter recipes by category field
   const categoryRecipes = allRecipes.filter(recipe => {
-    // Filter by tags for our dessert categories
+    // Filter by category field for our dessert categories
     if (slug === 'kladdkaka') {
-      return recipe.tags && recipe.tags.includes('Kladdkaka');
+      return recipe.category === 'Kladdkaka';
     }
     
     if (slug === 'chokladboll') {
-      return recipe.tags && recipe.tags.includes('Chokladboll');
+      return recipe.category === 'Chokladboll';
     }
     
     if (slug === 'appelpaj') {
-      return recipe.tags && recipe.tags.includes('Äppelpaj');
+      return recipe.category === 'Äppelpaj';
     }
     
     if (slug === 'cookies') {
-      return recipe.tags && recipe.tags.includes('Cookies');
+      return recipe.category === 'Cookies';
     }
     
     if (slug === 'vafflor') {
-      return recipe.tags && recipe.tags.includes('Våfflor');
+      return recipe.category === 'Våfflor';
     }
     
     if (slug === 'pannkakor') {
-      return recipe.tags && recipe.tags.includes('Pannkakor');
+      return recipe.category === 'Pannkakor';
     }
     
     return false;

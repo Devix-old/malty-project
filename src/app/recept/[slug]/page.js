@@ -11,6 +11,8 @@ import RecipeSteps from '@/components/recipe/RecipeSteps';
 import RecipeCard from '@/components/recipe/RecipeCard';
 import JsonLd from '@/components/seo/JsonLd';
 import { generateRecipeSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import BackButton from '@/components/ui/BackButton';
+import Header from '@/components/layout/Header';
 
 // Generate static params for all recipes
 export async function generateStaticParams() {
@@ -103,6 +105,14 @@ export default async function RecipePage({ params }) {
       <JsonLd data={breadcrumbSchema} />
 
       <article className="min-h-screen bg-gray-50 dark:bg-gray-950">
+        {/* Header */}
+        <Header />
+        
+        {/* Back Button */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+          <BackButton />
+        </div>
+
         {/* Hero Section - Full Width */}
         {frontmatter.heroImage?.src && (
           <div className="relative w-full h-[70vh] min-h-[600px] max-h-[800px]">

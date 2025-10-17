@@ -11,6 +11,8 @@ import Tag from '@/components/ui/Tag';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { searchContent, filterRecipes, sortRecipes, getUniqueFilterValues } from '@/lib/utils/search';
+import BackButton from '@/components/ui/BackButton';
+import Header from '@/components/layout/Header';
 
 export default function RecipeListingClient({ initialRecipes, categoryName = null, showHero = false }) {
   const searchParams = useSearchParams();
@@ -90,7 +92,15 @@ export default function RecipeListingClient({ initialRecipes, categoryName = nul
   const allTags = getUniqueFilterValues(recipes, 'tags').slice(0, 8);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-[#FFF8F3] to-white dark:from-gray-900 dark:to-gray-800">
+      {/* Header */}
+      <Header />
+      
+      {/* Back Button */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+        <BackButton />
+      </div>
+
       {/* Category Hero - Only show if we have a specific category */}
       {currentCategory && (
         <CategoryHero
@@ -100,7 +110,7 @@ export default function RecipeListingClient({ initialRecipes, categoryName = nul
         />
       )}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 md:px-16 lg:px-20 xl:px-24 py-20 md:py-24">
         {/* Header - Only show if no category hero */}
         {!currentCategory && (
           <div className="mb-12 text-center">
@@ -120,7 +130,7 @@ export default function RecipeListingClient({ initialRecipes, categoryName = nul
         )}
 
         {/* Search and Filter */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 md:p-8 mb-12 shadow-lg border border-gray-100 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-800 p-6 md:p-8 mb-12 border border-gray-100 dark:border-gray-700">
           <div className="flex flex-col md:flex-row gap-4 mb-6">
             <div className="flex-1">
               <SearchBar
@@ -199,7 +209,7 @@ export default function RecipeListingClient({ initialRecipes, categoryName = nul
         {/* Recipe Grid */}
         {paginatedRecipes.length > 0 ? (
           <>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-4 md:gap-y-8 mb-16">
               {paginatedRecipes.map((recipe, index) => (
                 <RecipeCard key={recipe.slug} recipe={recipe} index={index} />
               ))}

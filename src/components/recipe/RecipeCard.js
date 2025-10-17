@@ -21,12 +21,12 @@ export default function RecipeCard({ recipe, index = 0, className }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.05 }}
       className={cn(
-        'group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1',
+        'group bg-white dark:bg-gray-800 overflow-hidden transition-all duration-300 transform hover:-translate-y-1',
         className
       )}
     >
       <Link href={`/recept/${recipe.slug}`} className="block">
-        <div className="relative aspect-[16/10] overflow-hidden bg-gray-200 dark:bg-gray-700">
+        <div className="relative h-64 md:h-64 overflow-hidden bg-gray-200 dark:bg-gray-700">
           {recipe.heroImage?.src ? (
             <Image
               src={recipe.heroImage.src}
@@ -49,9 +49,9 @@ export default function RecipeCard({ recipe, index = 0, className }) {
           )}
         </div>
 
-        <div className="p-6">
+        <div className="pt-2">
           <h3 
-            className="font-bold text-xl mb-3 line-clamp-2 group-hover:text-purple-600 transition-colors"
+            className="text-sm md:text-base font-bold text-gray-900 dark:text-white mb-2 group-hover:text-[#FF7A7A] transition-colors line-clamp-2"
             style={{ 
               fontFamily: "'Inter', 'SF Pro Display', -apple-system, sans-serif",
               letterSpacing: '-0.01em',
@@ -63,27 +63,34 @@ export default function RecipeCard({ recipe, index = 0, className }) {
 
           {recipe.excerpt && (
             <p 
-              className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 line-clamp-2"
+              className="text-gray-600 dark:text-gray-400 text-xs mb-2 line-clamp-2"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               {recipe.excerpt}
             </p>
           )}
 
-          <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
+          <div className="flex items-center gap-2 md:gap-3 text-xs md:text-sm text-gray-500 dark:text-gray-400">
             <div className="flex items-center gap-1">
-              <Clock className="w-4 h-4" />
-              <span>{recipe.totalTimeMinutes} min</span>
+              <Clock className="w-3 h-3 md:w-4 md:h-4" />
+              <span>{recipe.totalTimeMinutes || recipe.cookTimeMinutes || 30} min</span>
             </div>
-            <div className="flex items-center gap-1">
-              <Users className="w-4 h-4" />
-              <span>{recipe.servings} port</span>
-            </div>
-            {recipe.difficulty && (
+            {recipe.servings && (
               <div className="flex items-center gap-1">
-                <ChefHat className="w-4 h-4" />
-                <span>{difficultyLabels[recipe.difficulty]}</span>
+                <Users className="w-3 h-3 md:w-4 md:h-4" />
+                <span>{recipe.servings} port</span>
               </div>
+            )}
+            {recipe.difficulty && (
+              <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                recipe.difficulty === 'Lätt' 
+                  ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
+                  : recipe.difficulty === 'Medel'
+                  ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400'
+                  : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
+              }`}>
+                {difficultyLabels[recipe.difficulty]}
+              </span>
             )}
           </div>
 

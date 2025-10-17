@@ -13,6 +13,8 @@ import ReadingProgress from '@/components/blog/ReadingProgress';
 import TableOfContents from '@/components/blog/TableOfContents';
 import AuthorCard from '@/components/blog/AuthorCard';
 import BlogContent from '@/components/blog/BlogContent';
+import BackButton from '@/components/ui/BackButton';
+import Header from '@/components/layout/Header';
 
 export default function BlogDetailClient({ frontmatter, content, slug, relatedArticles }) {
   const [copied, setCopied] = useState(false);
@@ -66,6 +68,14 @@ export default function BlogDetailClient({ frontmatter, content, slug, relatedAr
 
   return (
     <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-[#FFF8F3] via-white to-[#FFF5EE] relative">
+      {/* Header */}
+      <Header />
+      
+      {/* Back Button */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+        <BackButton />
+      </div>
+
       {/* Reading Progress Bar */}
       <ReadingProgress progress={scrollYProgress} />
 

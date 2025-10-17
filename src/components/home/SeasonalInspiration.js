@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Snowflake, Gift, ArrowRight } from 'lucide-react';
+import { Snowflake, Gift, ArrowRight, Clock, Users } from 'lucide-react';
 
 export default function SeasonalInspiration({ recipes }) {
   // Filter for seasonal recipes (baking, holiday-related, winter comfort food)
@@ -29,13 +29,7 @@ export default function SeasonalInspiration({ recipes }) {
     : '🍂 Höst';
 
   return (
-    <section className="py-20 px-4 relative overflow-hidden bg-gradient-to-br from-[#FFB4B4] via-[#FFA07A] to-[#FF7A7A]">
-      {/* Decorative Elements */}
-      <div className="absolute inset-0 opacity-10">
-        <Snowflake className="absolute top-20 left-10 w-24 h-24 text-white animate-pulse" />
-        <Snowflake className="absolute bottom-20 right-20 w-32 h-32 text-white animate-pulse" style={{ animationDelay: '1s' }} />
-        <Gift className="absolute top-40 right-10 w-20 h-20 text-white animate-pulse" style={{ animationDelay: '0.5s' }} />
-      </div>
+    <section className="py-32 px-12 md:px-16 lg:px-20 xl:px-24 relative overflow-hidden bg-gradient-to-br from-[#FFF8F3] to-white dark:from-gray-900 dark:to-gray-800">
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
@@ -47,24 +41,23 @@ export default function SeasonalInspiration({ recipes }) {
           className="text-center mb-16"
         >
           <div className="inline-block mb-4">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-semibold">
-              <Snowflake className="w-4 h-4" />
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-[#FF7A7A]/10 text-[#FF7A7A] text-sm font-semibold">
               Säsongens recept
             </span>
           </div>
           <h2 
-            className="text-4xl md:text-5xl font-bold text-white mb-4"
+            className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#FF7A7A] to-[#FFA07A] bg-clip-text text-transparent"
             style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}
           >
             Perfekt för {season}
           </h2>
-          <p className="text-white/90 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
             Mysiga och värmande rätter som passar årstiden perfekt
           </p>
         </motion.div>
 
         {/* Recipes Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-4 md:gap-y-8">
           {seasonalRecipes.map((recipe, index) => (
             <motion.div
               key={recipe.slug}
@@ -78,15 +71,15 @@ export default function SeasonalInspiration({ recipes }) {
                 className="group block h-full"
               >
                 {/* Card with hover effect */}
-                <div className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full">
+                <div className="bg-white dark:bg-gray-800 overflow-hidden transition-all duration-300 transform hover:-translate-y-1 h-full">
                   {/* Image */}
-                  <div className="relative aspect-[4/3] overflow-hidden bg-gray-200 dark:bg-gray-700">
+                  <div className="relative aspect-square overflow-hidden bg-gray-200 dark:bg-gray-700 rounded-full">
                     {recipe.heroImage?.src ? (
                       <Image
                         src={recipe.heroImage.src}
                         alt={recipe.heroImage.alt || recipe.title}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        className="object-cover transition-transform duration-700 group-hover:scale-110 rounded-full"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#FFB4B4] to-[#FFA07A]">
@@ -95,24 +88,31 @@ export default function SeasonalInspiration({ recipes }) {
                     )}
                     
                     {/* Seasonal Badge */}
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1.5 bg-white/95 backdrop-blur-sm text-[#FF7A7A] text-xs font-bold rounded-full shadow-lg">
+                    <div className="absolute top-2 left-2">
+                      <span className="px-2 py-1 bg-white/95 backdrop-blur-sm text-[#FF7A7A] text-xs font-bold shadow-md">
                         {season}
                       </span>
                     </div>
                   </div>
 
                   {/* Content */}
-                  <div className="p-5">
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-[#FF7A7A] transition-colors line-clamp-2">
+                  <div className="pt-2 text-center">
+                    <h3 className="text-sm md:text-base font-bold text-gray-900 dark:text-white mb-2 group-hover:text-[#FF7A7A] transition-colors line-clamp-2">
                       {recipe.title}
                     </h3>
                     
-                    {recipe.category && (
-                      <span className="inline-block px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs rounded-full">
-                        {recipe.category}
-                      </span>
-                    )}
+                    <div className="flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        <span>{recipe.totalTimeMinutes || recipe.cookTimeMinutes || 30} min</span>
+                      </div>
+                      {recipe.servings && (
+                        <div className="flex items-center gap-1">
+                          <Users className="w-3 h-3" />
+                          <span>{recipe.servings} port</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -130,7 +130,7 @@ export default function SeasonalInspiration({ recipes }) {
         >
           <Link
             href="/kategorier/hostens-favoriter"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#FF7A7A] font-semibold rounded-full hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#FF7A7A] to-[#FFA07A] text-white font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
           >
             Utforska säsongsrecept
             <ArrowRight className="w-5 h-5" />
