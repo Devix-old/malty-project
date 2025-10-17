@@ -6,7 +6,7 @@ export default function GoogleSiteVerification() {
   return (
     <html>
       <head>
-        <meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE" />
+        <meta name="google-site-verification" content="google73a51c1ce7036450.html" />
       </head>
       <body>
         <p>Google Search Console verification</p>
