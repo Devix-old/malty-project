@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ChefHat, Instagram, Youtube, Heart } from 'lucide-react';
 
 export default function AuthorsSection({ authors }) {
@@ -78,14 +79,15 @@ export default function AuthorsSection({ authors }) {
                 href={authors && authors.length > 0 ? `/author/${author.slug}` : '#'}
                 className="group block h-full"
               >
-                <div className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full">
+                <div className="bg-white dark:bg-gray-800 overflow-hidden transition-all duration-300 transform hover:-translate-y-2 h-full">
                   {/* Avatar */}
                   <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-[#FF7A7A] to-[#FFA07A]">
                     {author.avatar?.src ? (
-                      <img
+                      <Image
                         src={author.avatar.src}
                         alt={author.avatar.alt || author.name}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
@@ -116,7 +118,7 @@ export default function AuthorsSection({ authors }) {
                     
                     {author.specialty && (
                       <div className="mb-3">
-                        <span className="inline-block px-3 py-1 bg-gradient-to-r from-[#FF7A7A] to-[#FFA07A] text-white text-xs font-semibold rounded-full">
+                        <span className="inline-block px-3 py-1 bg-gradient-to-r from-[#FF7A7A] to-[#FFA07A] text-white text-xs font-semibold">
                           {author.specialty}
                         </span>
                       </div>
@@ -151,7 +153,7 @@ export default function AuthorsSection({ authors }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 text-center bg-gradient-to-r from-[#FF7A7A]/10 to-[#FFA07A]/10 rounded-2xl p-8 md:p-12"
+          className="mt-16 text-center bg-gradient-to-r from-[#FF7A7A]/10 to-[#FFA07A]/10 p-8 md:p-12"
         >
           <ChefHat className="w-12 h-12 text-[#FF7A7A] mx-auto mb-4" />
           <h3 className="text-2xl md:text-3xl font-bold mb-4">
@@ -162,7 +164,7 @@ export default function AuthorsSection({ authors }) {
           </p>
           <Link
             href="/kontakt"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#FF7A7A] to-[#FFA07A] text-white font-semibold rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#FF7A7A] to-[#FFA07A] text-white font-semibold transform hover:scale-105 transition-all duration-300"
           >
             Kontakta oss
             <Heart className="w-5 h-5" />

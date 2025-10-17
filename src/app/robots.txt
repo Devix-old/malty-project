@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://malty.se/sitemap.xml
+
+# Disallow admin areas (if any)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Allow all content pages
+Allow: /recept/
+Allow: /blogg/
+Allow: /kategorier/
+Allow: /om/
+
+# Crawl delay (optional)
+Crawl-delay: 1

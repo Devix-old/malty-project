@@ -26,19 +26,20 @@ export async function generateMetadata({ params }) {
   }
 
   const { frontmatter } = article;
+  const { generateMetadata } = await import('@/lib/seo');
 
-  return {
-    title: `${frontmatter.title} | Malty Blogg`,
-    description: frontmatter.excerpt || 'Läs mer på Malty blogg',
-    openGraph: {
-      title: frontmatter.title,
-      description: frontmatter.excerpt,
-      type: 'article',
-      publishedTime: frontmatter.publishedAt,
-      authors: [frontmatter.author],
-      images: frontmatter.heroImage?.src ? [frontmatter.heroImage.src] : [],
-    },
-  };
+  return generateMetadata({
+    title: frontmatter.title,
+    description: frontmatter.excerpt,
+    image: frontmatter.heroImage?.src,
+    url: `/blogg/${slug}`,
+    type: 'article',
+    publishedTime: frontmatter.publishedAt,
+    modifiedTime: frontmatter.updatedAt,
+    author: frontmatter.author,
+    tags: frontmatter.tags,
+    keywords: frontmatter.tags?.join(', ') + ', matlagning, tips, guider, svenska mat',
+  });
 }
 
 export default async function BlogDetailPage({ params }) {

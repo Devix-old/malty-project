@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ChefHat, ArrowRight, Sparkles } from 'lucide-react';
 
 export default function KategorierClient({ categories }) {
@@ -81,10 +82,11 @@ export default function KategorierClient({ categories }) {
                   <div className="relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 h-full">
                     {/* Image */}
                     <div className="relative aspect-[4/3] overflow-hidden">
-                      <img
+                      <Image
                         src={category.image}
                         alt={category.name}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       
                       {/* Gradient Overlay */}

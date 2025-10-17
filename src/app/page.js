@@ -1,5 +1,7 @@
 import { getAllContent } from '@/lib/mdx';
 import HomeClient from '@/components/HomeClient';
+import StructuredData from '@/components/seo/StructuredData';
+import { generateWebsiteSchema, generateOrganizationSchema, generateItemListSchema } from '@/lib/seo';
 
 export default async function Home() {
   // Load all recipes to calculate dynamic counts
@@ -97,26 +99,38 @@ export default async function Home() {
   });
 
   const popularTags = [
-    { name: 'Kladdkaka', slug: 'kladdkaka', image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80' },
-    { name: 'Chokladboll', slug: 'chokladboll', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80' },
-    { name: 'Äppelpaj', slug: 'appelpaj', image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=800&q=80' },
-    { name: 'Cookies', slug: 'cookies', image: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=800&q=80' },
-    { name: 'Våfflor', slug: 'vafflor', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=800&q=80' },
-    { name: 'Pannkakor', slug: 'pannkakor', image: 'https://images.unsplash.com/photo-1506084868230-bb9d95c24759?w=800&q=80' },
+    { name: 'Kladdkaka', slug: 'kladdkaka', image: '/images/recipes/filips-basta-kladdkaka.webp' },
+    { name: 'Chokladboll', slug: 'chokladboll', image: '/images/recipes/Chokladbolla.png' },
+    { name: 'Äppelpaj', slug: 'appelpaj', image: '/images/recipes/knackig-appelpaj.png' },
+    { name: 'Cookies', slug: 'cookies', image: '/images/recipes/nygräddade-kakor-med-chokladbitar.webp' },
+    { name: 'Våfflor', slug: 'vafflor', image: '/images/recipes/belgiska-vafflor.webp' },
+    { name: 'Pannkakor', slug: 'pannkakor', image: '/images/recipes/amerikanska-pannkakor-recept.webp' },
   ].map(tag => ({
     ...tag,
     count: `${tagCounts[tag.name] || 0}+ recept`,
   }));
 
+  // Generate structured data
+  const websiteSchema = generateWebsiteSchema();
+  const organizationSchema = generateOrganizationSchema();
+  const recipeListSchema = generateItemListSchema(featuredRecipes.slice(0, 10), 'Recipe');
+
   return (
-    <HomeClient 
-      collections={collections}
-      popularTags={popularTags}
-      totalRecipes={allRecipes.length}
-      featuredRecipes={featuredRecipes}
-      allRecipes={allRecipes}
-      articles={allArticles}
-      authors={allAuthors}
-    />
+    <>
+      {/* Structured Data */}
+      <StructuredData data={websiteSchema} />
+      <StructuredData data={organizationSchema} />
+      <StructuredData data={recipeListSchema} />
+      
+      <HomeClient 
+        collections={collections}
+        popularTags={popularTags}
+        totalRecipes={allRecipes.length}
+        featuredRecipes={featuredRecipes}
+        allRecipes={allRecipes}
+        articles={allArticles}
+        authors={allAuthors}
+      />
+    </>
   );
 }

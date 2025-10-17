@@ -16,6 +16,9 @@ export function generateMetadata({
   modifiedTime,
   author,
   tags,
+  keywords,
+  noindex = false,
+  nofollow = false,
 }) {
   const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
   const fullUrl = url ? `${SITE_URL}${url}` : SITE_URL;
@@ -24,6 +27,21 @@ export function generateMetadata({
   const metadata = {
     title: fullTitle,
     description: description || SITE_DESCRIPTION,
+    keywords: keywords || 'recept, matlagning, bakning, svenska recept, matlagningsguider, bakning, dessert, middag, frukost',
+    authors: author ? [{ name: author }] : undefined,
+    creator: author || SITE_NAME,
+    publisher: SITE_NAME,
+    robots: {
+      index: !noindex,
+      follow: !nofollow,
+      googleBot: {
+        index: !noindex,
+        follow: !nofollow,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       title: fullTitle,
       description: description || SITE_DESCRIPTION,
@@ -45,10 +63,18 @@ export function generateMetadata({
       title: fullTitle,
       description: description || SITE_DESCRIPTION,
       images: [imageUrl],
+      creator: '@malty',
+      site: '@malty',
     },
     alternates: {
       canonical: fullUrl,
     },
+    verification: {
+      google: process.env.GOOGLE_SITE_VERIFICATION,
+      yandex: process.env.YANDEX_VERIFICATION,
+      yahoo: process.env.YAHOO_VERIFICATION,
+    },
+    category: type === 'article' ? 'Food & Cooking' : 'Food & Cooking',
   };
 
   if (type === 'article' && publishedTime) {

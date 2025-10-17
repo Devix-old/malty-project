@@ -2,13 +2,13 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import SearchBar from '@/components/ui/SearchBar';
 import Tag from '@/components/ui/Tag';
 import FeaturedRecipes from '@/components/home/FeaturedRecipes';
-import BlogPreview from '@/components/home/BlogPreview';
 import SocialProof from '@/components/home/SocialProof';
 import PopularThisWeek from '@/components/home/PopularThisWeek';
 import SeasonalInspiration from '@/components/home/SeasonalInspiration';
@@ -57,11 +57,12 @@ export default function HomeClient({
       <section className="relative h-[40vh] sm:h-[45vh] lg:h-[50vh] overflow-hidden">
         {/* Cookie Background Image */}
         <div className="absolute inset-0">
-          <img
+          <Image
             src={heroImage}
             alt="Fresh baked cookies with sprinkles"
-                className="w-full h-full object-cover"
-              />
+            fill
+            className="object-cover"
+          />
           {/* Professional brightness and light overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-white/15"></div>
@@ -126,7 +127,7 @@ export default function HomeClient({
       <section className="h-[60vh] sm:h-[55vh] lg:h-[50vh] px-12 md:px-16 lg:px-20 xl:px-24 bg-gradient-to-b from-[#FFF8F3] via-[#FFF5EE] to-white flex items-center">
         <div className="max-w-7xl mx-auto">
           {/* Category Circles Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 lg:gap-16">
             {collections.map((collection, index) => (
               <motion.div
                 key={collection.slug}
@@ -146,9 +147,11 @@ export default function HomeClient({
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <img
+                    <Image
                       src={collection.image}
                       alt={collection.title}
+                      width={192}
+                      height={192}
                       className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-110"
                     />
                   </motion.div>
@@ -206,10 +209,11 @@ export default function HomeClient({
                 >
                   {/* Background Image */}
                   <div className="absolute inset-0">
-                    <img
+                    <Image
                       src={tag.image}
                       alt={tag.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   </div>
 
@@ -257,8 +261,6 @@ export default function HomeClient({
       <SeasonalInspiration recipes={allRecipes} />
 
 
-      {/* Blog Preview - NEW SECTION */}
-      <BlogPreview articles={articles} />
 
       {/* Social Proof - NEW SECTION */}
       <SocialProof totalRecipes={totalRecipes} />

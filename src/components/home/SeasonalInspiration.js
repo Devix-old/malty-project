@@ -6,15 +6,36 @@ import Image from 'next/image';
 import { Snowflake, Gift, ArrowRight, Clock, Users } from 'lucide-react';
 
 export default function SeasonalInspiration({ recipes }) {
-  // Filter for seasonal recipes (baking, holiday-related, winter comfort food)
-  const seasonalRecipes = recipes
-    ? recipes.filter(r => 
-        r.tags?.some(tag => 
-          ['Höst', 'Bakning', 'Comfort food', 'Fest', 'Jul'].includes(tag)
-        ) || 
-        ['Bakning', 'Desserter', 'Grytor & Soppor'].includes(r.category)
-      ).slice(0, 4)
-    : [];
+  // Ensure unique recipes by slug
+  const uniqueBySlug = (list) => {
+    const seenSlugs = new Set();
+    return (list || []).filter(item => {
+      if (!item?.slug) return false;
+      if (seenSlugs.has(item.slug)) return false;
+      seenSlugs.add(item.slug);
+      return true;
+    });
+  };
+
+  // Filter for seasonal recipes (baking, holiday-related, comfort foods)
+  const baseSeasonal = (recipes || []).filter(r =>
+    r?.tags?.some(tag => ['Höst', 'Bakning', 'Comfort food', 'Fest', 'Jul'].includes(tag)) ||
+    ['Bakning', 'Desserter', 'Grytor & Soppor'].includes(r?.category)
+  );
+
+  // Start with up to 4 unique seasonal picks
+  let seasonalRecipes = uniqueBySlug(baseSeasonal).slice(0, 4);
+
+  // Fallback: fill remaining slots with latest unique recipes not already selected
+  if (seasonalRecipes.length < 4) {
+    const remainingCount = 4 - seasonalRecipes.length;
+    const selectedSlugs = new Set(seasonalRecipes.map(r => r.slug));
+    const fallback = uniqueBySlug((recipes || [])
+      .filter(r => r?.slug && !selectedSlugs.has(r.slug))
+      .sort((a, b) => new Date(b?.publishedAt || 0) - new Date(a?.publishedAt || 0)))
+      .slice(0, remainingCount);
+    seasonalRecipes = [...seasonalRecipes, ...fallback];
+  }
 
   if (seasonalRecipes.length === 0) return null;
 

@@ -1,11 +1,11 @@
+import { getAllContent } from '@/lib/mdx';
+
 // Dynamic sitemap generation
 export default async function sitemap() {
   const baseUrl = 'https://malty.se';
 
-  // In production, these would be generated from your content
-  // For now, returning structure
-  
-  const routes = [
+  // Static routes
+  const staticRoutes = [
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -36,27 +36,87 @@ export default async function sitemap() {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
-    {
-      url: `${baseUrl}/kontakt`,
-      lastModified: new Date(),
+  ];
+
+  // Dynamic routes - Recipes
+  let recipeRoutes = [];
+  try {
+    const recipes = await getAllContent('recipes');
+    recipeRoutes = recipes.map(recipe => ({
+      url: `${baseUrl}/recept/${recipe.slug}`,
+      lastModified: new Date(recipe.updatedAt || recipe.publishedAt || new Date()),
       changeFrequency: 'monthly',
-      priority: 0.5,
+      priority: 0.8,
+    }));
+  } catch (error) {
+    console.error('Error fetching recipes for sitemap:', error);
+  }
+
+  // Dynamic routes - Blog articles
+  let articleRoutes = [];
+  try {
+    const articles = await getAllContent('articles');
+    articleRoutes = articles.map(article => ({
+      url: `${baseUrl}/blogg/${article.slug}`,
+      lastModified: new Date(article.updatedAt || article.publishedAt || new Date()),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    }));
+  } catch (error) {
+    console.error('Error fetching articles for sitemap:', error);
+  }
+
+  // Category routes
+  const categoryRoutes = [
+    {
+      url: `${baseUrl}/kategorier/kladdkaka`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/kategorier/chokladboll`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/kategorier/appelpaj`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/kategorier/cookies`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/kategorier/vafflor`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/kategorier/pannkakor`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/kategorier/hostens-favoriter`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
     },
   ];
 
-  // In production, add all recipes:
-  // const recipes = await getAllContent('recipes');
-  // recipes.forEach(recipe => {
-  //   routes.push({
-  //     url: `${baseUrl}/recept/${recipe.slug}`,
-  //     lastModified: new Date(recipe.updatedAt || recipe.publishedAt),
-  //     changeFrequency: 'monthly',
-  //     priority: 0.8,
-  //   });
-  // });
-
-  // Same for articles, categories, tags, etc.
-
-  return routes;
+  return [
+    ...staticRoutes,
+    ...recipeRoutes,
+    ...articleRoutes,
+    ...categoryRoutes,
+  ];
 }
 

@@ -3,24 +3,16 @@
  */
 
 /**
- * Simple fuzzy search implementation
+ * Exact keyword search implementation
  */
 export function fuzzyMatch(text, search) {
-  const searchLower = search.toLowerCase();
+  if (!text || !search) return false;
+  
+  const searchLower = search.toLowerCase().trim();
   const textLower = text.toLowerCase();
   
-  // Exact match
-  if (textLower.includes(searchLower)) return true;
-  
-  // Fuzzy match - all characters present in order
-  let searchIndex = 0;
-  for (let i = 0; i < textLower.length && searchIndex < searchLower.length; i++) {
-    if (textLower[i] === searchLower[searchIndex]) {
-      searchIndex++;
-    }
-  }
-  
-  return searchIndex === searchLower.length;
+  // Exact match - search term must be contained in the text
+  return textLower.includes(searchLower);
 }
 
 /**

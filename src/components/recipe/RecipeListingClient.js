@@ -16,7 +16,16 @@ import Header from '@/components/layout/Header';
 
 export default function RecipeListingClient({ initialRecipes, categoryName = null, showHero = false }) {
   const searchParams = useSearchParams();
-  const [recipes] = useState(initialRecipes);
+  // De-duplicate any incoming recipes by slug to prevent React key collisions
+  const [recipes] = useState(() => {
+    const seen = new Set();
+    return (initialRecipes || []).filter(r => {
+      if (!r?.slug) return false;
+      if (seen.has(r.slug)) return false;
+      seen.add(r.slug);
+      return true;
+    });
+  });
   const [filteredRecipes, setFilteredRecipes] = useState(initialRecipes);
   const [filters, setFilters] = useState({});
   const [searchQuery, setSearchQuery] = useState('');

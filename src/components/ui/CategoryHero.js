@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function CategoryHero({ category, image, description, recipeCount }) {
   // Map categories to beautiful images
@@ -32,10 +33,11 @@ export default function CategoryHero({ category, image, description, recipeCount
           transition={{ duration: 0.8 }}
           className="relative w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden mb-8 shadow-2xl"
         >
-          <img
+          <Image
             src={heroImage}
             alt={category}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
           />
           {/* Subtle overlay for depth */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>

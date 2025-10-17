@@ -34,21 +34,20 @@ export async function generateMetadata({ params }) {
   }
 
   const { frontmatter } = recipe;
+  const { generateMetadata } = await import('@/lib/seo');
 
-  return {
+  return generateMetadata({
     title: frontmatter.title,
     description: frontmatter.excerpt,
-    openGraph: {
-      title: frontmatter.title,
-      description: frontmatter.excerpt,
-      images: frontmatter.heroImage?.src ? [{ url: frontmatter.heroImage.src }] : [],
-      type: 'article',
-      publishedTime: frontmatter.publishedAt,
-      modifiedTime: frontmatter.updatedAt,
-      authors: [frontmatter.author],
-      tags: frontmatter.tags,
-    },
-  };
+    image: frontmatter.heroImage?.src,
+    url: `/recept/${slug}`,
+    type: 'article',
+    publishedTime: frontmatter.publishedAt,
+    modifiedTime: frontmatter.updatedAt,
+    author: frontmatter.author,
+    tags: frontmatter.tags,
+    keywords: frontmatter.tags?.join(', ') + ', recept, matlagning, bakning, svenska recept',
+  });
 }
 
 export default async function RecipePage({ params }) {

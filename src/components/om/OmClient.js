@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Heart, Users, Target, Award, Sparkles, ChefHat, BookOpen, Mail } from 'lucide-react';
 
 export default function OmClient() {
@@ -139,10 +140,11 @@ export default function OmClient() {
           >
             {/* Image */}
             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1200&q=80"
                 alt="Malty team cooking"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
               />
             </div>
 
@@ -252,10 +254,11 @@ export default function OmClient() {
                 className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <div className="relative aspect-square">
-                  <img
+                  <Image
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
                   />
                 </div>
                 <div className="p-6">

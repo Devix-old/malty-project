@@ -38,7 +38,7 @@ export default function PopularThisWeek({ recipes }) {
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-orange-300 to-transparent"></div>
             <span className="flex items-center gap-2 px-5 py-2 bg-white dark:bg-gray-800 rounded-full shadow-lg border border-orange-200 dark:border-orange-900">
               <Flame className="w-4 h-4 text-orange-500" />
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Trending Now</span>
+              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Populärt just nu</span>
             </span>
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-orange-300 to-transparent"></div>
           </div>
@@ -67,7 +67,7 @@ export default function PopularThisWeek({ recipes }) {
             >
               <Link
                 href={`/recept/${featured.slug}`}
-                className="group block relative h-[500px] lg:h-[700px] rounded-3xl overflow-hidden shadow-2xl"
+                className="group block relative h-[500px] lg:h-[700px] overflow-hidden"
               >
                 {/* Image */}
                 <div className="absolute inset-0">
@@ -88,7 +88,7 @@ export default function PopularThisWeek({ recipes }) {
 
                 {/* Trending Badge */}
                 <div className="absolute top-6 left-6">
-                  <span className="flex items-center gap-2 px-4 py-2 bg-white/95 backdrop-blur-md rounded-full shadow-xl">
+                  <span className="flex items-center gap-2 px-4 py-2 bg-white/95 backdrop-blur-md">
                     <TrendingUp className="w-4 h-4 text-orange-500" />
                     <span className="text-sm font-bold text-gray-900">#1 Trending</span>
                   </span>
@@ -97,7 +97,7 @@ export default function PopularThisWeek({ recipes }) {
                 {/* Rating Badge */}
                 {featured.ratingAverage && (
                   <div className="absolute top-6 right-6">
-                    <span className="flex items-center gap-1 px-4 py-2 bg-orange-500 text-white rounded-full shadow-xl">
+                    <span className="flex items-center gap-1 px-4 py-2 bg-orange-500 text-white">
                       <Star className="w-4 h-4 fill-white" />
                       <span className="text-sm font-bold">{featured.ratingAverage}</span>
                     </span>
@@ -153,7 +153,7 @@ export default function PopularThisWeek({ recipes }) {
                 >
                   <Link
                     href={`/recept/${recipe.slug}`}
-                    className="group block relative h-[280px] rounded-2xl overflow-hidden shadow-xl"
+                    className="group block relative h-[320px] overflow-hidden"
                   >
                     <div className="absolute inset-0">
                       {recipe.heroImage?.src ? (
@@ -172,7 +172,7 @@ export default function PopularThisWeek({ recipes }) {
 
                     {/* Ranking Badge */}
                     <div className="absolute top-4 left-4">
-                      <span className="flex items-center justify-center w-10 h-10 bg-white/95 backdrop-blur-md rounded-full shadow-lg">
+                      <span className="flex items-center justify-center w-10 h-10 bg-white/95 backdrop-blur-md">
                         <span className="text-sm font-bold text-orange-500">#{index + 2}</span>
                       </span>
                     </div>
@@ -180,7 +180,7 @@ export default function PopularThisWeek({ recipes }) {
                     {/* Rating */}
                     {recipe.ratingAverage && (
                       <div className="absolute top-4 right-4">
-                        <span className="flex items-center gap-1 px-3 py-1 bg-white/95 backdrop-blur-md rounded-full shadow-lg">
+                        <span className="flex items-center gap-1 px-3 py-1 bg-white/95 backdrop-blur-md">
                           <Star className="w-3 h-3 fill-orange-500 text-orange-500" />
                           <span className="text-xs font-bold text-gray-900">{recipe.ratingAverage}</span>
                         </span>
@@ -219,7 +219,7 @@ export default function PopularThisWeek({ recipes }) {
               href={`/recept/${recipe.slug}`}
               className="group block"
             >
-              <div className="relative h-[200px] md:h-[240px] rounded-2xl overflow-hidden shadow-lg mb-4">
+              <div className="relative h-[200px] md:h-[240px] overflow-hidden mb-4">
                 {recipe.heroImage?.src ? (
                   <Image
                     src={recipe.heroImage.src}
@@ -233,7 +233,7 @@ export default function PopularThisWeek({ recipes }) {
 
                 {/* Ranking */}
                 <div className="absolute top-3 left-3">
-                  <span className="flex items-center justify-center w-8 h-8 bg-white/95 backdrop-blur-md rounded-full shadow-md">
+                  <span className="flex items-center justify-center w-8 h-8 bg-white/95 backdrop-blur-md">
                     <span className="text-xs font-bold text-orange-500">#{index + 4}</span>
                   </span>
                 </div>
@@ -241,7 +241,7 @@ export default function PopularThisWeek({ recipes }) {
                 {/* Rating */}
                 {recipe.ratingAverage && (
                   <div className="absolute bottom-3 right-3">
-                    <span className="flex items-center gap-1 px-2 py-1 bg-white/95 backdrop-blur-md rounded-full shadow-md">
+                    <span className="flex items-center gap-1 px-2 py-1 bg-white/95 backdrop-blur-md">
                       <Star className="w-3 h-3 fill-orange-500 text-orange-500" />
                       <span className="text-xs font-bold text-gray-900">{recipe.ratingAverage}</span>
                     </span>
@@ -271,7 +271,7 @@ export default function PopularThisWeek({ recipes }) {
         >
           <Link
             href="/recept"
-            className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-orange-500 to-rose-500 text-white font-bold text-lg rounded-full shadow-2xl hover:shadow-orange-500/50 transform hover:scale-105 transition-all duration-300"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-orange-500 to-rose-500 text-white font-bold text-lg transform hover:scale-105 transition-all duration-300"
           >
             Utforska alla recept
             <ArrowRight className="w-5 h-5" />

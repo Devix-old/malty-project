@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Star, Users, BookOpen, Award, Quote } from 'lucide-react';
 
 export default function SocialProof({ totalRecipes, totalViews = 125000 }) {
@@ -135,10 +136,11 @@ export default function SocialProof({ totalRecipes, totalViews = 125000 }) {
               {/* Author */}
               <div className="flex items-center gap-4">
                 <div className="relative w-12 h-12 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700">
-                  <img
+                  <Image
                     src={testimonial.avatar}
                     alt={testimonial.name}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
                   />
                 </div>
                 <div>

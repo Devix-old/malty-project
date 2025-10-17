@@ -11,6 +11,7 @@ const categoryMap = {
   'cookies': 'Cookies',
   'vafflor': 'Våfflor',
   'pannkakor': 'Pannkakor',
+  'hostens-favoriter': 'Höstens favoriter',
 };
 
 // Generate static params for all categories
@@ -73,6 +74,15 @@ export default async function CategoryPage({ params }) {
     
     if (slug === 'pannkakor') {
       return recipe.category === 'Pannkakor';
+    }
+    
+    if (slug === 'hostens-favoriter') {
+      return recipe.tags && (
+        recipe.tags.includes('Höst') || 
+        recipe.tags.includes('Comfort food') ||
+        recipe.tags.includes('Fest') ||
+        recipe.tags.includes('Jul')
+      );
     }
     
     return false;

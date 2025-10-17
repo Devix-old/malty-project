@@ -16,7 +16,6 @@ export default function Header() {
   const navigation = [
     { name: 'Hem', href: '/' },
     { name: 'Recept', href: '/recept' },
-    { name: 'Blogg', href: '/blogg' },
     { name: 'Kategorier', href: '/kategorier' },
     { name: 'Om Malty', href: '/om' },
   ];
@@ -34,14 +33,9 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2" aria-label="Malty startsida">
-            <Image
-              src="/images/malty-logo.png"
-              alt="Malty"
-              width={140}
-              height={32}
-              className="h-8 w-auto"
-              priority
-            />
+            <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg" style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}>
+              Bakstunden
+            </h1>
           </Link>
 
           {/* Desktop Navigation */}

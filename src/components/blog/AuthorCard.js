@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { User, Instagram, Youtube, Globe } from 'lucide-react';
 
 export default function AuthorCard({ author }) {
@@ -51,9 +52,11 @@ export default function AuthorCard({ author }) {
         {/* Avatar */}
         <div className="flex-shrink-0">
           {data.avatar ? (
-            <img
+            <Image
               src={data.avatar}
               alt={author}
+              width={96}
+              height={96}
               className="w-24 h-24 rounded-full object-cover ring-4 ring-[#FF7A7A]/20"
             />
           ) : (

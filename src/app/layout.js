@@ -39,11 +39,22 @@ export const metadata = {
     title: 'Malty - Sveriges bästa desserter och bakverk',
     description: 'Upptäck fantastiska dessertrecept för alla tillfällen. Från klassisk kladdkaka till moderna chokladvåfflor. Malty har alla söta favoriter du behöver för att lyckas med bakning.',
     url: '/',
+    keywords: 'recept, bakning, dessert, kladdkaka, choklad, våfflor, pannkakor, svenska recept, matlagning, bakning, söta recept',
   }),
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://malty.se'),
   title: {
     template: '%s | Malty',
     default: 'Malty - Sveriges bästa desserter och bakverk',
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/manifest.json',
+  other: {
+    'msapplication-TileColor': '#FF7A7A',
+    'theme-color': '#FF7A7A',
   },
 };
 
