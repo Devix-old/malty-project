@@ -11,7 +11,6 @@ import Tag from '@/components/ui/Tag';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { searchContent, filterRecipes, sortRecipes, getUniqueFilterValues } from '@/lib/utils/search';
-import BackButton from '@/components/ui/BackButton';
 import Header from '@/components/layout/Header';
 
 export default function RecipeListingClient({ initialRecipes, categoryName = null, showHero = false }) {
@@ -105,10 +104,6 @@ export default function RecipeListingClient({ initialRecipes, categoryName = nul
       {/* Header */}
       <Header />
       
-      {/* Back Button */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-        <BackButton />
-      </div>
 
       {/* Category Hero - Only show if we have a specific category */}
       {currentCategory && (
@@ -303,7 +298,7 @@ export default function RecipeListingClient({ initialRecipes, categoryName = nul
                 href="/"
                 className="inline-flex items-center justify-center px-8 py-3 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700 transition-colors shadow-lg"
               >
-                Tillbaka till startsidan
+                Till startsidan
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
               <Link

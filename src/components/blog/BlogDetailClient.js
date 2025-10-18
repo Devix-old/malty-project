@@ -13,7 +13,6 @@ import ReadingProgress from '@/components/blog/ReadingProgress';
 import TableOfContents from '@/components/blog/TableOfContents';
 import AuthorCard from '@/components/blog/AuthorCard';
 import BlogContent from '@/components/blog/BlogContent';
-import BackButton from '@/components/ui/BackButton';
 import Header from '@/components/layout/Header';
 
 export default function BlogDetailClient({ frontmatter, content, slug, relatedArticles }) {
@@ -71,10 +70,6 @@ export default function BlogDetailClient({ frontmatter, content, slug, relatedAr
       {/* Header */}
       <Header />
       
-      {/* Back Button */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-        <BackButton />
-      </div>
 
       {/* Reading Progress Bar */}
       <ReadingProgress progress={scrollYProgress} />
@@ -116,7 +111,7 @@ export default function BlogDetailClient({ frontmatter, content, slug, relatedAr
             className="inline-flex items-center gap-2 text-gray-600 hover:text-[#FF7A7A] transition-colors group"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-            <span className="font-medium">Tillbaka till bloggen</span>
+            <span className="font-medium">Till bloggen</span>
           </Link>
         </motion.div>
       </div>

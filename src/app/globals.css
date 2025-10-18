@@ -62,7 +62,7 @@ body {
 
 .recipe-blog-content p {
   font-family: var(--font-lora);
-  font-size: 1.125rem;
+  font-size: 1rem;
   line-height: 1.8;
   color: #374151;
   margin-bottom: 1.5rem;
@@ -275,6 +275,14 @@ body {
 /* Custom gradient utilities for hero section */
 .bg-gradient-radial {
   background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Sticky positioning for recipe ingredients */
+.recipe-ingredients-sticky {
+  position: sticky;
+  top: 2rem;
+  align-self: start;
+  height: fit-content;
 }
 
 /* Print Styles for Recipe Pages */
