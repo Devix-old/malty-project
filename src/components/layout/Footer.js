@@ -4,15 +4,17 @@ import { Instagram, Youtube, Facebook } from 'lucide-react';
 
 export default function Footer() {
   const mainLinks = [
+    { name: "hem", href: '/' },
     { name: 'Recept', href: '/recept' },
     { name: 'Kategorier', href: '/kategorier' },
     { name: 'Om Malty', href: '/om' },
+    
   ];
 
   const socialLinks = [
-    { name: 'Instagram', href: 'https://instagram.com/malty', icon: Instagram },
+    { name: 'Instagram', href: 'https://www.instagram.com/alissam407/', icon: Instagram },
     { name: 'YouTube', href: 'https://youtube.com/@malty', icon: Youtube },
-    { name: 'Facebook', href: 'https://facebook.com/malty', icon: Facebook },
+    { name: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61581970813224', icon: Facebook },
   ];
 
   return (
@@ -21,16 +23,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
           <div>
-            <Link href="/" className="inline-block mb-4" aria-label="Malty startsida">
-              <Image
-                src="/images/bakstunden-tarta-dessert-logo.png"
-                alt="Malty"
-                width={160}
-                height={36}
-                className="h-9 w-auto"
-                priority
-              />
-            </Link>
+          <Link href="/" className="flex items-center space-x-2" aria-label="Malty startsida">
+            <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg" style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}>
+              Bakstunden
+            </h1>
+          </Link>
             <p className="text-sm text-gray-400 mb-4">
               Sveriges bästa samling av recept och matlagningsguider.
             </p>

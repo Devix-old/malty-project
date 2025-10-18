@@ -3,7 +3,7 @@
  */
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se';
-const SITE_NAME = 'Malty';
+const SITE_NAME = 'Bakstunden';
 const SITE_DESCRIPTION = 'Sveriges bästa samling av recept och matlagningsguider. Hitta inspiration för vardagsmiddagar, bakning och festmat.';
 
 export function generateMetadata({
@@ -22,7 +22,7 @@ export function generateMetadata({
 }) {
   const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
   const fullUrl = url ? `${SITE_URL}${url}` : SITE_URL;
-  const imageUrl = image ? `${SITE_URL}${image}` : `${SITE_URL}/images/og-default.jpg`;
+  const imageUrl = image ? `${SITE_URL}${image}` : `${SITE_URL}/bak-stunden.png`;
 
   const metadata = {
     title: fullTitle,
@@ -178,10 +178,10 @@ export function generateArticleSchema(article) {
     publisher: {
       '@type': 'Organization',
       name: SITE_NAME,
-      logo: {
-        '@type': 'ImageObject',
-        url: `${SITE_URL}/logo.svg`,
-      },
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/bak-stunden.png`,
+    },
     },
     datePublished: article.publishedAt,
     dateModified: article.updatedAt || article.publishedAt,
@@ -238,7 +238,7 @@ export function generateOrganizationSchema() {
     '@type': 'Organization',
     name: SITE_NAME,
     url: SITE_URL,
-    logo: `${SITE_URL}/logo.svg`,
+    logo: `${SITE_URL}/bak-stunden.png`,
     description: SITE_DESCRIPTION,
     sameAs: [
       'https://instagram.com/malty',

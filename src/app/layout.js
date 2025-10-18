@@ -36,20 +36,45 @@ const crimson = Crimson_Text({
 
 export const metadata = {
   ...generateSiteMetadata({
-    title: 'Malty - Sveriges bästa desserter och bakverk',
-    description: 'Upptäck fantastiska dessertrecept för alla tillfällen. Från klassisk kladdkaka till moderna chokladvåfflor. Malty har alla söta favoriter du behöver för att lyckas med bakning.',
+    title: 'Bakstunden - Sveriges bästa desserter och bakverk',
+    description: 'Upptäck fantastiska dessertrecept för alla tillfällen. Från klassisk kladdkaka till moderna chokladvåfflor. Bakstunden har alla söta favoriter du behöver för att lyckas med bakning.',
     url: '/',
     keywords: 'recept, bakning, dessert, kladdkaka, choklad, våfflor, pannkakor, svenska recept, matlagning, bakning, söta recept',
   }),
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se'),
   title: {
-    template: '%s | Malty',
-    default: 'Malty - Sveriges bästa desserter och bakverk',
+    template: '%s | Bakstunden',
+    default: 'Bakstunden - Sveriges bästa desserter och bakverk',
   },
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      { url: '/bak-stunden.png', sizes: '32x32', type: 'image/png' },
+      { url: '/bak-stunden.png', sizes: '16x16', type: 'image/png' },
+    ],
+    shortcut: '/bak-stunden.png',
+    apple: '/bak-stunden.png',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'sv_SE',
+    url: 'https://bakstunden.se',
+    siteName: 'Bakstunden',
+    title: 'Bakstunden - Sveriges bästa desserter och bakverk',
+    description: 'Upptäck fantastiska dessertrecept för alla tillfällen. Från klassisk kladdkaka till moderna chokladvåfflor.',
+    images: [
+      {
+        url: '/bak-stunden.png',
+        width: 1200,
+        height: 630,
+        alt: 'Bakstunden logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Bakstunden - Sveriges bästa desserter och bakverk',
+    description: 'Upptäck fantastiska dessertrecept för alla tillfällen. Från klassisk kladdkaka till moderna chokladvåfflor.',
+    images: ['/bak-stunden.png'],
   },
   manifest: '/manifest.json',
   other: {
@@ -72,7 +97,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-5B3M9L45');`,
           }}
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/bak-stunden.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body
