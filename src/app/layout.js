@@ -46,12 +46,15 @@ export const metadata = {
     template: '%s | Bakstunden',
     default: 'Bakstunden - Sveriges bästa desserter och bakverk',
   },
+  applicationName: 'Bakstunden',
+  generator: 'Next.js',
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: 'any' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
-    shortcut: '/favicon-32x32.png',
+    shortcut: '/favicon.ico',
     apple: '/apple-touch-icon.png',
   },
   openGraph: {
@@ -66,7 +69,7 @@ export const metadata = {
         url: '/bak-stunden.png',
         width: 1200,
         height: 630,
-        alt: 'Bakstunden logo',
+        alt: 'Bakstunden - Sveriges bästa desserter och bakverk',
       },
     ],
   },
@@ -97,8 +100,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-5B3M9L45');`,
           }}
         />
-        <link rel="icon" href="/favicon-32x32.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="google-site-verification" content="73a51c1ce7036450" />
       </head>
       <body
         className={`${inter.variable} ${playfair.variable} ${lora.variable} ${crimson.variable} antialiased min-h-screen flex flex-col`}

@@ -31,6 +31,8 @@ export function generateMetadata({
     authors: author ? [{ name: author }] : undefined,
     creator: author || SITE_NAME,
     publisher: SITE_NAME,
+    applicationName: SITE_NAME,
+    generator: 'Next.js',
     robots: {
       index: !noindex,
       follow: !nofollow,
@@ -63,12 +65,13 @@ export function generateMetadata({
       title: fullTitle,
       description: description || SITE_DESCRIPTION,
       images: [imageUrl],
-      creator: '@malty',
-      site: '@malty',
+      creator: '@bakstunden',
+      site: '@bakstunden',
     },
     alternates: {
       canonical: fullUrl,
     },
+    metadataBase: new URL(SITE_URL),
     verification: {
       google: process.env.GOOGLE_SITE_VERIFICATION,
       yandex: process.env.YANDEX_VERIFICATION,
@@ -110,21 +113,38 @@ export function generateRecipeSchema(recipe) {
     image: recipe.heroImage?.src ? `${SITE_URL}${recipe.heroImage.src}` : undefined,
     author: {
       '@type': 'Person',
-      name: recipe.author,
+      name: recipe.author || 'Bakstunden Team',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/bak-stunden.png`,
+      },
     },
     datePublished: recipe.publishedAt,
     dateModified: recipe.updatedAt || recipe.publishedAt,
-    prepTime: `PT${recipe.prepTimeMinutes}M`,
-    cookTime: `PT${recipe.cookTimeMinutes}M`,
-    totalTime: `PT${recipe.totalTimeMinutes}M`,
-    recipeYield: `${recipe.servings} portioner`,
-    recipeCategory: recipe.category,
+    prepTime: recipe.prepTimeMinutes ? `PT${recipe.prepTimeMinutes}M` : undefined,
+    cookTime: recipe.cookTimeMinutes ? `PT${recipe.cookTimeMinutes}M` : undefined,
+    totalTime: recipe.totalTimeMinutes ? `PT${recipe.totalTimeMinutes}M` : undefined,
+    recipeYield: recipe.servings ? `${recipe.servings} portioner` : undefined,
+    recipeCategory: recipe.category || 'Dessert',
+    recipeCuisine: 'Swedish',
     keywords: recipe.tags?.join(', '),
     aggregateRating: recipe.ratingAverage ? {
       '@type': 'AggregateRating',
       ratingValue: recipe.ratingAverage,
       ratingCount: recipe.ratingCount || 0,
+      bestRating: 5,
+      worstRating: 1,
     } : undefined,
+    recipeInstructions: recipe.steps?.map((step, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: step.title || `Steg ${index + 1}`,
+      text: step.description,
+    })) || [],
   };
 
   // Add ingredients
@@ -132,16 +152,6 @@ export function generateRecipeSchema(recipe) {
     schema.recipeIngredient = recipe.ingredients.flatMap(section => 
       section.items || []
     );
-  }
-
-  // Add instructions
-  if (recipe.steps && recipe.steps.length > 0) {
-    schema.recipeInstructions = recipe.steps.map((step, index) => ({
-      '@type': 'HowToStep',
-      position: index + 1,
-      name: step.title,
-      text: step.description,
-    }));
   }
 
   // Add nutrition
@@ -238,12 +248,31 @@ export function generateOrganizationSchema() {
     '@type': 'Organization',
     name: SITE_NAME,
     url: SITE_URL,
-    logo: `${SITE_URL}/bak-stunden.png`,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/bak-stunden.png`,
+      width: 512,
+      height: 512,
+    },
     description: SITE_DESCRIPTION,
+    foundingDate: '2024',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      email: 'info@bakstunden.se',
+    },
     sameAs: [
-      'https://instagram.com/malty',
-      'https://pinterest.com/malty',
+      'https://instagram.com/bakstunden',
+      'https://pinterest.com/bakstunden',
     ],
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_URL}/recept?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
   };
 }
 

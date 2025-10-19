@@ -92,10 +92,11 @@ export default async function RecipePage({ params }) {
         <section className="relative w-full h-[70vh] min-h-[600px] max-h-[800px]">
           <Image
             src={frontmatter.heroImage.src}
-            alt={frontmatter.heroImage.alt || frontmatter.title}
+            alt={frontmatter.heroImage.alt || `${frontmatter.title} - Bakstunden recept`}
             fill
             className="object-cover"
             priority
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900/95 via-gray-900/50 to-transparent"></div>
 
@@ -163,9 +164,10 @@ export default async function RecipePage({ params }) {
                     <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                       <Image
                         src={frontmatter.heroImage.src}
-                        alt={frontmatter.heroImage.alt || frontmatter.title}
+                        alt={frontmatter.heroImage.alt || `${frontmatter.title} - Bakstunden recept`}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     </div>
                     <p className="text-sm text-gray-500 dark:text-gray-400 italic mt-3 text-center">

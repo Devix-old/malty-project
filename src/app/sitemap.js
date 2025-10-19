@@ -117,6 +117,6 @@ export default async function sitemap() {
     ...recipeRoutes,
     ...articleRoutes,
     ...categoryRoutes,
-  ];
+  ].filter(Boolean); // Remove any undefined routes
 }
 

@@ -1,4 +1,4 @@
-# Malty Robots.txt
+# Bakstunden Robots.txt
 
 User-agent: *
 Allow: /
@@ -8,7 +8,7 @@ Disallow: /api/
 Disallow: /admin/
 
 # Sitemap location
-Sitemap: https://malty.se/sitemap.xml
+Sitemap: https://bakstunden.se/sitemap.xml
 
 # Crawl-delay for politeness (optional)
 Crawl-delay: 1
