@@ -184,11 +184,11 @@ export default async function RecipePage({ params }) {
           )}
 
           {/* Recipe two-column layout */}
-          <section className="grid lg:grid-cols-[400px_1fr] gap-8 mb-16 lg:items-start">
+          <section className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-8 mb-16 lg:items-start">
             {/* Left column - Ingredients */}
             <aside className="space-y-6 recipe-ingredients-sticky">
               <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
-                <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-6">
+                <div className="bg-gradient-to-r from-slate-400 to-slate-500 p-6">
                   <h2 className="text-2xl font-bold text-white flex items-center gap-2">
                     <ChefHat className="w-6 h-6" />
                     Ingredienser
@@ -255,7 +255,7 @@ export default async function RecipePage({ params }) {
             {/* Right column - Steps and details */}
             <div className="space-y-8">
               <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
-                <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-6">
+                <div className="bg-gradient-to-r from-stone-400 to-stone-500 p-6">
                   <h2 className="text-2xl font-bold text-white flex items-center gap-2">
                     <Timer className="w-6 h-6" />
                     Så här gör du

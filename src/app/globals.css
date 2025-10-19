@@ -277,12 +277,18 @@ body {
   background: radial-gradient(circle, var(--tw-gradient-stops));
 }
 
-/* Sticky positioning for recipe ingredients */
+/* Sticky positioning for recipe ingredients - only on large screens */
 .recipe-ingredients-sticky {
-  position: sticky;
-  top: 2rem;
+  position: static;
   align-self: start;
   height: fit-content;
+}
+
+@media (min-width: 1024px) {
+  .recipe-ingredients-sticky {
+    position: sticky;
+    top: 2rem;
+  }
 }
 
 /* Print Styles for Recipe Pages */

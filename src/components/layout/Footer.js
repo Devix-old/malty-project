@@ -7,7 +7,7 @@ export default function Footer() {
     { name: "hem", href: '/' },
     { name: 'Recept', href: '/recept' },
     { name: 'Kategorier', href: '/kategorier' },
-    { name: 'Om Malty', href: '/om' },
+    { name: 'Om Bakstunden', href: '/om' },
     
   ];
 
@@ -23,7 +23,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
           <div>
-          <Link href="/" className="flex items-center space-x-2" aria-label="Malty startsida">
+          <Link href="/" className="flex items-center space-x-2" aria-label="Bakstunden startsida">
             <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg" style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}>
               Bakstunden
             </h1>
@@ -76,7 +76,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 pt-8 text-center">
           <p className="text-sm text-gray-400">
-            © {new Date().getFullYear()} Malty. Alla rättigheter reserverade.
+            © {new Date().getFullYear()} Bakstunden. Alla rättigheter reserverade.
           </p>
         </div>
       </div>

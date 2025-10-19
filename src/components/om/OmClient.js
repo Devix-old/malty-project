@@ -88,7 +88,7 @@ export default function OmClient() {
               className="inline-flex items-center gap-2 px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full shadow-lg mb-6"
             >
               <Heart className="w-5 h-5 text-[#FF7A7A]" />
-              <span className="text-[#FF7A7A] font-semibold">Välkommen till Malty</span>
+              <span className="text-[#FF7A7A] font-semibold">Välkommen till Bakstunden</span>
             </motion.div>
 
             <h1 
@@ -142,7 +142,7 @@ export default function OmClient() {
             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
               <Image
                 src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1200&q=80"
-                alt="Malty team cooking"
+                alt="Bakstunden team cooking"
                 fill
                 className="object-cover"
               />
@@ -163,13 +163,13 @@ export default function OmClient() {
               </h2>
               <div className="space-y-4 text-gray-600 leading-relaxed text-lg">
                 <p>
-                  Malty startades 2020 av tre vänner med en gemensam passion: att göra matlagning roligt, enkelt och tillgängligt för alla.
+                  Bakstunden startades 2020 av tre vänner med en gemensam passion: att göra matlagning roligt, enkelt och tillgängligt för alla.
                 </p>
                 <p>
                   Vi var trötta på komplicerade recept med svåråtkomliga ingredienser och oprecisa instruktioner. Så vi bestämde oss för att skapa något bättre.
                 </p>
                 <p>
-                  Idag är Malty en plats där över 50 000 matälskare varje månad hittar inspiration, lär sig nya tekniker och delar sina matlagningsfram gångar.
+                  Idag är Bakstunden en plats där över 50 000 matälskare varje månad hittar inspiration, lär sig nya tekniker och delar sina matlagningsfram gångar.
                 </p>
               </div>
             </div>

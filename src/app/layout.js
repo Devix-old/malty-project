@@ -48,11 +48,11 @@ export const metadata = {
   },
   icons: {
     icon: [
-      { url: '/bak-stunden.png', sizes: '32x32', type: 'image/png' },
-      { url: '/bak-stunden.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
-    shortcut: '/bak-stunden.png',
-    apple: '/bak-stunden.png',
+    shortcut: '/favicon-32x32.png',
+    apple: '/apple-touch-icon.png',
   },
   openGraph: {
     type: 'website',
@@ -97,7 +97,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-5B3M9L45');`,
           }}
         />
-        <link rel="icon" href="/bak-stunden.png" />
+        <link rel="icon" href="/favicon-32x32.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body

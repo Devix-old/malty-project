@@ -37,7 +37,7 @@ export default function SocialProof({ totalRecipes, totalViews = 125000 }) {
       name: 'Emma Andersson',
       role: 'Matentusiast',
       avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80',
-      text: 'Malty har revolutionerat min vardag! Recepten är tydliga och alltid lyckas. Min familj älskar allt vi provar.',
+      text: 'Bakstunden har revolutionerat min vardag! Recepten är tydliga och alltid lyckas. Min familj älskar allt vi provar.',
       rating: 5,
     },
     {
@@ -51,7 +51,7 @@ export default function SocialProof({ totalRecipes, totalViews = 125000 }) {
       name: 'Sofia Lindqvist',
       role: 'Nybörjare i köket',
       avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80',
-      text: 'Som nybörjare var jag nervös, men Maltys guider och steg-för-steg instruktioner har gjort mig trygg!',
+      text: 'Som nybörjare var jag nervös, men Bakstundens guider och steg-för-steg instruktioner har gjort mig trygg!',
       rating: 5,
     },
   ];
@@ -101,7 +101,7 @@ export default function SocialProof({ totalRecipes, totalViews = 125000 }) {
             Vad våra läsare säger
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Tusentals matälskare litar på Malty för sina dagliga recept
+            Tusentals matälskare litar på Bakstunden för sina dagliga recept
           </p>
         </motion.div>
 

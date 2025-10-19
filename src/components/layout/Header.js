@@ -17,7 +17,7 @@ export default function Header() {
     { name: 'Hem', href: '/' },
     { name: 'Recept', href: '/recept' },
     { name: 'Kategorier', href: '/kategorier' },
-    { name: 'Om Malty', href: '/om' },
+    { name: 'Om Bakstunden', href: '/om' },
   ];
 
   const handleSearch = (query) => {
@@ -32,7 +32,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2" aria-label="Malty startsida">
+          <Link href="/" className="flex items-center space-x-2" aria-label="Bakstunden startsida">
             <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg" style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}>
               Bakstunden
             </h1>

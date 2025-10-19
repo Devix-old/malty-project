@@ -2,7 +2,7 @@ import { getAllContent } from '@/lib/mdx';
 import KategorierClient from '@/components/kategorier/KategorierClient';
 
 export const metadata = {
-  title: 'Dessertkategorier - Hitta inspiration | Malty',
+  title: 'Dessertkategorier - Hitta inspiration | Bakstunden',
   description: 'Utforska våra dessertkategorier: Kladdkaka, Chokladboll, Äppelpaj, Cookies, Våfflor och Pannkakor. Hitta ditt nästa favoritdessert!',
 };
 

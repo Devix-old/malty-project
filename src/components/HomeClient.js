@@ -275,7 +275,7 @@ export default function HomeClient({
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Välkommen till Malty
+              Välkommen till Bakstunden
             </h2>
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
               Vi är passionerade dessertälskare som älskar att dela med oss av våra favoritrecept. 

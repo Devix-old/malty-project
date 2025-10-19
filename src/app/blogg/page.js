@@ -2,7 +2,7 @@ import { getAllContent } from '@/lib/mdx';
 import BlogListingClient from '@/components/blog/BlogListingClient';
 
 export const metadata = {
-  title: 'Blogg - Tips, guider och inspiration | Malty',
+  title: 'Blogg - Tips, guider och inspiration | Bakstunden',
   description: 'Upptäck våra expertguider, köksknep och matlagningstekniker. Lär dig nya färdigheter och bli en bättre kock.',
 };
 
