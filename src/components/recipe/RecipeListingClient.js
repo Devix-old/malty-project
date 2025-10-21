@@ -11,7 +11,6 @@ import Tag from '@/components/ui/Tag';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { searchContent, filterRecipes, sortRecipes, getUniqueFilterValues } from '@/lib/utils/search';
-import Header from '@/components/layout/Header';
 
 export default function RecipeListingClient({ initialRecipes, categoryName = null, showHero = false }) {
   const searchParams = useSearchParams();
@@ -101,10 +100,6 @@ export default function RecipeListingClient({ initialRecipes, categoryName = nul
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FFF8F3] to-white dark:from-gray-900 dark:to-gray-800">
-      {/* Header */}
-      <Header />
-      
-
       {/* Category Hero - Only show if we have a specific category */}
       {currentCategory && (
         <CategoryHero
@@ -215,7 +210,7 @@ export default function RecipeListingClient({ initialRecipes, categoryName = nul
           <>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-4 md:gap-y-8 mb-16">
               {paginatedRecipes.map((recipe, index) => (
-                <RecipeCard key={recipe.slug} recipe={recipe} index={index} />
+                <RecipeCard key={`${recipe.slug}-${index}`} recipe={recipe} index={index} />
               ))}
             </div>
 
@@ -252,34 +247,6 @@ export default function RecipeListingClient({ initialRecipes, categoryName = nul
           </div>
         )}
 
-        {/* Related Tags Section - After cards */}
-        {currentCategory && allTags.length > 0 && (
-          <div className="mt-20 pt-16 border-t border-gray-200 dark:border-gray-800">
-            <div className="text-center mb-12">
-              <h2 
-                className="text-3xl md:text-4xl font-bold mb-4"
-                style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}
-              >
-                Utforska relaterade kategorier
-              </h2>
-              <p className="text-gray-600 dark:text-gray-400">
-                Hitta fler recept som du kanske gillar
-              </p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-3">
-              {allTags.filter(tag => tag !== currentCategory).slice(0, 12).map((tag) => (
-                <Tag
-                  key={tag}
-                  href={`/recept?tag=${encodeURIComponent(tag)}`}
-                  size="lg"
-                  variant="default"
-                >
-                  {tag}
-                </Tag>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* CTA Section - After everything */}
         <div className="mt-20 pt-16 border-t border-gray-200 dark:border-gray-800">

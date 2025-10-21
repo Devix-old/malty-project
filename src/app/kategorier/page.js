@@ -16,42 +16,42 @@ export default async function KategorierPage() {
       name: 'Kladdkaka',
       slug: 'kladdkaka',
       description: 'Sveriges mest älskade chokladkaka i alla varianter. Kladdig mitt och krispig topp.',
-      image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1200&q=80',
+      image: '/images/recipes/kladdkaka-godaste-och-harligaste.webp',
       icon: '🍰',
     },
     {
       name: 'Chokladboll',
       slug: 'chokladboll',
       description: 'Klassiska no-bake favoriter och moderna varianter. Sveriges mest älskade fika-godis.',
-      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80',
+      image: '/images/recipes/Chokladbolla.png',
       icon: '🍫',
     },
     {
       name: 'Äppelpaj',
       slug: 'appelpaj',
       description: 'Klassisk svensk äppelpaj med smuldeg och söta äpplen. Servera varm med vaniljsås.',
-      image: 'https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=1200&q=80',
+      image: '/images/recipes/appelpaj-klassisk-svensk.webp',
       icon: '🥧',
     },
     {
       name: 'Cookies',
       slug: 'cookies',
       description: 'Krispiga cookies med massor av choklad. Perfekt balans mellan krispigt och mjukt.',
-      image: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=1200&q=80',
+      image: '/images/recipes/amerikanska-pannkakor.webp',
       icon: '🍪',
     },
     {
       name: 'Våfflor',
       slug: 'vafflor',
       description: 'Perfekta våfflor med krispig yta och mjuk mitt. En svensk klassiker för helger.',
-      image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=1200&q=80',
+      image: '/images/recipes/belgiska-vafflor.webp',
       icon: '🧇',
     },
     {
       name: 'Pannkakor',
       slug: 'pannkakor',
       description: 'Tunna, mjuka pannkakor som alla älskar. Klassisk svensk husmanskost för fika.',
-      image: 'https://images.unsplash.com/photo-1506084868230-bb9d95c24759?w=1200&q=80',
+      image: '/images/recipes/amerikanska-pannkakor.webp',
       icon: '🥞',
     },
   ];
@@ -91,7 +91,7 @@ export default async function KategorierPage() {
       ...category,
       count,
     };
-  }).filter(cat => cat.count > 0); // Only show categories with recipes
+  }); // Show all categories
 
   return <KategorierClient categories={categoriesWithCounts} />;
 }

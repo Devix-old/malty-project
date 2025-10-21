@@ -13,7 +13,6 @@ import ReadingProgress from '@/components/blog/ReadingProgress';
 import TableOfContents from '@/components/blog/TableOfContents';
 import AuthorCard from '@/components/blog/AuthorCard';
 import BlogContent from '@/components/blog/BlogContent';
-import Header from '@/components/layout/Header';
 
 export default function BlogDetailClient({ frontmatter, content, slug, relatedArticles }) {
   const [copied, setCopied] = useState(false);
@@ -67,8 +66,6 @@ export default function BlogDetailClient({ frontmatter, content, slug, relatedAr
 
   return (
     <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-[#FFF8F3] via-white to-[#FFF5EE] relative">
-      {/* Header */}
-      <Header />
       
 
       {/* Reading Progress Bar */}
@@ -305,7 +302,7 @@ export default function BlogDetailClient({ frontmatter, content, slug, relatedAr
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {relatedArticles.map((related, index) => (
                   <motion.div
-                    key={related.slug}
+                    key={`${related.slug}-${index}`}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}

@@ -19,12 +19,6 @@ export default async function sitemap() {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/blogg`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
       url: `${baseUrl}/kategorier`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
@@ -52,21 +46,9 @@ export default async function sitemap() {
     console.error('Error fetching recipes for sitemap:', error);
   }
 
-  // Dynamic routes - Blog articles
-  let articleRoutes = [];
-  try {
-    const articles = await getAllContent('articles');
-    articleRoutes = articles.map(article => ({
-      url: `${baseUrl}/blogg/${article.slug}`,
-      lastModified: new Date(article.updatedAt || article.publishedAt || new Date()),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    }));
-  } catch (error) {
-    console.error('Error fetching articles for sitemap:', error);
-  }
+  // Blog articles removed - /blogg page no longer exists
 
-  // Category routes
+  // Category routes - only existing categories
   const categoryRoutes = [
     {
       url: `${baseUrl}/kategorier/kladdkaka`,
@@ -104,18 +86,11 @@ export default async function sitemap() {
       changeFrequency: 'weekly',
       priority: 0.7,
     },
-    {
-      url: `${baseUrl}/kategorier/hostens-favoriter`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
   ];
 
   return [
     ...staticRoutes,
     ...recipeRoutes,
-    ...articleRoutes,
     ...categoryRoutes,
   ].filter(Boolean); // Remove any undefined routes
 }

@@ -6,12 +6,16 @@ import Image from 'next/image';
 import { Search, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SearchBar from '../ui/SearchBar';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
+  
+  // Check if we're on the home page
+  const isHomePage = pathname === '/';
 
   const navigation = [
     { name: 'Hem', href: '/' },
@@ -28,12 +32,12 @@ export default function Header() {
   };
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50">
+    <header className={`${isHomePage ? 'absolute' : 'relative bg-white shadow-sm'} top-0 left-0 right-0 z-50`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2" aria-label="Bakstunden startsida">
-            <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg" style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}>
+            <h1 className={`text-2xl md:text-3xl font-bold ${isHomePage ? 'text-white drop-shadow-lg' : 'text-gray-900'} transition-colors`} style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}>
               Bakstunden
             </h1>
           </Link>
@@ -44,7 +48,7 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-white hover:text-[#FFA07A] font-medium transition-colors drop-shadow-lg"
+                className={`${isHomePage ? 'text-white hover:text-[#FFA07A] drop-shadow-lg' : 'text-gray-700 hover:text-[#FF7A7A]'} font-medium transition-colors`}
               >
                 {item.name}
               </Link>
@@ -55,7 +59,7 @@ export default function Header() {
           <div className="flex items-center space-x-4">
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2 text-white hover:text-[#FFA07A] hover:bg-white/10 rounded-lg transition-colors"
+              className={`p-2 ${isHomePage ? 'text-white hover:text-[#FFA07A] hover:bg-white/10' : 'text-gray-700 hover:text-[#FF7A7A] hover:bg-gray-100'} rounded-lg transition-colors`}
               aria-label="Sök"
             >
               <Search className="w-5 h-5" />
@@ -64,7 +68,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-white hover:text-[#FFA07A] hover:bg-white/10 rounded-lg transition-colors"
+              className={`md:hidden p-2 ${isHomePage ? 'text-white hover:text-[#FFA07A] hover:bg-white/10' : 'text-gray-700 hover:text-[#FF7A7A] hover:bg-gray-100'} rounded-lg transition-colors`}
               aria-label="Meny"
             >
               {mobileMenuOpen ? (

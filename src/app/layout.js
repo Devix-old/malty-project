@@ -90,18 +90,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="sv" dir="ltr">
       <head>
-        {/* Favicon links - explicit for better browser support */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
-        <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/manifest.json" />
-        
-        {/* Google-specific favicon optimization */}
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <meta name="msapplication-TileImage" content="/android-chrome-192x192.png" />
-        <meta name="msapplication-TileColor" content="#FF7A7A" />
-        
         {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
@@ -129,6 +117,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         
+        <Header />
         <a 
           href="#main-content" 
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-purple-600 focus:text-white focus:rounded-lg"

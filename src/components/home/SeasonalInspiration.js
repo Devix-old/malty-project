@@ -81,7 +81,7 @@ export default function SeasonalInspiration({ recipes }) {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-4 md:gap-y-8">
           {seasonalRecipes.map((recipe, index) => (
             <motion.div
-              key={recipe.slug}
+              key={`${recipe.slug}-${index}`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

@@ -21,7 +21,6 @@ import RecipeSteps from '@/components/recipe/RecipeSteps';
 import RecipeCard from '@/components/recipe/RecipeCard';
 import JsonLd from '@/components/seo/JsonLd';
 import { generateRecipeSchema, generateBreadcrumbSchema } from '@/lib/seo';
-import Header from '@/components/layout/Header';
 
 // Generate static params
 export async function generateStaticParams() {
@@ -84,8 +83,6 @@ export default async function RecipePage({ params }) {
       <JsonLd data={recipeSchema} />
       <JsonLd data={breadcrumbSchema} />
 
-      {/* HEADER */}
-      <Header />
 
       {/* 🧁 HERO SECTION */}
       {frontmatter.heroImage?.src && (
@@ -286,7 +283,7 @@ export default async function RecipePage({ params }) {
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {relatedRecipes.map((r, i) => (
-                  <RecipeCard key={r.slug} recipe={r} index={i} />
+                  <RecipeCard key={`${r.slug}-${i}`} recipe={r} index={i} />
                 ))}
               </div>
             </section>

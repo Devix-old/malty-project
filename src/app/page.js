@@ -104,7 +104,7 @@ export default async function Home() {
     { name: 'Äppelpaj', slug: 'appelpaj', image: '/images/recipes/knackig-appelpaj.png' },
     { name: 'Cookies', slug: 'cookies', image: '/images/recipes/nygräddade-kakor-med-chokladbitar.webp' },
     { name: 'Våfflor', slug: 'vafflor', image: '/images/recipes/belgiska-vafflor.webp' },
-    { name: 'Pannkakor', slug: 'pannkakor', image: '/images/recipes/amerikanska-pannkakor-recept.webp' },
+    { name: 'Pannkakor', slug: 'pannkakor', image: '/images/recipes/amerikanska-pannkakor.webp' },
   ].map(tag => ({
     ...tag,
     count: `${tagCounts[tag.name] || 0}+ recept`,

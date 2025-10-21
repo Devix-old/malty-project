@@ -145,7 +145,7 @@ export default function PopularThisWeek({ recipes }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
               {rest.slice(0, 2).map((recipe, index) => (
                 <motion.div
-                  key={recipe.slug}
+                  key={`${recipe.slug}-${index}`}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -215,7 +215,7 @@ export default function PopularThisWeek({ recipes }) {
         >
           {rest.slice(2, 6).map((recipe, index) => (
             <Link
-              key={recipe.slug}
+              key={`${recipe.slug}-${index}`}
               href={`/recept/${recipe.slug}`}
               className="group block"
             >

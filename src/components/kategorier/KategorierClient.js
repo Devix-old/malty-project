@@ -3,7 +3,9 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ChefHat, ArrowRight, Sparkles } from 'lucide-react';
+import { ChefHat, ArrowRight, Sparkles, Clock, Users } from 'lucide-react';
+import Tag from '../ui/Tag';
+import { cn } from '@/lib/utils/cn';
 
 export default function KategorierClient({ categories }) {
   return (
@@ -66,69 +68,64 @@ export default function KategorierClient({ categories }) {
       {/* Categories Grid */}
       <section className="relative z-10 px-4 pb-20">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {categories.map((category, index) => (
-              <motion.div
+              <motion.article
                 key={category.slug}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                className="group bg-white dark:bg-gray-800 overflow-hidden transition-all duration-300 transform hover:-translate-y-1 rounded-2xl shadow-lg hover:shadow-xl"
               >
-                <Link
-                  href={`/kategorier/${category.slug}`}
-                  className="group block h-full"
-                >
-                  <div className="relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 h-full">
-                    {/* Image */}
-                    <div className="relative aspect-[4/3] overflow-hidden">
-                      <Image
-                        src={category.image}
-                        alt={category.name}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      
-                      {/* Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                <Link href={`/kategorier/${category.slug}`} className="block">
+                  <div className="relative h-64 overflow-hidden bg-gray-200 dark:bg-gray-700">
+                    <Image
+                      src={category.image}
+                      alt={category.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    />
+                    
+                    {/* Icon Badge */}
+                    <div className="absolute top-3 right-3 w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center text-2xl">
+                      {category.icon}
+                    </div>
+                  </div>
 
-                      {/* Icon Badge */}
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 + index * 0.05, type: "spring" }}
-                        className="absolute top-6 right-6 w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center text-3xl"
-                      >
-                        {category.icon}
-                      </motion.div>
+                  <div className="pt-4 px-4 pb-4">
+                    <h3 
+                      className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-[#FF7A7A] transition-colors"
+                      style={{ 
+                        fontFamily: "'Inter', 'SF Pro Display', -apple-system, sans-serif",
+                        letterSpacing: '-0.01em',
+                        fontWeight: 700
+                      }}
+                    >
+                      {category.name}
+                    </h3>
 
-                      {/* Category Name Overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <h2 className="text-3xl font-bold text-white mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
-                          {category.name}
-                        </h2>
-                        <div className="flex items-center gap-2 text-white/90 text-sm font-medium">
-                          <span>{category.count} recept</span>
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </div>
+                    <p 
+                      className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2"
+                      style={{ fontFamily: "'Inter', sans-serif" }}
+                    >
+                      {category.description}
+                    </p>
+
+                    <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                      <div className="flex items-center gap-1">
+                        <ChefHat className="w-4 h-4" />
+                        <span>{category.count} recept</span>
                       </div>
                     </div>
 
-                    {/* Content */}
-                    <div className="p-6">
-                      <p className="text-gray-600 leading-relaxed">
-                        {category.description}
-                      </p>
-                      
-                      <div className="mt-4 flex items-center gap-2 text-[#FF7A7A] font-semibold group-hover:gap-3 transition-all">
-                        <span>Utforska kategori</span>
-                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                      </div>
+                    <div className="flex items-center gap-2 text-[#FF7A7A] font-semibold text-sm group-hover:gap-3 transition-all">
+                      <span>Utforska kategori</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
                 </Link>
-              </motion.div>
+              </motion.article>
             ))}
           </div>
         </div>

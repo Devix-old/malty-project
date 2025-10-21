@@ -13,7 +13,6 @@ import SocialProof from '@/components/home/SocialProof';
 import PopularThisWeek from '@/components/home/PopularThisWeek';
 import SeasonalInspiration from '@/components/home/SeasonalInspiration';
 import AuthorsSection from '@/components/home/AuthorsSection';
-import Header from '@/components/layout/Header';
 import { useRouter } from 'next/navigation';
 
 export default function HomeClient({ 
@@ -74,10 +73,6 @@ export default function HomeClient({
                style={{ boxShadow: 'inset 0 0 100px rgba(255,255,255,0.3), inset 0 0 200px rgba(255,255,255,0.1)' }}></div>
         </div>
 
-        {/* Header Overlay */}
-        <div className="absolute inset-0">
-          <Header />
-        </div>
 
         {/* Centered Content */}
         <div className="relative h-full flex items-center justify-center">
