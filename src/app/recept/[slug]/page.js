@@ -21,6 +21,7 @@ import RecipeSteps from '@/components/recipe/RecipeSteps';
 import RecipeCard from '@/components/recipe/RecipeCard';
 import JsonLd from '@/components/seo/JsonLd';
 import { generateRecipeSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import { InArticleAd, RecipeContentAd, RelatedRecipesAd } from '@/components/ads/AdPlacements';
 
 // Generate static params
 export async function generateStaticParams() {
@@ -264,6 +265,9 @@ export default async function RecipePage({ params }) {
                   <RecipeSteps steps={frontmatter.steps} />
                 </div>
               </div>
+              
+              {/* Ad between recipe content and related recipes */}
+              <RecipeContentAd />
             </div>
           </section>
 
@@ -286,6 +290,9 @@ export default async function RecipePage({ params }) {
                   <RecipeCard key={`${r.slug}-${i}`} recipe={r} index={i} />
                 ))}
               </div>
+              
+              {/* Ad after related recipes */}
+              <RelatedRecipesAd />
             </section>
           )}
         </div>

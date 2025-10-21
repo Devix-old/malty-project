@@ -1,0 +1,220 @@
+/* Ad Styles for Bakstunden */
+
+/* Base ad container styles */
+.ad-in-image,
+.hb-ad-inpage,
+.ad-interstitial,
+.ad-sticky-footer,
+.ad-sticky-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+/* In-page ads */
+.hb-ad-inpage {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 2px dashed #dee2e6;
+  position: relative;
+  overflow: hidden;
+}
+
+.hb-ad-inpage::before {
+  content: "Annons";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #6c757d;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.hb-ad-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sticky footer ad */
+.ad-sticky-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: white;
+  border-top: 1px solid #dee2e6;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  min-height: 90px;
+  max-height: 90px;
+}
+
+/* Sticky left banner */
+.ad-sticky-left {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+  background: white;
+  border-right: 1px solid #dee2e6;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  height: 600px;
+}
+
+/* Hide sticky ads on mobile */
+@media (max-width: 768px) {
+  .ad-sticky-left {
+    display: none;
+  }
+  
+  .ad-sticky-footer {
+    min-height: 60px;
+    max-height: 60px;
+  }
+}
+
+/* Ad loading states */
+.ad-in-image:empty,
+.hb-ad-inpage:empty,
+.ad-interstitial:empty {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Ad close buttons */
+#HB_CLOSE_hbagency_space_241541,
+#HB_CLOSE_hbagency_space_241542 {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 1001;
+}
+
+#HB_CLOSE_hbagency_space_241541:hover,
+#HB_CLOSE_hbagency_space_241542:hover {
+  background: #495057;
+}
+
+/* Ensure ads don't interfere with content */
+.ad-in-image,
+.hb-ad-inpage,
+.ad-interstitial {
+  margin: 24px 0;
+  max-width: 100%;
+}
+
+/* Recipe content ads */
+.recipe-content-ad {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 32px 0;
+  text-align: center;
+}
+
+.recipe-content-ad::before {
+  content: "Reklam";
+  display: block;
+  font-size: 12px;
+  color: #6c757d;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+/* Homepage ads */
+.homepage-hero-ad {
+  background: linear-gradient(135deg, #fff5f5 0%, #f0f9ff 100%);
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 32px;
+  margin: 48px 0;
+  text-align: center;
+}
+
+/* Category page ads */
+.category-page-ad {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 32px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Related recipes ads */
+.related-recipes-ad {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 24px 0;
+  text-align: center;
+}
+
+/* Ensure proper spacing around ads */
+.ad-in-image + *,
+.hb-ad-inpage + *,
+.ad-interstitial + * {
+  margin-top: 24px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .ad-in-image,
+  .hb-ad-inpage,
+  .ad-interstitial,
+  .ad-sticky-footer,
+  .ad-sticky-left {
+    background: #1a1a1a;
+    border-color: #333;
+    color: #e0e0e0;
+  }
+  
+  .hb-ad-inpage::before {
+    background: #4a5568;
+  }
+  
+  .recipe-content-ad,
+  .homepage-hero-ad,
+  .category-page-ad,
+  .related-recipes-ad {
+    background: #1a1a1a;
+    border-color: #333;
+    color: #e0e0e0;
+  }
+}

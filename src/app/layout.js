@@ -3,6 +3,8 @@ import "./globals.css";
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CookieBanner from '@/components/ui/CookieBanner';
+import { AdManager, AdPlacement, AD_TYPES } from '@/components/ads/AdManager';
+import AdToggle from '@/components/ads/AdToggle';
 import { generateMetadata as generateSiteMetadata } from '@/lib/seo';
 
 // Modern sans-serif for body text (excellent readability)
@@ -117,18 +119,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         
-        <Header />
-        <a 
-          href="#main-content" 
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-purple-600 focus:text-white focus:rounded-lg"
-        >
-          Hoppa till huvudinnehåll
-        </a>
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
-        <Footer />
-        <CookieBanner />
+        <AdManager>
+          <Header />
+          <a 
+            href="#main-content" 
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-purple-600 focus:text-white focus:rounded-lg"
+          >
+            Hoppa till huvudinnehåll
+          </a>
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+          <CookieBanner />
+          <AdToggle />
+          
+          {/* Sticky Footer Ad */}
+          <AdPlacement type={AD_TYPES.STICKY_FOOTER} />
+          
+          {/* Sticky Left Banner Ad */}
+          <AdPlacement type={AD_TYPES.STICKY_LEFT} />
+        </AdManager>
       </body>
     </html>
   );
