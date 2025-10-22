@@ -126,28 +126,8 @@ export function AdPlacement({ type, className = '', style = {}, ...props }) {
   return isVisible ? renderAd() : null;
 }
 
-// Ad manager for controlling ad behavior
-export function AdManager({ children, enableAds = true, adFrequency = 'normal' }) {
-  const [adsEnabled, setAdsEnabled] = useState(enableAds);
-
-  useEffect(() => {
-    // Check user preferences for ads
-    const adPreference = localStorage.getItem('ads-enabled');
-    if (adPreference !== null) {
-      setAdsEnabled(adPreference === 'true');
-    }
-  }, []);
-
-  const toggleAds = () => {
-    const newState = !adsEnabled;
-    setAdsEnabled(newState);
-    localStorage.setItem('ads-enabled', newState.toString());
-  };
-
-  if (!adsEnabled) {
-    return children;
-  }
-
+// Ad manager for controlling ad behavior - always enabled
+export function AdManager({ children }) {
   return (
     <div className="ad-manager">
       {children}
@@ -155,22 +135,3 @@ export function AdManager({ children, enableAds = true, adFrequency = 'normal' }
   );
 }
 
-// Hook for ad management
-export function useAdManager() {
-  const [adsEnabled, setAdsEnabled] = useState(true);
-
-  useEffect(() => {
-    const adPreference = localStorage.getItem('ads-enabled');
-    if (adPreference !== null) {
-      setAdsEnabled(adPreference === 'true');
-    }
-  }, []);
-
-  const toggleAds = () => {
-    const newState = !adsEnabled;
-    setAdsEnabled(newState);
-    localStorage.setItem('ads-enabled', newState.toString());
-  };
-
-  return { adsEnabled, toggleAds };
-}
