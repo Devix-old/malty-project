@@ -40,7 +40,7 @@ export default function AdToggle() {
         </div>
         <p className="text-xs text-gray-600 dark:text-gray-400">
           {adsEnabled 
-            ? 'Annonser visas för att stödja vår webbplats' 
+            ? 'Annonser är aktiverade' 
             : 'Annonser är dolda. Du kan aktivera dem när som helst.'
           }
         </p>
