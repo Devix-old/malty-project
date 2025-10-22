@@ -70,8 +70,7 @@ export default function HomeClient({
           {/* Top shadow for header clarity */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent"></div>
           {/* Subtle vignette for focus */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent" 
-               style={{ boxShadow: 'inset 0 0 100px rgba(255,255,255,0.3), inset 0 0 200px rgba(255,255,255,0.1)' }}></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent box-shadow-vignette"></div>
         </div>
 
 
@@ -85,13 +84,7 @@ export default function HomeClient({
               transition={{ duration: 1, ease: "easeOut" }}
             >
               <h1 
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-3 md:mb-4 leading-[1.1] lowercase"
-                style={{ 
-                  fontFamily: "'Inter', 'Poppins', 'Montserrat', sans-serif",
-                  textShadow: '0 2px 4px rgba(255,255,255,0.9), 0 4px 8px rgba(255,255,255,0.7), 0 8px 16px rgba(255,255,255,0.5), 0 0 20px rgba(255,255,255,0.3)',
-                  letterSpacing: '-0.02em',
-                  filter: 'drop-shadow(0 1px 2px rgba(255,255,255,0.8))'
-                }}
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-3 md:mb-4 leading-[1.1] lowercase font-inter text-shadow-hero letter-spacing-tight filter-drop-shadow"
               >
                 låt oss baka något sött
               </h1>
@@ -104,12 +97,7 @@ export default function HomeClient({
               >
                 <Button
                   onClick={() => router.push('/recept')}
-                  className="bg-[#C8B6FF] hover:bg-[#B5A0FF] text-white font-bold text-xs sm:text-sm px-4 sm:px-5 py-2 sm:py-2.5 shadow-lg hover:shadow-xl transition-all duration-300 uppercase tracking-wider"
-                  style={{ 
-                    fontFamily: "'Inter', 'Poppins', 'Montserrat', sans-serif",
-                    boxShadow: '0 2px 8px rgba(200, 182, 255, 0.5), 0 4px 16px rgba(200, 182, 255, 0.3), 0 8px 32px rgba(200, 182, 255, 0.2), inset 0 1px 0 rgba(255,255,255,0.3)',
-                    filter: 'drop-shadow(0 1px 2px rgba(200, 182, 255, 0.4))'
-                  }}
+                  className="bg-[#C8B6FF] hover:bg-[#B5A0FF] text-white font-bold text-xs sm:text-sm px-4 sm:px-5 py-2 sm:py-2.5 shadow-lg hover:shadow-xl transition-all duration-300 uppercase tracking-wider font-inter text-shadow-button filter-drop-shadow-button"
                 >
                   SENASTE RECEPTEN
                 </Button>
@@ -154,10 +142,7 @@ export default function HomeClient({
 
                   {/* Category Name */}
                   <h3 
-                    className="text-base md:text-lg font-medium text-gray-800 group-hover:text-[#FF7A7A] transition-colors duration-300"
-                    style={{ 
-                      fontFamily: "'Inter', 'Poppins', 'Montserrat', sans-serif"
-                    }}
+                    className="text-base md:text-lg font-medium text-gray-800 group-hover:text-[#FF7A7A] transition-colors duration-300 font-inter"
                   >
                     {collection.title}
                   </h3>
@@ -180,8 +165,7 @@ export default function HomeClient({
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 
-              className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-[#FF7A7A] to-[#6FCF97] bg-clip-text text-transparent"
-              style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}
+              className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-[#FF7A7A] to-[#6FCF97] bg-clip-text text-transparent font-playfair"
             >
               Utforska efter kategori
             </h2>
@@ -220,12 +204,12 @@ export default function HomeClient({
                   <div className="absolute inset-0 flex flex-col justify-end">
                     <div className="p-3 flex items-end justify-between gap-2">
                       {/* Title - Bottom Left */}
-                      <h3 className="text-sm md:text-base font-semibold text-white drop-shadow-lg flex-1" style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, sans-serif" }}>
+                      <h3 className="text-sm md:text-base font-semibold text-white drop-shadow-lg flex-1 font-inter-system">
                         {tag.name}
                       </h3>
 
                       {/* Badge - Far Right */}
-                      <span className="px-2 py-0.5 bg-white/50 opacity-95 backdrop-blur-sm text-gray-900 text-xs font-semibold whitespace-nowrap ml-auto" style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, sans-serif" }}>
+                      <span className="px-2 py-0.5 bg-white/50 opacity-95 backdrop-blur-sm text-gray-900 text-xs font-semibold whitespace-nowrap ml-auto font-inter-system">
                         {tag.count}
                       </span>
                     </div>

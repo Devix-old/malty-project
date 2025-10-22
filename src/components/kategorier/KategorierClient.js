@@ -53,8 +53,7 @@ export default function KategorierClient({ categories }) {
             </motion.div>
 
             <h1 
-              className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#FF7A7A] via-[#FFA07A] to-[#6FCF97] bg-clip-text text-transparent"
-              style={{ fontFamily: "'Playfair Display', serif" }}
+              className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#FF7A7A] via-[#FFA07A] to-[#6FCF97] bg-clip-text text-transparent font-playfair"
             >
               Receptkategorier
             </h1>
@@ -96,19 +95,13 @@ export default function KategorierClient({ categories }) {
 
                   <div className="pt-4 px-4 pb-4">
                     <h3 
-                      className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-[#FF7A7A] transition-colors"
-                      style={{ 
-                        fontFamily: "'Inter', 'SF Pro Display', -apple-system, sans-serif",
-                        letterSpacing: '-0.01em',
-                        fontWeight: 700
-                      }}
+                      className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-[#FF7A7A] transition-colors font-inter-system tracking-tight"
                     >
                       {category.name}
                     </h3>
 
                     <p 
-                      className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2"
-                      style={{ fontFamily: "'Inter', sans-serif" }}
+                      className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2 font-inter"
                     >
                       {category.description}
                     </p>

@@ -24,9 +24,9 @@ export default function Footer() {
           {/* Brand */}
           <div>
           <Link href="/" className="flex items-center space-x-2" aria-label="Bakstunden startsida">
-            <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg" style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}>
+            <div className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg font-playfair">
               Bakstunden
-            </h1>
+            </div>
           </Link>
             <p className="text-sm text-gray-400 mb-4">
               Sveriges bästa samling av recept och matlagningsguider.

@@ -37,9 +37,9 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2" aria-label="Bakstunden startsida">
-            <h1 className={`text-2xl md:text-3xl font-bold ${isHomePage ? 'text-white drop-shadow-lg' : 'text-gray-900'} transition-colors`} style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}>
+            <div className={`text-2xl md:text-3xl font-bold font-playfair ${isHomePage ? 'text-white drop-shadow-lg' : 'text-gray-900'} transition-colors`}>
               Bakstunden
-            </h1>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

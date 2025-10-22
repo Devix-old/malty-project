@@ -114,14 +114,12 @@ export default function RecipeListingClient({ initialRecipes, categoryName = nul
         {!currentCategory && (
           <div className="mb-12 text-center">
             <h1 
-              className="text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white"
-              style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}
+              className="text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white font-playfair"
             >
               Alla recept
             </h1>
             <p 
-              className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
-              style={{ fontFamily: "'Inter', sans-serif" }}
+              className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-inter"
             >
               Utforska {recipes.length} provlagade recept för alla tillfällen
             </p>
@@ -148,16 +146,14 @@ export default function RecipeListingClient({ initialRecipes, categoryName = nul
           {/* Sort */}
           <div className="flex items-center gap-4">
             <label 
-              className="text-sm font-semibold text-gray-700 dark:text-gray-300"
-              style={{ fontFamily: "'Inter', sans-serif" }}
+              className="text-sm font-semibold text-gray-700 dark:text-gray-300 font-inter"
             >
               Sortera:
             </label>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-900 focus:ring-2 focus:ring-purple-500 focus:border-transparent font-medium text-sm transition-all"
-              style={{ fontFamily: "'Inter', sans-serif" }}
+              className="px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-900 focus:ring-2 focus:ring-purple-500 focus:border-transparent font-medium text-sm transition-all font-inter"
             >
               <option value="newest">Nyaste först</option>
               <option value="rating">Högst betyg</option>

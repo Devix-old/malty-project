@@ -38,15 +38,15 @@ const crimson = Crimson_Text({
 
 export const metadata = {
   ...generateSiteMetadata({
-    title: 'Bakstunden - Sveriges bästa desserter och bakverk',
-    description: 'Upptäck fantastiska dessertrecept för alla tillfällen. Från klassisk kladdkaka till moderna chokladvåfflor. Bakstunden har alla söta favoriter du behöver för att lyckas med bakning.',
+    title: 'Bakstunden – Bästa recept på pannkakor och kladdkaka',
+    description: 'Upptäck recept på pannkakor, kladdkaka och chokladbollar. Enkla och goda desserter för alla tillfällen – besök Bakstunden idag!',
     url: '/',
     keywords: 'recept, bakning, dessert, kladdkaka, choklad, våfflor, pannkakor, svenska recept, matlagning, bakning, söta recept',
   }),
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se'),
   title: {
     template: '%s | Bakstunden',
-    default: 'Bakstunden - Sveriges bästa desserter och bakverk',
+    default: 'Bakstunden – Bästa recept på pannkakor och kladdkaka',
   },
   applicationName: 'Bakstunden',
   generator: 'Next.js',
@@ -64,8 +64,8 @@ export const metadata = {
     locale: 'sv_SE',
     url: 'https://bakstunden.se',
     siteName: 'Bakstunden',
-    title: 'Bakstunden - Sveriges bästa desserter och bakverk',
-    description: 'Upptäck fantastiska dessertrecept för alla tillfällen. Från klassisk kladdkaka till moderna chokladvåfflor.',
+    title: 'Bakstunden – Bästa recept på pannkakor och kladdkaka',
+    description: 'Upptäck recept på pannkakor, kladdkaka och chokladbollar. Enkla och goda desserter för alla tillfällen – besök Bakstunden idag!',
     images: [
       {
         url: '/bak-stunden.png',
@@ -77,8 +77,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Bakstunden - Sveriges bästa desserter och bakverk',
-    description: 'Upptäck fantastiska dessertrecept för alla tillfällen. Från klassisk kladdkaka till moderna chokladvåfflor.',
+    title: 'Bakstunden – Bästa recept på pannkakor och kladdkaka',
+    description: 'Upptäck recept på pannkakor, kladdkaka och chokladbollar. Enkla och goda desserter för alla tillfällen – besök Bakstunden idag!',
     images: ['/bak-stunden.png'],
   },
   manifest: '/manifest.json',

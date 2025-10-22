@@ -1,7 +1,7 @@
 {
-  "name": "Bakstunden - Sveriges bästa desserter och bakverk",
+  "name": "Bakstunden – Bästa recept på pannkakor och kladdkaka",
   "short_name": "Bakstunden",
-  "description": "Upptäck fantastiska dessertrecept för alla tillfällen. Från klassisk kladdkaka till moderna chokladvåfflor.",
+  "description": "Upptäck recept på pannkakor, kladdkaka och chokladbollar. Enkla och goda desserter för alla tillfällen – besök Bakstunden idag!",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FFF8F3",
@@ -21,7 +21,7 @@
       "purpose": "any"
     }
   ],
-  "categories": ["food", "lifestyle", "cooking"],
+  "categories": ["food", "cooking", "recipes", "baking", "desserts"],
   "lang": "sv",
   "dir": "ltr"
 }
