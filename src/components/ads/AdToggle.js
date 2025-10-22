@@ -21,10 +21,7 @@ export default function AdToggle() {
   return (
     <div className="fixed bottom-4 right-4 z-50">
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-4 max-w-xs">
-        <div className="flex items-center justify-between mb-2">
-          <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
-            Annonser
-          </h3>
+        <div className="flex items-center justify-end">
           <button
             onClick={toggleAds}
             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
