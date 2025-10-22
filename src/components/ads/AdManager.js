@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Ad placement types
 export const AD_TYPES = {
@@ -56,6 +56,7 @@ const AD_CONFIG = {
 export function AdPlacement({ type, className = '', style = {}, ...props }) {
   const [isVisible, setIsVisible] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const rootRef = useRef(null);
   const config = AD_CONFIG[type];
 
   useEffect(() => {
@@ -67,6 +68,8 @@ export function AdPlacement({ type, className = '', style = {}, ...props }) {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting && !isLoaded) {
+              // Minimal diagnostics
+              try { console.debug && console.debug('[Ads] Visible:', type, config.id); } catch (e) {}
               setIsVisible(true);
               setIsLoaded(true);
             }
@@ -75,9 +78,9 @@ export function AdPlacement({ type, className = '', style = {}, ...props }) {
         { threshold: 0.1, rootMargin: '50px' }
       );
 
-      const element = document.getElementById(config.id);
-      if (element) {
-        observer.observe(element);
+      if (rootRef.current) {
+        try { console.debug && console.debug('[Ads] Observing placeholder for', type, config.id); } catch (e) {}
+        observer.observe(rootRef.current);
       }
 
       return () => observer.disconnect();
@@ -90,40 +93,35 @@ export function AdPlacement({ type, className = '', style = {}, ...props }) {
 
   if (!config) return null;
 
-  const renderAd = () => {
-    if (type === AD_TYPES.IN_PAGE) {
-      return (
-        <div className={`hb-ad-inpage ${className}`} style={style} {...props}>
-          <div className="hb-ad-inner">
-            <div className={`hbagency_cls ${config.id}`}></div>
-          </div>
-        </div>
-      );
-    }
-
-    if (type === AD_TYPES.STICKY_FOOTER || type === AD_TYPES.STICKY_LEFT) {
-      return (
-        <div id={config.wrapper} className={`${config.className} ${className}`} style={style} {...props}>
-          <div id={config.closeButton}></div>
-          <div id={config.outer}>
-            <div id={config.id}></div>
-          </div>
-        </div>
-      );
-    }
-
-    // Default ad placement
+  // Sticky ads (non-lazy) render immediately with provider-specified structure
+  if (type === AD_TYPES.STICKY_FOOTER || type === AD_TYPES.STICKY_LEFT) {
     return (
-      <div 
-        id={config.id} 
-        className={`${config.className} ${className}`} 
-        style={style} 
-        {...props}
-      />
+      <div id={config.wrapper} className={`${config.className} ${className}`} style={style} {...props}>
+        <div id={config.closeButton}></div>
+        <div id={config.outer}>
+          <div id={config.id}></div>
+        </div>
+      </div>
     );
-  };
+  }
 
-  return isVisible ? renderAd() : null;
+  // In-page ad: always render wrapper; inject ad container when visible
+  if (type === AD_TYPES.IN_PAGE) {
+    return (
+      <div ref={rootRef} className={`hb-ad-inpage ${className}`} style={style} {...props}>
+        <div className="hb-ad-inner">
+          {isVisible ? <div className={`hbagency_cls ${config.id}`}></div> : null}
+        </div>
+      </div>
+    );
+  }
+
+  // Default (e.g., in-image, interstitial): use a neutral wrapper to observe; mount inner on visible
+  return (
+    <div ref={rootRef} className={`${config.className} ${className}`} style={style} {...props}>
+      {isVisible ? <div id={config.id}></div> : null}
+    </div>
+  );
 }
 
 // Ad manager for controlling ad behavior - always enabled
