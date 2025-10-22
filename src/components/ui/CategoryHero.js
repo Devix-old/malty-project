@@ -6,19 +6,19 @@ import Image from 'next/image';
 export default function CategoryHero({ category, image, description, recipeCount }) {
   // Map categories to beautiful images
   const categoryImages = {
-    'Vegetariskt': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1600&q=80',
-    'Vardagsmat': 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1600&q=80',
-    'Bakning': 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1600&q=80',
-    'Pasta': 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=1600&q=80',
-    'Grillmat': 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600&q=80',
-    'Desserter': 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=1600&q=80',
-    'Soppor': 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=1600&q=80',
-    'Sallader': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1600&q=80',
-    'Kyckling': 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=1600&q=80',
-    'Fisk': 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=1600&q=80',
-    'Snabb middag': 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=80',
-    'Glutenfritt': 'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=1600&q=80',
-    'default': 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1600&q=80',
+    'Vegetariskt': '/images/nygräddade-kakor-med-strössel-hero-banner.webp',
+    'Vardagsmat': '/images/nygräddade-kakor-med-strössel-hero-banner.webp',
+    'Bakning': '/images/nygräddade-kakor-med-strössel-hero-banner.webp',
+    'Pasta': '/images/nygräddade-kakor-med-strössel-hero-banner.webp',
+    'Grillmat': '/images/nygräddade-kakor-med-strössel-hero-banner.webp',
+    'Desserter': '/images/nygräddade-kakor-med-strössel-hero-banner.webp',
+    'Soppor': '/images/nygräddade-kakor-med-strössel-hero-banner.webp',
+    'Sallader': '/images/nygräddade-kakor-med-strössel-hero-banner.webp',
+    'Kyckling': '/images/nygräddade-kakor-med-strössel-hero-banner.webp',
+    'Fisk': '/images/nygräddade-kakor-med-strössel-hero-banner.webp',
+    'Snabb middag': '/images/nygräddade-kakor-med-strössel-hero-banner.webp',
+    'Glutenfritt': '/images/nygräddade-kakor-med-strössel-hero-banner.webp',
+    'default': '/images/nygräddade-kakor-med-strössel-hero-banner.webp',
   };
 
   const heroImage = image || categoryImages[category] || categoryImages.default;

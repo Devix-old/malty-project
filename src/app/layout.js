@@ -138,6 +138,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <CookieBanner />
           
           {/* Sticky Footer Ad */}
+          
           <AdPlacement type={AD_TYPES.STICKY_FOOTER} />
           
           {/* Sticky Left Banner Ad */}

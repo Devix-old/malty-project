@@ -146,30 +146,6 @@ export default function AuthorsSection({ authors }) {
             </motion.div>
           ))}
         </div>
-
-        {/* Join CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 text-center bg-gradient-to-r from-[#FF7A7A]/10 to-[#FFA07A]/10 p-8 md:p-12"
-        >
-          <ChefHat className="w-12 h-12 text-[#FF7A7A] mx-auto mb-4" />
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">
-            Vill du också dela dina recept?
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
-            Vi söker alltid passionerade matkreatörer som vill dela sina recept med vårt community.
-          </p>
-          <Link
-            href="/kontakt"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#FF7A7A] to-[#FFA07A] text-white font-semibold transform hover:scale-105 transition-all duration-300"
-          >
-            Kontakta oss
-            <Heart className="w-5 h-5" />
-          </Link>
-        </motion.div>
       </div>
     </section>
   );
