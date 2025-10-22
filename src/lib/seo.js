@@ -20,7 +20,7 @@ export function generateMetadata({
   noindex = false,
   nofollow = false,
 }) {
-  const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
+  const fullTitle = title || SITE_NAME;
   const fullUrl = url ? `${SITE_URL}${url}` : SITE_URL;
   const imageUrl = image ? `${SITE_URL}${image}` : `${SITE_URL}/bak-stunden.png`;
 
