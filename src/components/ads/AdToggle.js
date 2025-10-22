@@ -38,12 +38,6 @@ export default function AdToggle() {
             />
           </button>
         </div>
-        <p className="text-xs text-gray-600 dark:text-gray-400">
-          {adsEnabled 
-            ? 'Annonser är aktiverade' 
-            : 'Annonser är dolda. Du kan aktivera dem när som helst.'
-          }
-        </p>
         <button
           onClick={() => setIsVisible(false)}
           className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
