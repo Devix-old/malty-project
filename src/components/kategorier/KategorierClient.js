@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ChefHat, ArrowRight, Sparkles, Clock, Users } from 'lucide-react';
-import { CategoryPageAd } from '@/components/ads/AdPlacements';
+import { InPageAd } from '@/components/ads/AdPlacements';
 import Tag from '../ui/Tag';
 import { cn } from '@/lib/utils/cn';
 
@@ -126,7 +126,12 @@ export default function KategorierClient({ categories }) {
       </section>
 
       {/* Category Page Ad */}
-      <CategoryPageAd />
+      <InPageAd 
+        adId="241545" 
+        adType="inpage_style_2"
+        className="my-12"
+        style={{ minHeight: '250px' }}
+      />
 
       {/* CTA Section */}
       <section className="relative z-10 px-4 pb-20">
