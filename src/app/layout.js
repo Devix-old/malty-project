@@ -150,9 +150,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </AdManager>
         
         {/* HB Agency Ads - Direct HTML approach */}
-        <div className="hb-ad-inpage">
-          <div className="hb-ad-inner"> 
-          <div className="hbagency_cls hbagency_space_241545"></div></div> </div>
+        
 
         <div id="HB_Footer_Close_hbagency_space_241541">
           <div id="HB_CLOSE_hbagency_space_241541"></div>
