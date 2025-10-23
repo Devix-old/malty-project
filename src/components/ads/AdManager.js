@@ -106,15 +106,7 @@ export function AdPlacement({ type, className = '', style = {}, ...props }) {
   }
 
   // In-page ad: always render wrapper; inject ad container when visible
-  if (type === AD_TYPES.IN_PAGE) {
-    return (
-      <div ref={rootRef} className={`hb-ad-inpage ${className}`} style={style} {...props}>
-        <div className="hb-ad-inner">
-          {isVisible ? <div className={`hbagency_cls ${config.id}`}></div> : null}
-        </div>
-      </div>
-    );
-  }
+
 
   // Default (e.g., in-image, interstitial): use a neutral wrapper to observe; mount inner on visible
   return (
