@@ -5,6 +5,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CookieBanner from '@/components/ui/CookieBanner';
 import { AdManager, AdPlacement, AD_TYPES } from '@/components/ads/AdManager';
+import HBScripts from '@/components/ads/HBScripts';
 import { generateMetadata as generateSiteMetadata } from '@/lib/seo';
 
 // Modern sans-serif for body text (excellent readability)
@@ -105,7 +106,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         {/* Prebid Header Bidding Script */}
-        <script src="https://d3u598arehftfk.cloudfront.net/prebid_hb_37238_28732.js" async> </script>
+        <script src="https://d3u598arehftfk.cloudfront.net/prebid_hb_37238_28732.js" async></script>
+        
+        {/* HB Agency Scripts and Styles */}
+        <HBScripts />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="google-site-verification" content="73a51c1ce7036450" />
       </head>
