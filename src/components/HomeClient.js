@@ -109,6 +109,7 @@ export default function HomeClient({
 
       {/* Top Categories Showcase */}
       <section className="h-[60vh] sm:h-[55vh] lg:h-[50vh] px-12 md:px-16 lg:px-20 xl:px-24 bg-gradient-to-b from-[#FFF8F3] via-[#FFF5EE] to-white flex items-center">
+      <div id='hbagency_space_241544' className='h-[100px] w-full'></div>
         <div className="max-w-7xl mx-auto">
           {/* Category Circles Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 lg:gap-16">
@@ -162,6 +163,7 @@ export default function HomeClient({
 
       {/* Popular Tags/Categories */}
       <section className="py-32 px-12 md:px-16 lg:px-20 xl:px-24 bg-white dark:bg-gray-800">
+      <div id='hbagency_space_241544' className='h-[100px] w-full'></div>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 

@@ -56,51 +56,11 @@ const AD_CONFIG = {
 export function AdPlacement({ type, className = '', style = {}, ...props }) {
   const [isVisible, setIsVisible] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [debugInfo, setDebugInfo] = useState({});
   const rootRef = useRef(null);
   const config = AD_CONFIG[type];
 
-  // Debug function to check Prebid status
-  const checkPrebidStatus = () => {
-    const status = {
-      pbjsExists: !!window.pbjs,
-      pbjsQue: window.pbjs?.que || [],
-      pbjsVersion: window.pbjs?.version || 'unknown',
-      adUnits: window.pbjs?.getAdserverTargeting ? window.pbjs.getAdserverTargeting() : {},
-      bidResponses: window.pbjs?.getBidResponses ? window.pbjs.getBidResponses() : {},
-      timestamp: new Date().toISOString()
-    };
-    console.log(`[Ads Debug] Prebid Status for ${type}:`, status);
-    setDebugInfo(status);
-    return status;
-  };
-
   useEffect(() => {
-    if (!config) {
-      console.error(`[Ads Error] No config found for type: ${type}`);
-      return;
-    }
-
-    console.log(`[Ads Debug] Initializing ${type} with config:`, config);
-
-    // Check Prebid status immediately
-    const prebidStatus = checkPrebidStatus();
-    
-    // If Prebid is not loaded, wait for it
-    if (!prebidStatus.pbjsExists) {
-      console.log(`[Ads Debug] Prebid not loaded yet for ${type}, waiting...`);
-      
-      const waitForPrebid = () => {
-        if (window.pbjs) {
-          console.log(`[Ads Debug] Prebid loaded for ${type}!`);
-          checkPrebidStatus();
-        } else {
-          setTimeout(waitForPrebid, 1000);
-        }
-      };
-      
-      setTimeout(waitForPrebid, 1000);
-    }
+    if (!config) return;
 
     // For lazy loading ads
     if (config.lazy) {
@@ -108,23 +68,10 @@ export function AdPlacement({ type, className = '', style = {}, ...props }) {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting && !isLoaded) {
-              console.log(`[Ads Debug] Ad became visible: ${type} (${config.id})`);
-              console.log(`[Ads Debug] Prebid status when visible:`, checkPrebidStatus());
-              
+              // Minimal diagnostics
+              try { console.debug && console.debug('[Ads] Visible:', type, config.id); } catch (e) {}
               setIsVisible(true);
               setIsLoaded(true);
-
-              // Force Prebid refresh after visibility
-              setTimeout(() => {
-                if (window.pbjs && window.pbjs.refreshBids) {
-                  console.log(`[Ads Debug] Attempting to refresh bids for ${config.id}`);
-                  try {
-                    window.pbjs.refreshBids();
-                  } catch (error) {
-                    console.error(`[Ads Error] Failed to refresh bids:`, error);
-                  }
-                }
-              }, 100);
             }
           });
         },
@@ -132,37 +79,17 @@ export function AdPlacement({ type, className = '', style = {}, ...props }) {
       );
 
       if (rootRef.current) {
-        console.log(`[Ads Debug] Setting up observer for ${type} (${config.id})`);
+        try { console.debug && console.debug('[Ads] Observing placeholder for', type, config.id); } catch (e) {}
         observer.observe(rootRef.current);
       }
 
-      return () => {
-        console.log(`[Ads Debug] Cleaning up observer for ${type}`);
-        observer.disconnect();
-      };
+      return () => observer.disconnect();
     } else {
       // For non-lazy ads (sticky)
-      console.log(`[Ads Debug] Non-lazy ad ${type} - setting visible immediately`);
       setIsVisible(true);
       setIsLoaded(true);
-      
-      // Check Prebid status for sticky ads too
-      setTimeout(() => {
-        checkPrebidStatus();
-      }, 1000);
     }
-  }, [config, isLoaded, type, checkPrebidStatus]);
-
-  // Additional effect to monitor Prebid changes
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (isVisible && isLoaded) {
-        checkPrebidStatus();
-      }
-    }, 5000); // Check every 5 seconds
-
-    return () => clearInterval(interval);
-  }, [isVisible, isLoaded, checkPrebidStatus]);
+  }, [config, isLoaded, type]);
 
   if (!config) return null;
 
@@ -199,81 +126,9 @@ export function AdPlacement({ type, className = '', style = {}, ...props }) {
 
 // Ad manager for controlling ad behavior - always enabled
 export function AdManager({ children }) {
-  const [globalDebugInfo, setGlobalDebugInfo] = useState({});
-
-  useEffect(() => {
-    // Global Prebid monitoring
-    const checkGlobalPrebid = () => {
-      const status = {
-        pbjsExists: !!window.pbjs,
-        pbjsVersion: window.pbjs?.version || 'unknown',
-        pbjsQue: window.pbjs?.que || [],
-        adUnits: window.pbjs?.getAdserverTargeting ? window.pbjs.getAdserverTargeting() : {},
-        bidResponses: window.pbjs?.getBidResponses ? window.pbjs.getBidResponses() : {},
-        timestamp: new Date().toISOString(),
-        userAgent: navigator.userAgent,
-        url: window.location.href
-      };
-      
-      console.log('[Ads Global Debug] Prebid Status:', status);
-      setGlobalDebugInfo(status);
-      
-      // Check if we have any ad units configured
-      if (window.pbjs && window.pbjs.getAdserverTargeting) {
-        const targeting = window.pbjs.getAdserverTargeting();
-        console.log('[Ads Global Debug] Ad Server Targeting:', targeting);
-      }
-      
-      // Check bid responses
-      if (window.pbjs && window.pbjs.getBidResponses) {
-        const responses = window.pbjs.getBidResponses();
-        console.log('[Ads Global Debug] Bid Responses:', responses);
-      }
-    };
-
-    // Check immediately
-    checkGlobalPrebid();
-
-    // Check every 3 seconds
-    const interval = setInterval(checkGlobalPrebid, 3000);
-
-    // Also check when window loads
-    const handleLoad = () => {
-      setTimeout(checkGlobalPrebid, 1000);
-    };
-    
-    window.addEventListener('load', handleLoad);
-
-    return () => {
-      clearInterval(interval);
-      window.removeEventListener('load', handleLoad);
-    };
-  }, []);
-
   return (
     <div className="ad-manager">
       {children}
-      {/* Debug info in development */}
-      {process.env.NODE_ENV === 'development' && (
-        <div style={{ 
-          position: 'fixed', 
-          bottom: '10px', 
-          right: '10px', 
-          background: 'rgba(0,0,0,0.8)', 
-          color: 'white', 
-          padding: '10px', 
-          fontSize: '12px',
-          zIndex: 9999,
-          maxWidth: '300px'
-        }}>
-          <div><strong>Prebid Debug:</strong></div>
-          <div>pbjs: {globalDebugInfo.pbjsExists ? '✅' : '❌'}</div>
-          <div>Version: {globalDebugInfo.pbjsVersion}</div>
-          <div>Que: {globalDebugInfo.pbjsQue?.length || 0} items</div>
-          <div>Ad Units: {Object.keys(globalDebugInfo.adUnits || {}).length}</div>
-          <div>Bid Responses: {Object.keys(globalDebugInfo.bidResponses || {}).length}</div>
-        </div>
-      )}
     </div>
   );
 }
