@@ -105,7 +105,67 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         {/* Prebid Header Bidding Script */}
-        <script src="https://d3u598arehftfk.cloudfront.net/prebid_hb_37238_28732.js" async> </script>
+        <script src="https://hbagency.it/cdn/prebid_9_52_hb_v2808.js" async></script>
+        
+        {/* Debug Script for Ad Testing */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            window.addEventListener('load', function() {
+              console.log('[Ads Debug] Page loaded, checking Prebid...');
+              
+              // Check Prebid every 2 seconds for first 30 seconds
+              let attempts = 0;
+              const maxAttempts = 15;
+              
+              const checkPrebid = () => {
+                attempts++;
+                console.log('[Ads Debug] Attempt', attempts, 'of', maxAttempts);
+                
+                if (window.pbjs) {
+                  console.log('[Ads Debug] Prebid found!', {
+                    version: window.pbjs.version,
+                    que: window.pbjs.que,
+                    adUnits: window.pbjs.getAdserverTargeting ? window.pbjs.getAdserverTargeting() : 'not available',
+                    bidResponses: window.pbjs.getBidResponses ? window.pbjs.getBidResponses() : 'not available'
+                  });
+                  
+                  // Try to refresh bids
+                  if (window.pbjs.refreshBids) {
+                    console.log('[Ads Debug] Attempting to refresh bids...');
+                    try {
+                      window.pbjs.refreshBids();
+                    } catch (error) {
+                      console.error('[Ads Debug] Error refreshing bids:', error);
+                    }
+                  }
+                  
+                  // Check for ad elements
+                  const adElements = document.querySelectorAll('[id*="hbagency_space"]');
+                  console.log('[Ads Debug] Found ad elements:', adElements.length);
+                  adElements.forEach((el, index) => {
+                    console.log('[Ads Debug] Ad element', index, ':', {
+                      id: el.id,
+                      className: el.className,
+                      innerHTML: el.innerHTML,
+                      parentElement: el.parentElement?.tagName
+                    });
+                  });
+                  
+                } else {
+                  console.log('[Ads Debug] Prebid not found yet, attempt', attempts);
+                  if (attempts < maxAttempts) {
+                    setTimeout(checkPrebid, 2000);
+                  } else {
+                    console.error('[Ads Debug] Prebid not loaded after', maxAttempts, 'attempts');
+                  }
+                }
+              };
+              
+              // Start checking after 1 second
+              setTimeout(checkPrebid, 1000);
+            });
+          `
+        }} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="google-site-verification" content="73a51c1ce7036450" />
       </head>
