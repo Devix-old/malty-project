@@ -105,7 +105,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         {/* Prebid Header Bidding Script */}
-        <Script id="prebid-hb" src="https://d3u598arehftfk.cloudfront.net/prebid_hb_37238_28732.js" async />
+        <script src='//d3u598arehftfk.cloudfront.net/prebid_hb_37238_28732.js' async></script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="google-site-verification" content="73a51c1ce7036450" />
       </head>
