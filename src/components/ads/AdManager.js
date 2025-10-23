@@ -119,7 +119,7 @@ export function AdPlacement({ type, className = '', style = {}, ...props }) {
   // Default (e.g., in-image, interstitial): use a neutral wrapper to observe; mount inner on visible
   return (
     <div ref={rootRef} className={`${config.className} ${className}`} style={style} {...props}>
-      {isVisible ? <div className={`hbagency_cls ${config.id}`}></div> : null}
+      {isVisible ? <div id={config.id}></div> : null}
     </div>
   );
 }

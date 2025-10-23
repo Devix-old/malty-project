@@ -21,7 +21,7 @@ import RecipeSteps from '@/components/recipe/RecipeSteps';
 import RecipeCard from '@/components/recipe/RecipeCard';
 import JsonLd from '@/components/seo/JsonLd';
 import { generateRecipeSchema, generateBreadcrumbSchema } from '@/lib/seo';
-import { InPageAd, FooterAd } from '@/components/ads/AdPlacements';
+import { InArticleAd, RecipeContentAd, RelatedRecipesAd } from '@/components/ads/AdPlacements';
 
 // Generate static params
 export async function generateStaticParams() {
@@ -267,12 +267,7 @@ export default async function RecipePage({ params }) {
               </div>
               
               {/* Ad between recipe content and related recipes */}
-              <InPageAd 
-                adId="241545" 
-                adType="inpage_style_2"
-                className="my-12"
-                style={{ minHeight: '280px' }}
-              />
+              <RecipeContentAd />
             </div>
           </section>
 
@@ -297,20 +292,12 @@ export default async function RecipePage({ params }) {
               </div>
               
               {/* Ad after related recipes */}
-              <InPageAd 
-                adId="241544" 
-                adType="simple"
-                className="my-8"
-                style={{ minHeight: '200px' }}
-              />
+              <RelatedRecipesAd />
             </section>
           )}
         </div>
       </article>
 
-      {/* HB Agency Footer Ads - Using React Portal */}
-      <FooterAd adId="241541" />
-      <FooterAd adId="241542" />
     </>
   );
 }
