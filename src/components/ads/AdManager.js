@@ -110,7 +110,7 @@ export function AdPlacement({ type, className = '', style = {}, ...props }) {
     return (
       <div ref={rootRef} className={`hb-ad-inpage ${className}`} style={style} {...props}>
         <div className="hb-ad-inner">
-          {isVisible ? <div className={`hbagency_cls ${config.id}`}></div> : null}
+          {isVisible ? <div className="hbagency_cls hbagency_space_241545"></div> : null}
         </div>
       </div>
     );
