@@ -85,6 +85,22 @@ export function AdPlacement({ type, className = '', style = {}, ...props }) {
 
     // Check Prebid status immediately
     const prebidStatus = checkPrebidStatus();
+    
+    // If Prebid is not loaded, wait for it
+    if (!prebidStatus.pbjsExists) {
+      console.log(`[Ads Debug] Prebid not loaded yet for ${type}, waiting...`);
+      
+      const waitForPrebid = () => {
+        if (window.pbjs) {
+          console.log(`[Ads Debug] Prebid loaded for ${type}!`);
+          checkPrebidStatus();
+        } else {
+          setTimeout(waitForPrebid, 1000);
+        }
+      };
+      
+      setTimeout(waitForPrebid, 1000);
+    }
 
     // For lazy loading ads
     if (config.lazy) {

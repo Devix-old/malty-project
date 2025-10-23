@@ -107,6 +107,47 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {/* Prebid Header Bidding Script */}
         <script src="https://hbagency.it/cdn/prebid_9_52_hb_v2808.js" async></script>
         
+        {/* Force Prebid Loading */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            console.log('[Ads Debug] Starting Prebid script loading...');
+            
+            // Check if script is already loaded
+            if (window.pbjs) {
+              console.log('[Ads Debug] Prebid already loaded!');
+            } else {
+              console.log('[Ads Debug] Prebid not found, checking script loading...');
+              
+              // Monitor script loading
+              const checkScript = () => {
+                const scripts = document.querySelectorAll('script[src*="prebid"]');
+                console.log('[Ads Debug] Found Prebid scripts:', scripts.length);
+                
+                scripts.forEach((script, index) => {
+                  console.log('[Ads Debug] Script', index, ':', {
+                    src: script.src,
+                    loaded: script.readyState || 'unknown',
+                    onload: !!script.onload
+                  });
+                });
+                
+                if (window.pbjs) {
+                  console.log('[Ads Debug] Prebid loaded successfully!', {
+                    version: window.pbjs.version,
+                    que: window.pbjs.que
+                  });
+                } else {
+                  console.log('[Ads Debug] Prebid still not loaded, retrying...');
+                  setTimeout(checkScript, 2000);
+                }
+              };
+              
+              // Start checking after 1 second
+              setTimeout(checkScript, 1000);
+            }
+          `
+        }} />
+        
         {/* Debug Script for Ad Testing */}
         <script dangerouslySetInnerHTML={{
           __html: `
