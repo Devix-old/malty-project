@@ -14,7 +14,7 @@ import PopularThisWeek from '@/components/home/PopularThisWeek';
 import SeasonalInspiration from '@/components/home/SeasonalInspiration';
 import AuthorsSection from '@/components/home/AuthorsSection';
 import { useRouter } from 'next/navigation';
-import { HomepageHeroAd } from '@/components/ads/AdPlacements';
+import { InPageAd, FooterAd, StickyFooterAd } from '@/components/ads/AdPlacements';
 
 export default function HomeClient({ 
   collections, 
@@ -241,8 +241,13 @@ export default function HomeClient({
       {/* Seasonal Inspiration - NEW SECTION */}
       <SeasonalInspiration recipes={allRecipes} />
 
-      {/* Homepage Ad */}
-      <HomepageHeroAd />
+      {/* Homepage Ad - In-Page Style 2 */}
+      <InPageAd 
+        adId="241545" 
+        adType="inpage_style_2"
+        className="max-w-7xl mx-auto px-4"
+        style={{ minHeight: '300px' }}
+      />
 
       {/* Social Proof - NEW SECTION */}
       <SocialProof totalRecipes={totalRecipes} />
@@ -337,6 +342,13 @@ export default function HomeClient({
           </motion.div>
         </div>
       </section>
+
+      {/* HB Agency Footer Ads - Using React Portal */}
+      <FooterAd adId="241541" />
+      <FooterAd adId="241542" />
+      
+      {/* Sticky Footer Ad */}
+      <StickyFooterAd adId="241541" />
     </div>
   );
 }

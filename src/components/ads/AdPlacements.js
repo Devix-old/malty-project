@@ -1,123 +1,142 @@
 'use client';
 
-import { AdPlacement, AD_TYPES } from './AdManager';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
-// In-article ad placement (best for recipe content)
-export function InArticleAd({ className = '' }) {
-  return (
-    <div className={`my-8 ${className}`}>
-      <AdPlacement 
-        type={AD_TYPES.IN_PAGE}
-        className="max-w-4xl mx-auto"
-        style={{ 
-          minHeight: '250px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      />
-    </div>
-  );
-}
+// In-Page Ad Component for simple ads (241543, 241544, 241545)
+export function InPageAd({ adId, adType = 'simple', className = '', style = {} }) {
+  useEffect(() => {
+    // Wait for HB Agency script to load and refresh the ad
+    const loadAd = () => {
+      if (window.hbagency && window.hbagency.loadAd) {
+        console.log(`[HB Agency] Loading ad: hbagency_space_${adId}`);
+        window.hbagency.loadAd(`hbagency_space_${adId}`);
+      } else if (window.hbagency && window.hbagency.refresh) {
+        console.log(`[HB Agency] Refreshing ad: hbagency_space_${adId}`);
+        window.hbagency.refresh(`hbagency_space_${adId}`);
+      } else {
+        console.log(`[HB Agency] Script not ready, retrying in 1s...`);
+        setTimeout(loadAd, 1000);
+      }
+    };
 
-// In-image ad placement (for recipe hero images)
-export function InImageAd({ className = '' }) {
-  return (
-    <div className={`relative ${className}`}>
-      <AdPlacement 
-        type={AD_TYPES.IN_IMAGE}
-        className="absolute inset-0 z-10"
-        style={{ 
-          minHeight: '200px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      />
-    </div>
-  );
-}
+    // Start loading after component mounts
+    const timer = setTimeout(loadAd, 100);
+    return () => clearTimeout(timer);
+  }, [adId]);
 
-// Recipe content ad (between ingredients and steps)
-export function RecipeContentAd({ className = '' }) {
-  return (
-    <div className={`my-12 ${className}`}>
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-          <AdPlacement 
-            type={AD_TYPES.IN_PAGE}
-            className="w-full"
-            style={{ 
-              minHeight: '280px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          />
+  if (adType === 'inpage_style_2') {
+    // For hbagency_space_241545 with wrapper structure
+    return (
+      <div className={`hb-ad-inpage ${className}`} style={style}>
+        <div className="hb-ad-inner">
+          <div className={`hbagency_cls hbagency_space_${adId}`}></div>
         </div>
       </div>
+    );
+  }
+
+  // For simple ads (241543, 241544)
+  return (
+    <div className={className} style={style}>
+      <div id={`hbagency_space_${adId}`}></div>
     </div>
   );
 }
 
-// Homepage hero ad
-export function HomepageHeroAd({ className = '' }) {
-  return (
-    <div className={`my-8 ${className}`}>
-      <div className="max-w-7xl mx-auto px-4">
-        <AdPlacement 
-          type={AD_TYPES.IN_PAGE}
-          className="w-full"
-          style={{ 
-            minHeight: '300px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        />
+// Footer Ad Component using React Portal
+export function FooterAd({ adId, className = '', style = {} }) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
+    // Load the footer ad after portal is rendered
+    const loadFooterAd = () => {
+      if (window.hbagency && window.hbagency.loadAd) {
+        console.log(`[HB Agency] Loading footer ad: hbagency_space_${adId}`);
+        window.hbagency.loadAd(`hbagency_space_${adId}`);
+      } else if (window.hbagency && window.hbagency.refresh) {
+        console.log(`[HB Agency] Refreshing footer ad: hbagency_space_${adId}`);
+        window.hbagency.refresh(`hbagency_space_${adId}`);
+      } else {
+        console.log(`[HB Agency] Footer ad script not ready, retrying in 1s...`);
+        setTimeout(loadFooterAd, 1000);
+      }
+    };
+
+    const timer = setTimeout(loadFooterAd, 200);
+    return () => clearTimeout(timer);
+  }, [adId, mounted]);
+
+  // Don't render on server-side
+  if (!mounted) return null;
+
+  // Footer ad HTML structure
+  const footerAdHTML = (
+    <div id={`HB_Footer_Close_hbagency_space_${adId}`} className={className} style={style}>
+      <div id={`HB_CLOSE_hbagency_space_${adId}`}></div>
+      <div id={`HB_OUTER_hbagency_space_${adId}`}>
+        <div id={`hbagency_space_${adId}`}></div>
       </div>
     </div>
   );
+
+  // Use React Portal to render directly into document.body
+  // This bypasses React's DOM tree and fixes the "can't close" problem
+  return createPortal(footerAdHTML, document.body);
 }
 
-// Category page ad
-export function CategoryPageAd({ className = '' }) {
-  return (
-    <div className={`my-12 ${className}`}>
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
-          <AdPlacement 
-            type={AD_TYPES.IN_PAGE}
-            className="w-full"
-            style={{ 
-              minHeight: '250px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
+// Sticky Footer Ad (simplified version for testing)
+export function StickyFooterAd({ adId, className = '', style = {} }) {
+  const [mounted, setMounted] = useState(false);
 
-// Related recipes ad
-export function RelatedRecipesAd({ className = '' }) {
-  return (
-    <div className={`my-8 ${className}`}>
-      <div className="max-w-4xl mx-auto px-4">
-        <AdPlacement 
-          type={AD_TYPES.IN_PAGE}
-          className="w-full"
-          style={{ 
-            minHeight: '200px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        />
-      </div>
-    </div>
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
+    const loadStickyAd = () => {
+      if (window.hbagency && window.hbagency.loadAd) {
+        console.log(`[HB Agency] Loading sticky ad: hbagency_space_${adId}`);
+        window.hbagency.loadAd(`hbagency_space_${adId}`);
+      } else if (window.hbagency && window.hbagency.refresh) {
+        console.log(`[HB Agency] Refreshing sticky ad: hbagency_space_${adId}`);
+        window.hbagency.refresh(`hbagency_space_${adId}`);
+      } else {
+        console.log(`[HB Agency] Sticky ad script not ready, retrying in 1s...`);
+        setTimeout(loadStickyAd, 1000);
+      }
+    };
+
+    const timer = setTimeout(loadStickyAd, 200);
+    return () => clearTimeout(timer);
+  }, [adId, mounted]);
+
+  if (!mounted) return null;
+
+  const stickyAdHTML = (
+    <div 
+      id={`hbagency_space_${adId}`} 
+      className={`ad-sticky-footer ${className}`} 
+      style={{
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
+        background: '#fff',
+        borderTop: '1px solid #ddd',
+        ...style
+      }}
+    ></div>
   );
+
+  return createPortal(stickyAdHTML, document.body);
 }
