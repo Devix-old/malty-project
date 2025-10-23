@@ -89,7 +89,7 @@ export function AdPlacement({ type, className = '', style = {}, ...props }) {
       setIsVisible(true);
       setIsLoaded(true);
     }
-  }, [config, isLoaded]);
+  }, [config, isLoaded, type]);
 
   if (!config) return null;
 
