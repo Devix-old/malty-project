@@ -335,6 +335,8 @@ export default function HomeClient({
         </div>
       </section>
       
+      {/* HB Agency Ad */}
+      <div id='hbagency_space_241543'></div>
 
     </div>
   );
