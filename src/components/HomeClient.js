@@ -14,7 +14,6 @@ import PopularThisWeek from '@/components/home/PopularThisWeek';
 import SeasonalInspiration from '@/components/home/SeasonalInspiration';
 import AuthorsSection from '@/components/home/AuthorsSection';
 import { useRouter } from 'next/navigation';
-import { HomepageHeroAd } from '@/components/ads/AdPlacements';
 
 export default function HomeClient({ 
   collections, 
@@ -241,8 +240,6 @@ export default function HomeClient({
       {/* Seasonal Inspiration - NEW SECTION */}
       <SeasonalInspiration recipes={allRecipes} />
 
-      {/* Homepage Ad */}
-      <HomepageHeroAd />
 
       {/* Social Proof - NEW SECTION */}
       <SocialProof totalRecipes={totalRecipes} />
@@ -337,7 +334,7 @@ export default function HomeClient({
           </motion.div>
         </div>
       </section>
-
+      
 
     </div>
   );

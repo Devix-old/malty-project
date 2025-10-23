@@ -4,8 +4,6 @@ import "./globals.css";
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CookieBanner from '@/components/ui/CookieBanner';
-import { AdManager, AdPlacement, AD_TYPES } from '@/components/ads/AdManager';
-import HBScripts from '@/components/ads/HBScripts';
 import { generateMetadata as generateSiteMetadata } from '@/lib/seo';
 
 // Modern sans-serif for body text (excellent readability)
@@ -105,11 +103,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-5B3M9L45');`,
           }}
         />
-        {/* Prebid Header Bidding Script */}
-        <script src="https://d3u598arehftfk.cloudfront.net/prebid_hb_37238_28732.js" async></script>
         
-        {/* HB Agency Scripts and Styles */}
-        <HBScripts />
+        {/* Prebid Header Bidding Script */}
+        <Script
+          src="https://d3u598arehftfk.cloudfront.net/prebid_hb_37238_28732.js"
+          strategy="afterInteractive"
+        />
+        
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="google-site-verification" content="73a51c1ce7036450" />
       </head>
@@ -127,47 +127,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         
-        <AdManager>
-          <Header />
-          <a 
-            href="#main-content" 
-            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-purple-600 focus:text-white focus:rounded-lg"
-          >
-            Hoppa till huvudinnehåll
-          </a>
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
-          <Footer />
-          <CookieBanner />
-          
-          {/* Sticky Footer Ad */}
-          
-          <AdPlacement type={AD_TYPES.STICKY_FOOTER} />
-          
-          {/* Sticky Left Banner Ad */}
-          <AdPlacement type={AD_TYPES.STICKY_LEFT} />
-        </AdManager>
-        
-        {/* HB Agency Ads - Direct HTML approach */}
-        
-
-        <div id="HB_Footer_Close_hbagency_space_241541">
-          <div id="HB_CLOSE_hbagency_space_241541"></div>
-          <div id="HB_OUTER_hbagency_space_241541">
-            <div id="hbagency_space_241541"></div>
-          </div>
-        </div>
-        
-        <div id="HB_Footer_Close_hbagency_space_241542">
-          <div id="HB_CLOSE_hbagency_space_241542"></div>
-          <div id="HB_OUTER_hbagency_space_241542">
-            <div id="hbagency_space_241542"></div>
-          </div>
-        </div>
-        
-        <div id="hbagency_space_241543"></div>
-        
+        <Header />
+        <a 
+          href="#main-content" 
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-purple-600 focus:text-white focus:rounded-lg"
+        >
+          Hoppa till huvudinnehåll
+        </a>
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
+        <Footer />
+        <CookieBanner />
       </body>
     </html>
   );
