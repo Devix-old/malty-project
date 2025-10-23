@@ -14,7 +14,7 @@ import PopularThisWeek from '@/components/home/PopularThisWeek';
 import SeasonalInspiration from '@/components/home/SeasonalInspiration';
 import AuthorsSection from '@/components/home/AuthorsSection';
 import { useRouter } from 'next/navigation';
-import { HomepageHeroAd, HBInPageAd, HBFooterAd } from '@/components/ads/AdPlacements';
+import { HomepageHeroAd } from '@/components/ads/AdPlacements';
 
 export default function HomeClient({ 
   collections, 
@@ -243,9 +243,6 @@ export default function HomeClient({
 
       {/* Homepage Ad */}
       <HomepageHeroAd />
-      
-      {/* HB Agency Simple Ads */}
-      <HBInPageAd adId="241545" className="max-w-7xl mx-auto px-4" />
 
       {/* Social Proof - NEW SECTION */}
       <SocialProof totalRecipes={totalRecipes} />
@@ -341,12 +338,6 @@ export default function HomeClient({
         </div>
       </section>
 
-      {/* HB Agency Footer Ads - Simple approach */}
-      <HBFooterAd adId="241541" />
-      <HBFooterAd adId="241542" />
-      
-      {/* HB Agency Interstitial Ad */}
-      <div id="hbagency_space_241543"></div>
 
     </div>
   );

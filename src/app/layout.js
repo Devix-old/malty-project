@@ -148,6 +148,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           {/* Sticky Left Banner Ad */}
           <AdPlacement type={AD_TYPES.STICKY_LEFT} />
         </AdManager>
+        
+        {/* HB Agency Ads - Direct HTML approach */}
+        <div id="HB_Footer_Close_hbagency_space_241541">
+          <div id="HB_CLOSE_hbagency_space_241541"></div>
+          <div id="HB_OUTER_hbagency_space_241541">
+            <div id="hbagency_space_241541"></div>
+          </div>
+        </div>
+        
+        <div id="HB_Footer_Close_hbagency_space_241542">
+          <div id="HB_CLOSE_hbagency_space_241542"></div>
+          <div id="HB_OUTER_hbagency_space_241542">
+            <div id="hbagency_space_241542"></div>
+          </div>
+        </div>
+        
+        <div id="hbagency_space_241543"></div>
+        
       </body>
     </html>
   );
