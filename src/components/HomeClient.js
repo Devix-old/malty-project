@@ -109,6 +109,9 @@ export default function HomeClient({
 
       {/* Top Categories Showcase */}
       <section className="h-[60vh] sm:h-[55vh] lg:h-[50vh] px-12 md:px-16 lg:px-20 xl:px-24 bg-gradient-to-b from-[#FFF8F3] via-[#FFF5EE] to-white flex items-center">
+      <div class="hb-ad-inpage">
+    <div class="hb-ad-inner"> 
+    <div class="hbagency_cls hbagency_space_241545"></div></div> </div>
         <div className="max-w-7xl mx-auto">
           {/* Category Circles Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 lg:gap-16">
