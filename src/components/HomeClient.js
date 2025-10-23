@@ -249,9 +249,7 @@ export default function HomeClient({
 
       {/* About Preview */}
       <section className="py-16 px-4 bg-gradient-to-r from-[#FFB4B4]/20 to-[#A8E6CF]/20 dark:from-gray-900 dark:to-gray-800">
-      <div class="hb-ad-inpage">
-    <div class="hb-ad-inner"> 
-    <div class="hbagency_cls hbagency_space_241545"></div></div> </div>
+        
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
