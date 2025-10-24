@@ -273,13 +273,13 @@ export default async function RecipePage({ params }) {
             <section className="pt-12 border-t border-gray-200 dark:border-gray-800">
               <div className="text-center mb-12">
                 <div className="inline-block px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm font-semibold mb-4">
-                  Rekommenderat
+                  {frontmatter.category}
                 </div>
                 <h2
                   className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white"
                   style={{ fontFamily: 'var(--font-playfair)' }}
                 >
-                  Fler recept du kanske gillar
+                  Fler {frontmatter.category.toLowerCase()} du kanske gillar
                 </h2>
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

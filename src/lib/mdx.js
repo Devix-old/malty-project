@@ -62,29 +62,32 @@ export async function getAllContent(type) {
 }
 
 /**
- * Get related content based on tags and category
+ * Get related content based on category only (same category recipes)
  */
 export async function getRelatedContent(type, currentSlug, tags, category, limit = 6) {
   const allContent = await getAllContent(type);
   
-  const scored = allContent
-    .filter(item => item.slug !== currentSlug)
+  // Filter to only include recipes from the same category
+  const sameCategoryRecipes = allContent
+    .filter(item => item.slug !== currentSlug && item.category === category)
     .map(item => {
       let score = 0;
       
-      // Same category = +3 points
-      if (item.category === category) score += 3;
-      
-      // Each shared tag = +2 points
+      // Each shared tag = +1 point (for sorting within same category)
       const sharedTags = item.tags?.filter(tag => tags?.includes(tag)) || [];
-      score += sharedTags.length * 2;
+      score += sharedTags.length;
       
       return { ...item, score };
     })
-    .filter(item => item.score > 0)
-    .sort((a, b) => b.score - a.score)
+    .sort((a, b) => {
+      // Sort by score first (shared tags), then by date
+      if (b.score !== a.score) {
+        return b.score - a.score;
+      }
+      return new Date(b.publishedAt) - new Date(a.publishedAt);
+    })
     .slice(0, limit);
 
-  return scored;
+  return sameCategoryRecipes;
 }
 
