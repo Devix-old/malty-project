@@ -105,19 +105,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         
-        {/* Prebid Header Bidding Script */}
-        <script 
-          src="https://d3u598arehftfk.cloudfront.net/prebid_hb_37238_28732.js" 
-          async
-          onError="console.warn('Prebid script failed to load')"
-        ></script>
-        
-        {/* Initialize consents object to prevent errors */}
+        {/* Initialize consents and load scripts after hydration */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              window.consents = window.consents || {};
-              window.dataLayer = window.dataLayer || [];
+              (function() {
+                window.consents = window.consents || {};
+                window.dataLayer = window.dataLayer || [];
+                
+                // Load Prebid script after DOM is ready
+                if (document.readyState === 'loading') {
+                  document.addEventListener('DOMContentLoaded', loadPrebidScript);
+                } else {
+                  loadPrebidScript();
+                }
+                
+                function loadPrebidScript() {
+                  const script = document.createElement('script');
+                  script.src = 'https://d3u598arehftfk.cloudfront.net/prebid_hb_37238_28732.js';
+                  script.async = true;
+                  script.onerror = function() {
+                    console.warn('Prebid script failed to load');
+                  };
+                  document.head.appendChild(script);
+                }
+              })();
             `,
           }}
         />

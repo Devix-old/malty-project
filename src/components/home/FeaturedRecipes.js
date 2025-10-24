@@ -9,24 +9,31 @@ export default function FeaturedRecipes({ recipes }) {
   if (!recipes || recipes.length === 0) return null;
 
   return (
-    <section className="py-24 px-4 md:px-8 lg:px-16 xl:px-20 bg-white dark:bg-gray-950">
-      <div className="max-w-[1400px] mx-auto">
-        {/* Section Header - Minimal & Clean */}
+    <section className="py-16 px-4 sm:px-12 md:px-16 lg:px-20 xl:px-24 bg-gradient-to-br from-orange-50 via-pink-50 to-purple-50">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header - Matching Other Sections */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-12 md:mb-16"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
         >
-          <p className="text-sm font-medium text-[#FF7A7A] mb-2 tracking-wide uppercase">
+          <h2 
+            className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-[#FF7A7A] to-[#6FCF97] bg-clip-text text-transparent font-playfair"
+            style={{
+              fontFamily: "'Playfair Display', serif",
+            }}
+          >
             Senaste recepten
-          </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 dark:text-white mb-3 tracking-tight">
-            Nya favoriter att upptäcka
           </h2>
-          <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
-            Fräscha recept testade till perfektion
+          <p 
+            className="text-lg text-gray-700"
+            style={{
+              fontFamily: "'Crimson Text', serif",
+            }}
+          >
+            Nya favoriter att upptäcka - Fräscha recept testade till perfektion
           </p>
         </motion.div>
 
@@ -130,20 +137,23 @@ export default function FeaturedRecipes({ recipes }) {
           ))}
         </div>
 
-        {/* View All Button - Understated */}
+        {/* View All Button - Matching Other Sections */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center mt-12 md:mt-16"
+          className="text-center mt-12"
         >
           <Link
             href="/recept"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors duration-200"
+            className="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FF7A7A] to-[#6FCF97] text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+            style={{
+              fontFamily: "'Inter', sans-serif",
+            }}
           >
             Se alla recept
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Link>

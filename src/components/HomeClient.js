@@ -3,10 +3,10 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Sparkles, ChevronLeft, ChevronRight, ChefHat, Search, Menu } from 'lucide-react';
+import { ArrowRight, Sparkles, ChevronLeft, ChevronRight, ChefHat, Search, Menu, X } from 'lucide-react';clear
 import { motion } from 'framer-motion';
 import useEmblaCarousel from 'embla-carousel-react';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import Button from '@/components/ui/Button';
 import SearchBar from '@/components/ui/SearchBar';
 import Tag from '@/components/ui/Tag';
@@ -28,6 +28,7 @@ export default function HomeClient({
   authors
 }) {
   const router = useRouter();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Embla Carousel setup
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
@@ -225,7 +226,7 @@ export default function HomeClient({
                   { name: 'Hem', href: '/', icon: '🏠' },
                   { name: 'Recept', href: '/recept', icon: '📖' },
                   { name: 'Kategorier', href: '/kategorier', icon: '✨' },
-                  { name: 'Blogg', href: '/blogg', icon: '❤️' },
+                  { name: 'Om Bakstunden', href: '/om', icon: '🍰' },
                 ].map((item, index) => (
                   <motion.div
                     key={item.name}
@@ -277,13 +278,54 @@ export default function HomeClient({
               {/* Mobile Menu Button */}
               <motion.button
                 className="lg:hidden relative p-2 text-gray-700 hover:text-pink-600 transition-colors"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 whileTap={{ scale: 0.9 }}
               >
-                <Menu className="w-6 h-6" />
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
               </motion.button>
             </div>
           </div>
         </div>
+
+        {/* Mobile Menu Overlay */}
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: isMobileMenuOpen ? 1 : 0, y: isMobileMenuOpen ? 0 : -50 }}
+          transition={{ duration: 0.3 }}
+          className={`lg:hidden absolute top-20 left-0 right-0 bg-white/95 backdrop-blur-xl shadow-xl border-b border-pink-100 pb-4 ${
+            isMobileMenuOpen ? 'block' : 'hidden'
+          }`}
+        >
+          <nav className="flex flex-col items-center gap-4 px-4 pt-4">
+            {[
+              { name: 'Hem', href: '/', icon: '🏠' },
+              { name: 'Recept', href: '/recept', icon: '📖' },
+              { name: 'Kategorier', href: '/kategorier', icon: '✨' },
+              { name: 'Om Bakstunden', href: '/om', icon: '🍰' },
+            ].map((item, index) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="flex items-center gap-2 text-gray-700 hover:text-pink-600 transition-colors duration-300 text-lg font-semibold"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span className="text-lg">{item.icon}</span>
+                {item.name}
+              </Link>
+            ))}
+            <Link
+              href="/recept"
+              className="mt-4 px-6 py-3 bg-gradient-to-r from-pink-500 via-rose-500 to-orange-500 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Börja Baka
+            </Link>
+          </nav>
+        </motion.div>
 
         {/* Hero Content - Middle Part */}
         <div className="relative h-[30vh] sm:h-[32vh] lg:h-[35vh] flex items-center justify-center z-30">
