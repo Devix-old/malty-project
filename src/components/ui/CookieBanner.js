@@ -9,6 +9,12 @@ export default function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Initialize consents object if not exists
+    if (typeof window !== 'undefined') {
+      window.consents = window.consents || {};
+      window.dataLayer = window.dataLayer || [];
+    }
+    
     const consent = localStorage.getItem('cookieConsent');
     if (!consent) {
       setIsVisible(true);
@@ -18,12 +24,41 @@ export default function CookieBanner() {
   const handleAccept = () => {
     localStorage.setItem('cookieConsent', 'accepted');
     setIsVisible(false);
-    // Initialize analytics here if accepted
+    
+    // Initialize consents and analytics
+    if (typeof window !== 'undefined') {
+      window.consents = window.consents || {};
+      window.consents.analytics = true;
+      window.consents.marketing = true;
+      
+      // Trigger GTM consent update
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: 'consent_update',
+          consent: 'accepted'
+        });
+      }
+    }
   };
 
   const handleDecline = () => {
     localStorage.setItem('cookieConsent', 'declined');
     setIsVisible(false);
+    
+    // Initialize consents with declined state
+    if (typeof window !== 'undefined') {
+      window.consents = window.consents || {};
+      window.consents.analytics = false;
+      window.consents.marketing = false;
+      
+      // Trigger GTM consent update
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: 'consent_update',
+          consent: 'declined'
+        });
+      }
+    }
   };
 
   return (

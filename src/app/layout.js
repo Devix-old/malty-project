@@ -1,10 +1,11 @@
 import { Inter, Playfair_Display, Lora, Crimson_Text } from "next/font/google";
 import Script from 'next/script';
 import "./globals.css";
-import Header from '@/components/layout/Header';
+import HeaderWrapper from '@/components/layout/HeaderWrapper';
 import Footer from '@/components/layout/Footer';
 import CookieBanner from '@/components/ui/CookieBanner';
 import { generateMetadata as generateSiteMetadata } from '@/lib/seo';
+import '@/lib/consent-protection';
 
 // Modern sans-serif for body text (excellent readability)
 const inter = Inter({
@@ -105,7 +106,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
         
         {/* Prebid Header Bidding Script */}
-        <script src="https://d3u598arehftfk.cloudfront.net/prebid_hb_37238_28732.js" async> </script>
+        <script 
+          src="https://d3u598arehftfk.cloudfront.net/prebid_hb_37238_28732.js" 
+          async
+          onError="console.warn('Prebid script failed to load')"
+        ></script>
+        
+        {/* Initialize consents object to prevent errors */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.consents = window.consents || {};
+              window.dataLayer = window.dataLayer || [];
+            `,
+          }}
+        />
         
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="google-site-verification" content="73a51c1ce7036450" />
@@ -124,7 +139,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         
-        <Header />
+        <HeaderWrapper />
         <a 
           href="#main-content" 
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-purple-600 focus:text-white focus:rounded-lg"
