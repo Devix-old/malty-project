@@ -51,6 +51,24 @@ export default async function Home() {
   // Calculate recipe counts dynamically
   const collections = [
     {
+      title: 'Pannkakor',
+      description: 'Klassiska svenska pannkakor för hela familjen',
+      image: '/images/pannkakor-icon-transparent.png',
+      slug: 'pannkakor',
+      recipes: allRecipes.filter(r => 
+        r.tags && r.tags.includes('Pannkakor')
+      ).length,
+    },
+    {
+      title: 'Våfflor',
+      description: 'Krispiga Våfflor med söt topping och sylt',
+      image: '/images/vafflor-icon-transparent.png',
+      slug: 'vafflor',
+      recipes: allRecipes.filter(r => 
+        r.tags && r.tags.includes('Vafflor')
+      ).length,
+    },
+    {
       title: 'Kladdkaka',
       description: 'Sveriges mest älskade chokladkaka i alla varianter',
       image: '/images/lyxig-chokladkaka-slice-med-korsbar-och-chokladchips.png',

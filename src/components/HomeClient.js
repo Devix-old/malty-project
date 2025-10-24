@@ -13,6 +13,7 @@ import SocialProof from '@/components/home/SocialProof';
 import PopularThisWeek from '@/components/home/PopularThisWeek';
 import SeasonalInspiration from '@/components/home/SeasonalInspiration';
 import AuthorsSection from '@/components/home/AuthorsSection';
+import CategoriesCarousel from '@/components/home/CategoriesCarousel';
 import { useRouter } from 'next/navigation';
 
 export default function HomeClient({ 
@@ -106,51 +107,8 @@ export default function HomeClient({
         </div>
       </section>
 
-      {/* Top Categories Showcase */}
-      <section className="h-[60vh] sm:h-[55vh] lg:h-[50vh] px-12 md:px-16 lg:px-20 xl:px-24 bg-gradient-to-b from-[#FFF8F3] via-[#FFF5EE] to-white flex items-center">
-        <div className="max-w-7xl mx-auto">
-          {/* Category Circles Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 lg:gap-16">
-            {collections.map((collection, index) => (
-              <motion.div
-                key={collection.slug}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="text-center group"
-              >
-                <Link
-                  href={`/kategorier/${collection.slug}`}
-                  className="block"
-                >
-                  {/* Free-form Image */}
-                  <motion.div
-                    className="relative w-40 h-40 md:w-48 md:h-48 mx-auto mb-3 flex items-center justify-center"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Image
-                      src={collection.image}
-                      alt={collection.title}
-                      width={192}
-                      height={192}
-                      className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-110"
-                    />
-                  </motion.div>
-
-                  {/* Category Name */}
-                  <h3 
-                    className="text-base md:text-lg font-medium text-gray-800 group-hover:text-[#FF7A7A] transition-colors duration-300 font-inter"
-                  >
-                    {collection.title}
-                  </h3>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Categories Carousel */}
+      <CategoriesCarousel collections={collections} />
 
       {/* Featured Recipes - NEW SECTION */}
       <FeaturedRecipes recipes={featuredRecipes} />
@@ -161,20 +119,20 @@ export default function HomeClient({
 
       {/* Popular Tags/Categories */}
       
-      <section className="py-32 px-12 md:px-16 lg:px-20 xl:px-24 bg-white dark:bg-gray-800">
+      <section className="py-16 md:py-24 lg:py-32 px-4 md:px-12 lg:px-16 xl:px-24 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8 md:mb-12">
             <h2 
-              className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-[#FF7A7A] to-[#6FCF97] bg-clip-text text-transparent font-playfair"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 md:mb-3 bg-gradient-to-r from-[#FF7A7A] to-[#6FCF97] bg-clip-text text-transparent font-playfair px-4"
             >
               Utforska efter kategori
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-lg">
+            <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base lg:text-lg px-4">
               Hitta inspiration bland våra mest populära receptkategorier
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 lg:gap-6 max-w-5xl mx-auto">
             {popularTags.map((tag, index) => (
               <motion.div
                 key={tag.name}
@@ -185,7 +143,7 @@ export default function HomeClient({
               >
                 <Link
                   href={`/kategorier/${tag.slug}`}
-                  className="group block relative aspect-[4/3] overflow-hidden transition-all duration-300 transform hover:scale-105"
+                  className="group block relative aspect-[3/2] sm:aspect-[4/3] overflow-hidden rounded-xl transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-xl"
                 >
                   {/* Background Image */}
                   <div className="absolute inset-0">
@@ -202,33 +160,33 @@ export default function HomeClient({
 
                   {/* Content - Bottom Positioned */}
                   <div className="absolute inset-0 flex flex-col justify-end">
-                    <div className="p-3 flex items-end justify-between gap-2">
+                    <div className="p-4 md:p-3 flex items-end justify-between gap-2">
                       {/* Title - Bottom Left */}
-                      <h3 className="text-sm md:text-base font-semibold text-white drop-shadow-lg flex-1 font-inter-system">
+                      <h3 className="text-base sm:text-sm md:text-base lg:text-lg font-semibold text-white drop-shadow-lg flex-1 font-inter-system">
                         {tag.name}
                       </h3>
 
                       {/* Badge - Far Right */}
-                      <span className="px-2 py-0.5 bg-white/50 opacity-95 backdrop-blur-sm text-gray-900 text-xs font-semibold whitespace-nowrap ml-auto font-inter-system">
+                      <span className="px-2.5 py-1 md:px-2 md:py-0.5 bg-white/50 opacity-95 backdrop-blur-sm text-gray-900 text-xs md:text-xs font-semibold whitespace-nowrap ml-auto font-inter-system rounded">
                         {tag.count}
                       </span>
                     </div>
                   </div>
 
                   {/* Hover Effect Border */}
-                  <div className="absolute inset-0 border-2 border-white/0 group-hover:border-white/60 transition-all duration-300"></div>
+                  <div className="absolute inset-0 border-2 border-white/0 group-hover:border-white/60 transition-all duration-300 rounded-xl"></div>
                 </Link>
               </motion.div>
             ))}
           </div>
 
           {/* View All Button */}
-          <div className="text-center mt-12">
+          <div className="text-center mt-8 md:mt-12 px-4">
             <Button
               variant="outline"
               size="lg"
               onClick={() => router.push('/recept')}
-              className="group border-[#FF7A7A] text-[#FF7A7A] hover:bg-[#FF7A7A] hover:text-white"
+              className="group border-[#FF7A7A] text-[#FF7A7A] hover:bg-[#FF7A7A] hover:text-white w-full sm:w-auto"
             >
               Se alla recept
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
