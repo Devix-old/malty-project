@@ -13,6 +13,7 @@ import SocialProof from '@/components/home/SocialProof';
 import PopularThisWeek from '@/components/home/PopularThisWeek';
 import SeasonalInspiration from '@/components/home/SeasonalInspiration';
 import AuthorsSection from '@/components/home/AuthorsSection';
+import CategoryCarousel from '@/components/home/CategoryCarousel';
 import { useRouter } from 'next/navigation';
 
 export default function HomeClient({ 
@@ -106,51 +107,8 @@ export default function HomeClient({
         </div>
       </section>
 
-      {/* Top Categories Showcase */}
-      <section className="h-[60vh] sm:h-[55vh] lg:h-[50vh] px-12 md:px-16 lg:px-20 xl:px-24 bg-gradient-to-b from-[#FFF8F3] via-[#FFF5EE] to-white flex items-center">
-        <div className="max-w-7xl mx-auto">
-          {/* Category Circles Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 lg:gap-16">
-            {collections.map((collection, index) => (
-              <motion.div
-                key={collection.slug}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="text-center group"
-              >
-                <Link
-                  href={`/kategorier/${collection.slug}`}
-                  className="block"
-                >
-                  {/* Free-form Image */}
-                  <motion.div
-                    className="relative w-40 h-40 md:w-48 md:h-48 mx-auto mb-3 flex items-center justify-center"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Image
-                      src={collection.image}
-                      alt={collection.title}
-                      width={192}
-                      height={192}
-                      className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-110"
-                    />
-                  </motion.div>
-
-                  {/* Category Name */}
-                  <h3 
-                    className="text-base md:text-lg font-medium text-gray-800 group-hover:text-[#FF7A7A] transition-colors duration-300 font-inter"
-                  >
-                    {collection.title}
-                  </h3>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Category Carousel */}
+      <CategoryCarousel collections={collections} />
 
       {/* Featured Recipes - NEW SECTION */}
       <FeaturedRecipes recipes={featuredRecipes} />
