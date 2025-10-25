@@ -292,9 +292,6 @@ export default function HomeClient({
           </motion.div>
         </div>
       </section>
-      
-      {/* HB Agency Ad */}
-      <div id='hbagency_space_241543'></div>
 
     </div>
   );
