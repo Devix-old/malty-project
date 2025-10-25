@@ -3,7 +3,7 @@ import KategorierClient from '@/components/kategorier/KategorierClient';
 
 export const metadata = {
   title: 'Dessertkategorier - Hitta inspiration | Bakstunden',
-  description: 'Utforska våra dessertkategorier: Kladdkaka, Chokladboll, Äppelpaj, Cookies, Våfflor och Pannkakor. Hitta ditt nästa favoritdessert!',
+  description: 'Utforska våra dessertkategorier: Kladdkaka, Chokladbollar, Äppelpaj, Cookies, Våfflor och Pannkakor. Hitta ditt nästa favoritdessert!',
 };
 
 export default async function KategorierPage() {
@@ -20,8 +20,8 @@ export default async function KategorierPage() {
       icon: '🍰',
     },
     {
-      name: 'Chokladboll',
-      slug: 'chokladboll',
+      name: 'Chokladbollar',
+      slug: 'chokladbollar',
       description: 'Klassiska no-bake favoriter och moderna varianter. Sveriges mest älskade fika-godis.',
       image: '/images/recipes/Chokladbolla.png',
       icon: '🍫',
@@ -65,9 +65,9 @@ export default async function KategorierPage() {
       count = allRecipes.filter(recipe => 
         recipe.tags && recipe.tags.includes('Kladdkaka')
       ).length;
-    } else if (category.slug === 'chokladboll') {
+    } else if (category.slug === 'chokladbollar') {
       count = allRecipes.filter(recipe => 
-        recipe.tags && recipe.tags.includes('Chokladboll')
+        recipe.tags && recipe.tags.includes('Chokladbollar')
       ).length;
     } else if (category.slug === 'appelpaj') {
       count = allRecipes.filter(recipe => 

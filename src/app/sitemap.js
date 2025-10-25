@@ -57,7 +57,7 @@ export default async function sitemap() {
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/kategorier/chokladboll`,
+      url: `${baseUrl}/kategorier/chokladbollar`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.7,

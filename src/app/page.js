@@ -96,12 +96,12 @@ export default async function Home() {
       ).length,
     },
     {
-      title: 'Chokladboll',
+      title: 'Chokladbollar',
       description: 'Klassiska no-bake favoriter och moderna varianter',
       image: '/images/utsokt-sortiment-gourmet-chokladtrumfer.png',
-      slug: 'chokladboll',
+      slug: 'chokladbollar',
       recipes: allRecipes.filter(r => 
-        r.tags && r.tags.includes('Chokladboll')
+        r.tags && r.tags.includes('Chokladbollar')
       ).length,
     },
   ];
@@ -118,7 +118,7 @@ export default async function Home() {
 
   const popularTags = [
     { name: 'Kladdkaka', slug: 'kladdkaka', image: '/images/recipes/filips-basta-kladdkaka.webp' },
-    { name: 'Chokladboll', slug: 'chokladboll', image: '/images/recipes/Chokladbolla.png' },
+    { name: 'Chokladbollar', slug: 'chokladbollar', image: '/images/recipes/Chokladbolla.png' },
     { name: 'Äppelpaj', slug: 'appelpaj', image: '/images/recipes/knackig-appelpaj.png' },
     { name: 'Cookies', slug: 'cookies', image: '/images/recipes/nygräddade-kakor-med-chokladbitar.webp' },
     { name: 'Våfflor', slug: 'vafflor', image: '/images/recipes/belgiska-vafflor.webp' },

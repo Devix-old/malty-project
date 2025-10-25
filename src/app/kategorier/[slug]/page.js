@@ -6,7 +6,7 @@ import { Suspense } from 'react';
 // Category mapping - slug to display name
 const categoryMap = {
   'kladdkaka': 'Kladdkaka',
-  'chokladboll': 'Chokladboll',
+  'chokladbollar': 'Chokladbollar',
   'appelpaj': 'Äppelpaj',
   'cookies': 'Cookies',
   'vafflor': 'Våfflor',
@@ -56,8 +56,8 @@ export default async function CategoryPage({ params }) {
       return recipe.category === 'Kladdkaka';
     }
     
-    if (slug === 'chokladboll') {
-      return recipe.category === 'Chokladboll';
+    if (slug === 'chokladbollar') {
+      return recipe.category === 'Chokladbollar';
     }
     
     if (slug === 'appelpaj') {

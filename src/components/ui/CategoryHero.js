@@ -9,7 +9,7 @@ export default function CategoryHero({ category, image, description, recipeCount
     'Pannkakor': '/images/recipes/pannkakor-recept-2-personer.webp',
     'Våfflor': '/images/recipes/Belgiska-våfflor.png',
     'Kladdkaka': '/images/recipes/filips-basta-kladdkaka.webp',
-    'Chokladboll': '/images/recipes/Chokladbolla.png',
+    'Chokladbollar': '/images/recipes/Chokladbolla.png',
     'Cookies': '/images/nygräddade-kakor-med-strössel-hero-banner.webp',
     'Äppelpaj': '/images/recipes/appelpaj-klassisk-svensk.webp',
     'Vegetariskt': '/images/nygräddade-kakor-med-strössel-hero-banner.webp',
