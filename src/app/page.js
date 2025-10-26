@@ -1,5 +1,5 @@
 import { getAllContent } from '@/lib/mdx';
-import HomeClient from '@/components/HomeClient';
+import EnhancedHomeClient from '@/components/EnhancedHomeClient';
 import StructuredData from '@/components/seo/StructuredData';
 import { generateWebsiteSchema, generateOrganizationSchema, generateItemListSchema } from '@/lib/seo';
 
@@ -25,86 +25,8 @@ export default async function Home() {
     allAuthors = [];
   }
 
-  // Get featured recipes first (prioritize featured: true)
-  const featuredMarked = allRecipes
-    .filter(r => r.featured === true)
-    .sort((a, b) => {
-      const dateA = new Date(a.publishedAt || 0);
-      const dateB = new Date(b.publishedAt || 0);
-      return dateB - dateA;
-    });
-
-  // If less than 8 featured, fill with latest non-featured recipes
-  let featuredRecipes = [...featuredMarked];
-  if (featuredRecipes.length < 8) {
-    const nonFeatured = allRecipes
-      .filter(r => !r.featured)
-      .sort((a, b) => {
-        const dateA = new Date(a.publishedAt || 0);
-        const dateB = new Date(b.publishedAt || 0);
-        return dateB - dateA;
-      });
-    
-    featuredRecipes.push(...nonFeatured.slice(0, 8 - featuredRecipes.length));
-  }
-
-  // Calculate recipe counts dynamically
-  const collections = [
-    {
-      title: 'Pannkakor',
-      description: 'Klassiska svenska pannkakor för hela familjen',
-      image: '/images/pannkakor-icon-transparent.png',
-      slug: 'pannkakor',
-      recipes: allRecipes.filter(r => 
-        r.tags && r.tags.includes('Pannkakor')
-      ).length,
-    },
-    {
-      title: 'Våfflor',
-      description: 'Krispiga Våfflor med söt topping och sylt',
-      image: '/images/vafflor-icon-transparent.png',
-      slug: 'vafflor',
-      recipes: allRecipes.filter(r => 
-        r.tags && r.tags.includes('Vafflor')
-      ).length,
-    },
-    {
-      title: 'Kladdkaka',
-      description: 'Sveriges mest älskade chokladkaka i alla varianter',
-      image: '/images/lyxig-chokladkaka-slice-med-korsbar-och-chokladchips.png',
-      slug: 'kladdkaka',
-      recipes: allRecipes.filter(r => 
-        r.tags && r.tags.includes('Kladdkaka')
-      ).length,
-    },
-    {
-      title: 'Cookies',
-      description: 'Mjuka och knapriga kakor för alla tillfällen',
-      image: '/images/utsokt-chokladchunk-kaka-sot-dessert.png',
-      slug: 'cookies',
-      recipes: allRecipes.filter(r => 
-        r.tags && r.tags.includes('Cookies')
-      ).length,
-    },
-    {
-      title: 'Äppelpaj',
-      description: 'Klassisk svensk äppelpaj med smuldeg och söta äpplen',
-      image: '/images/utsokt-kirapaj-slice-sot-dessert-fotografi.png',
-      slug: 'appelpaj',
-      recipes: allRecipes.filter(r => 
-        r.tags && r.tags.includes('Äppelpaj')
-      ).length,
-    },
-    {
-      title: 'Chokladbollar',
-      description: 'Klassiska no-bake favoriter och moderna varianter',
-      image: '/images/utsokt-sortiment-gourmet-chokladtrumfer.png',
-      slug: 'chokladbollar',
-      recipes: allRecipes.filter(r => 
-        r.tags && r.tags.includes('Chokladbollar')
-      ).length,
-    },
-  ];
+  // Get manually selected homepage featured recipes
+  const featuredRecipes = allRecipes.filter(r => r.homepageFeatured === true);
 
   // Calculate tag counts dynamically
   const tagCounts = {};
@@ -116,17 +38,27 @@ export default async function Home() {
     }
   });
 
-  const popularTags = [
-    { name: 'Kladdkaka', slug: 'kladdkaka', image: '/images/recipes/filips-basta-kladdkaka.webp' },
-    { name: 'Chokladbollar', slug: 'chokladbollar', image: '/images/recipes/Chokladbolla.png' },
-    { name: 'Äppelpaj', slug: 'appelpaj', image: '/images/recipes/knackig-appelpaj.png' },
-    { name: 'Cookies', slug: 'cookies', image: '/images/recipes/nygräddade-kakor-med-chokladbitar.webp' },
-    { name: 'Våfflor', slug: 'vafflor', image: '/images/recipes/belgiska-vafflor.webp' },
-    { name: 'Pannkakor', slug: 'pannkakor', image: '/images/recipes/amerikanska-pannkakor.webp' },
-  ].map(tag => ({
-    ...tag,
-    count: `${tagCounts[tag.name] || 0}+ recept`,
-  }));
+  // Get all categories and select the 12 most relevant ones for homepage
+  const { getAllCategories } = await import('@/lib/categories');
+  const allCategories = getAllCategories();
+  
+  // Select the 12 most relevant categories for homepage display
+  const selectedCategoryKeys = [
+    'pannkakor', 'kladdkaka', 'pasta', 'kyckling', 'vegetariska', 'vafflor',
+    'appelpaj', 'chokladbollar', 'kycklingfars', 'lax', 'scones', 'lasagne'
+  ];
+  
+  const popularCategories = selectedCategoryKeys.map(key => {
+    const category = allCategories.find(cat => cat.slug === `${key}-recept`);
+    return {
+      name: category.name,
+      slug: category.slug,
+      image: category.image,
+      icon: category.icon,
+      description: category.description,
+      count: `${tagCounts[category.name] || 0}+ recept`
+    };
+  });
 
   // Generate structured data
   const websiteSchema = generateWebsiteSchema();
@@ -140,9 +72,8 @@ export default async function Home() {
       <StructuredData data={organizationSchema} />
       <StructuredData data={recipeListSchema} />
       
-      <HomeClient 
-        collections={collections}
-        popularTags={popularTags}
+      <EnhancedHomeClient
+        popularCategories={popularCategories}
         totalRecipes={allRecipes.length}
         featuredRecipes={featuredRecipes}
         allRecipes={allRecipes}

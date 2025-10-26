@@ -1,7 +1,7 @@
 import { Inter, Playfair_Display, Lora, Crimson_Text } from "next/font/google";
 import Script from 'next/script';
 import "./globals.css";
-import Header from '@/components/layout/Header';
+import HeaderWrapper from '@/components/layout/HeaderWrapper';
 import Footer from '@/components/layout/Footer';
 import CookieBanner from '@/components/ui/CookieBanner';
 import { generateMetadata as generateSiteMetadata } from '@/lib/seo';
@@ -37,15 +37,15 @@ const crimson = Crimson_Text({
 
 export const metadata = {
   ...generateSiteMetadata({
-    title: 'Bakstunden – Bästa recept på pannkakor och kladdkaka',
-    description: 'Upptäck recept på pannkakor, kladdkaka och chokladbollar. Enkla och goda desserter för alla tillfällen – besök Bakstunden idag!',
+    title: 'Bakstunden – Sveriges bästa matrecept för alla tillfällen',
+    description: 'Upptäck tusentals goda recept för frukost, lunch, middag och dessert. Vegetariskt, veganskt, glutenfritt och mycket mer – hitta din perfekta mat på Bakstunden!',
     url: '/',
-    keywords: 'recept, bakning, dessert, kladdkaka, choklad, våfflor, pannkakor, svenska recept, matlagning, bakning, söta recept',
+    keywords: 'recept, mat, matlagning, svenska recept, vegetariskt, veganskt, glutenfritt, frukost, lunch, middag, dessert, matrecept, kokbok, svensk mat, italiensk mat, asiatisk mat, snabbmat, vardagsmat, sallader, soppor, pasta, kött, fisk, vegetariska recept, hälsosam mat, familjerecept',
   }),
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se'),
   title: {
     template: '%s | Bakstunden',
-    default: 'Bakstunden – Bästa recept på pannkakor och kladdkaka',
+    default: 'Bakstunden – Sveriges bästa matrecept för alla tillfällen',
   },
   applicationName: 'Bakstunden',
   generator: 'Next.js',
@@ -63,21 +63,21 @@ export const metadata = {
     locale: 'sv_SE',
     url: 'https://bakstunden.se',
     siteName: 'Bakstunden',
-    title: 'Bakstunden – Bästa recept på pannkakor och kladdkaka',
-    description: 'Upptäck recept på pannkakor, kladdkaka och chokladbollar. Enkla och goda desserter för alla tillfällen – besök Bakstunden idag!',
+    title: 'Bakstunden – Sveriges bästa matrecept för alla tillfällen',
+    description: 'Upptäck tusentals goda recept för frukost, lunch, middag och dessert. Vegetariskt, veganskt, glutenfritt och mycket mer – hitta din perfekta mat på Bakstunden!',
     images: [
       {
         url: '/bak-stunden.png',
         width: 1200,
         height: 630,
-        alt: 'Bakstunden - Sveriges bästa desserter och bakverk',
+        alt: 'Bakstunden - Sveriges bästa matrecept för alla tillfällen',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Bakstunden – Bästa recept på pannkakor och kladdkaka',
-    description: 'Upptäck recept på pannkakor, kladdkaka och chokladbollar. Enkla och goda desserter för alla tillfällen – besök Bakstunden idag!',
+    title: 'Bakstunden – Sveriges bästa matrecept för alla tillfällen',
+    description: 'Upptäck tusentals goda recept för frukost, lunch, middag och dessert. Vegetariskt, veganskt, glutenfritt och mycket mer – hitta din perfekta mat på Bakstunden!',
     images: ['/bak-stunden.png'],
   },
   manifest: '/manifest.json',
@@ -120,7 +120,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         
-        <Header />
+        <HeaderWrapper />
         <a 
           href="#main-content" 
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-purple-600 focus:text-white focus:rounded-lg"

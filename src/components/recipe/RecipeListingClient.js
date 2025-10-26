@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import RecipeCard from '@/components/recipe/RecipeCard';
-import RecipeFilter from '@/components/recipe/RecipeFilter';
-import SearchBar from '@/components/ui/SearchBar';
+import EnhancedRecipeFilter from '@/components/recipe/EnhancedRecipeFilter';
+import EnhancedSearchBar from '@/components/ui/EnhancedSearchBar';
 import Pagination from '@/components/ui/Pagination';
 import CategoryHero from '@/components/ui/CategoryHero';
 import Tag from '@/components/ui/Tag';
@@ -100,8 +100,8 @@ export default function RecipeListingClient({ initialRecipes, categoryName = nul
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FFF8F3] to-white dark:from-gray-900 dark:to-gray-800">
-      {/* Category Hero - Only show if we have a specific category */}
-      {currentCategory && (
+      {/* Category Hero - Only show if we have a specific category and showHero is true */}
+      {currentCategory && showHero && (
         <CategoryHero
           category={currentCategory}
           description={categoryDescription}
@@ -130,17 +130,17 @@ export default function RecipeListingClient({ initialRecipes, categoryName = nul
         <div className="bg-white dark:bg-gray-800 p-6 md:p-8 mb-12 border border-gray-100 dark:border-gray-700">
           <div className="flex flex-col md:flex-row gap-4 mb-6">
             <div className="flex-1">
-              <SearchBar
-                onSearch={setSearchQuery}
-                placeholder="Sök recept, ingredienser eller taggar..."
-              />
+            <EnhancedSearchBar
+  onSearch={setSearchQuery}
+  placeholder="Sök recept, ingredienser eller taggar..."
+/>
             </div>
-            <RecipeFilter
-              filters={filters}
-              onFilterChange={setFilters}
-              categories={categories}
-              tags={tags}
-            />
+        <EnhancedRecipeFilter
+          filters={filters}
+          onFilterChange={setFilters}
+          categories={categories}
+          tags={tags}
+        />
           </div>
 
           {/* Sort */}

@@ -150,7 +150,7 @@ export default function SeasonalInspiration({ recipes }) {
           className="text-center mt-12"
         >
           <Link
-            href="/kategorier/hostens-favoriter"
+            href="/kategorier/scones-recept"
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#FF7A7A] to-[#FFA07A] text-white font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
           >
             Utforska säsongsrecept

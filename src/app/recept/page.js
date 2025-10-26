@@ -5,13 +5,27 @@ import StructuredData from '@/components/seo/StructuredData';
 import { generateItemListSchema } from '@/lib/seo';
 
 export const metadata = {
-  title: 'Alla recept',
-  description: 'Utforska hundratals provlagade dessertrecept från Bakstunden. Från klassisk kladdkaka till moderna chokladvåfflor - hitta din nya favorit!',
-  keywords: 'recept, bakning, dessert, kladdkaka, choklad, våfflor, pannkakor, svenska recept, matlagning, söta recept',
+  title: 'Alla recept - Matrecept för alla tillfällen',
+  description: 'Utforska hundratals provlagade matrecept från Bakstunden. Från kyckling och pasta till vegetariskt och dessert - hitta din nya favorit!',
+  keywords: 'recept, mat, matlagning, kyckling, pasta, vegetariskt, kladdkaka, pannkakor, svenska recept, frukost, lunch, middag, dessert, familjerecept',
   openGraph: {
     title: 'Alla recept | Bakstunden',
-    description: 'Utforska hundratals provlagade dessertrecept från Bakstunden. Från klassisk kladdkaka till moderna chokladvåfflor - hitta din nya favorit!',
+    description: 'Utforska hundratals provlagade matrecept från Bakstunden. Från kyckling och pasta till vegetariskt och dessert - hitta din nya favorit!',
     type: 'website',
+    images: [
+      {
+        url: '/images/fika-och-bakning-svensk-stil.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Svenska matrecept - Bakstunden',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Alla recept | Bakstunden',
+    description: 'Utforska hundratals provlagade matrecept från Bakstunden. Från kyckling och pasta till vegetariskt och dessert - hitta din nya favorit!',
+    images: ['/images/fika-och-bakning-svensk-stil.webp'],
   },
 };
 

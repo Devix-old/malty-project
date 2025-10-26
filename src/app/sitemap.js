@@ -1,4 +1,5 @@
 import { getAllContent } from '@/lib/mdx';
+import { getAllCategories } from '@/lib/categories';
 
 // Dynamic sitemap generation
 export default async function sitemap() {
@@ -30,6 +31,18 @@ export default async function sitemap() {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
+    {
+      url: `${baseUrl}/maltider`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/snabbmat`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
   ];
 
   // Dynamic routes - Recipes
@@ -48,45 +61,19 @@ export default async function sitemap() {
 
   // Blog articles removed - /blogg page no longer exists
 
-  // Category routes - only existing categories
-  const categoryRoutes = [
-    {
-      url: `${baseUrl}/kategorier/kladdkaka`,
+  // Category routes - dynamically generated from all 16 categories
+  let categoryRoutes = [];
+  try {
+    const allCategories = getAllCategories();
+    categoryRoutes = allCategories.map(category => ({
+      url: `${baseUrl}/kategorier/${category.slug}`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/kategorier/chokladbollar`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/kategorier/appelpaj`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/kategorier/cookies`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/kategorier/vafflor`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/kategorier/pannkakor`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-  ];
+    }));
+  } catch (error) {
+    console.error('Error fetching categories for sitemap:', error);
+  }
 
   return [
     ...staticRoutes,

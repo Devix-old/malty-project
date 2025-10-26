@@ -1,7 +1,7 @@
 {
-  "name": "Bakstunden – Bästa recept på pannkakor och kladdkaka",
+  "name": "Bakstunden – Sveriges bästa matrecept för alla tillfällen",
   "short_name": "Bakstunden",
-  "description": "Upptäck recept på pannkakor, kladdkaka och chokladbollar. Enkla och goda desserter för alla tillfällen – besök Bakstunden idag!",
+  "description": "Upptäck tusentals goda matrecept för frukost, lunch, middag och dessert. Vegetariskt, veganskt, glutenfritt och mycket mer – hitta din perfekta mat!",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FFF8F3",
@@ -21,7 +21,7 @@
       "purpose": "any"
     }
   ],
-  "categories": ["food", "cooking", "recipes", "baking", "desserts"],
+  "categories": ["food", "cooking", "recipes", "swedish", "meals", "family"],
   "lang": "sv",
   "dir": "ltr"
 }

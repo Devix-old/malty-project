@@ -13,14 +13,47 @@ import {
   Flame,
   ArrowRight,
   Timer,
+  Clock,
+  Users,
+  Star,
+  Share2,
+  BookOpen,
+  Heart
 } from 'lucide-react';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Tag from '@/components/ui/Tag';
 import IngredientsList from '@/components/recipe/IngredientsList';
 import RecipeSteps from '@/components/recipe/RecipeSteps';
 import RecipeCard from '@/components/recipe/RecipeCard';
-import JsonLd from '@/components/seo/JsonLd';
-import { generateRecipeSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import RecipeSEO from '@/components/seo/RecipeSEO';
+import { 
+  RecipeTipsSection, 
+  RecipeFAQSection, 
+  RelatedRecipesSection, 
+  RecipeCategoriesSection,
+  RecipeSocialSection 
+} from '@/components/recipe/RecipeSEOSections';
+import SmartInternalLinks, { CategoryNavigation, TrendingRecipes } from '@/components/seo/SmartInternalLinks';
+import { generateRecipeMetadata, generateEnhancedRecipeSchema, generateRecipeFAQSchema, generateRelatedContentSchema } from '@/lib/seo/recipe-seo';
+import { generateInternalLinks, generateContextualLinks } from '@/lib/seo/internal-linking';
+import { getAllCategories } from '@/lib/categories';
+
+// Icon mapping function
+function getIconComponent(iconName) {
+  const iconMap = {
+    'Lightbulb': Lightbulb,
+    'Clock': Clock,
+    'Star': Star,
+    'Heart': Heart,
+    'Flame': Flame,
+    'ChefHat': ChefHat,
+    'Utensils': Utensils,
+    'AlertCircle': AlertCircle,
+    'Wine': Wine,
+    'Timer': Timer
+  };
+  return iconMap[iconName] || Lightbulb;
+}
 
 // Generate static params
 export async function generateStaticParams() {
@@ -28,30 +61,14 @@ export async function generateStaticParams() {
   return recipes.map((recipe) => ({ slug: recipe.slug }));
 }
 
-// Generate metadata
+// Generate comprehensive metadata
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const recipe = await getContentBySlug('recipes', slug);
 
   if (!recipe) return { title: 'Recept hittades inte' };
 
-  const { frontmatter } = recipe;
-  const { generateMetadata } = await import('@/lib/seo');
-
-  return generateMetadata({
-    title: frontmatter.title,
-    description: frontmatter.excerpt,
-    image: frontmatter.heroImage?.src,
-    url: `/recept/${slug}`,
-    type: 'article',
-    publishedTime: frontmatter.publishedAt,
-    modifiedTime: frontmatter.updatedAt,
-    author: frontmatter.author,
-    tags: frontmatter.tags,
-    keywords:
-      frontmatter.tags?.join(', ') +
-      ', recept, bakning, svenska efterrätter, matlagning',
-  });
+  return generateRecipeMetadata(recipe);
 }
 
 export default async function RecipePage({ params }) {
@@ -61,6 +78,8 @@ export default async function RecipePage({ params }) {
   if (!recipe) notFound();
 
   const { frontmatter, content } = recipe;
+  
+  // Get related content
   const relatedRecipes = await getRelatedContent(
     'recipes',
     slug,
@@ -69,19 +88,72 @@ export default async function RecipePage({ params }) {
     6
   );
 
-  // Schemas
-  const recipeSchema = generateRecipeSchema(frontmatter);
-  const breadcrumbSchema = generateBreadcrumbSchema([
+  // Get all categories for navigation
+  const allCategories = getAllCategories();
+
+  // Generate internal links
+  const internalLinks = await generateInternalLinks(frontmatter);
+  const contextualLinks = generateContextualLinks(frontmatter, internalLinks);
+
+  // Use frontmatter data or generate fallbacks
+  const faqs = frontmatter.faqs && frontmatter.faqs.length > 0 
+    ? frontmatter.faqs 
+    : [
+        {
+          question: `Hur lång tid tar det att laga ${frontmatter.title}?`,
+          answer: `Det tar cirka ${frontmatter.totalTimeMinutes} minuter att laga ${frontmatter.title}.${frontmatter.prepTimeMinutes ? ` Förberedelse: ${frontmatter.prepTimeMinutes} minuter.` : ''}${frontmatter.cookTimeMinutes ? ` Tillagning: ${frontmatter.cookTimeMinutes} minuter.` : ''}`
+        },
+        {
+          question: `Hur många portioner ger ${frontmatter.title}?`,
+          answer: `Detta recept ger ${frontmatter.servings} portioner.`
+        },
+        {
+          question: `Vilken svårighetsgrad har ${frontmatter.title}?`,
+          answer: `Detta recept har svårighetsgrad ${frontmatter.difficulty || 'medel'}.`
+        }
+      ];
+
+  // Use frontmatter data or generate fallbacks
+  const tips = frontmatter.tips && frontmatter.tips.length > 0 
+    ? frontmatter.tips.map(tip => ({
+        ...tip,
+        icon: getIconComponent(tip.icon)
+      }))
+    : [
+        {
+          title: 'Proffstips',
+          content: `För bästa resultat med ${frontmatter.title}, se till att alla ingredienser är i rumstemperatur.`,
+          icon: Lightbulb
+        },
+        {
+          title: 'Tidssparande',
+          content: 'Förbered alla ingredienser innan du börjar för att spara tid under tillagningen.',
+          icon: Clock
+        },
+        {
+          title: 'Lagring',
+          content: `${frontmatter.title} kan förvaras i kylskåp i upp till 3 dagar eller frysas i 2 månader.`,
+          icon: Heart
+        }
+      ];
+
+  // Generate breadcrumbs
+  const breadcrumbs = [
     { name: 'Hem', url: '/' },
     { name: 'Recept', url: '/recept' },
-    { name: frontmatter.title },
-  ]);
+    { name: frontmatter.category, url: `/kategorier/${frontmatter.category?.toLowerCase()}-recept` },
+    { name: frontmatter.title }
+  ];
 
   return (
     <>
-      {/* JSON-LD SEO */}
-      <JsonLd data={recipeSchema} />
-      <JsonLd data={breadcrumbSchema} />
+      {/* SEO Component */}
+      <RecipeSEO 
+        recipe={frontmatter}
+        relatedRecipes={relatedRecipes}
+        faqs={faqs}
+        breadcrumbs={breadcrumbs}
+      />
 
 
       {/* 🧁 HERO SECTION */}
@@ -268,7 +340,13 @@ export default async function RecipePage({ params }) {
             </div>
           </section>
 
-          {/* Related Recipes */}
+          {/* SEO Sections - Placed FIRST after recipe steps for optimal SEO */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <RecipeTipsSection recipe={frontmatter} tips={tips} />
+            <RecipeFAQSection recipe={frontmatter} faqs={faqs} />
+          </div>
+
+          {/* Related Recipes - Placed after SEO sections */}
           {relatedRecipes.length > 0 && (
             <section className="pt-12 border-t border-gray-200 dark:border-gray-800">
               <div className="text-center mb-12">
@@ -290,6 +368,15 @@ export default async function RecipePage({ params }) {
               
             </section>
           )}
+
+          {/* Additional SEO Sections - Placed after related recipes */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <CategoryNavigation 
+              categories={allCategories.slice(0, 8)} 
+              currentCategory={frontmatter.category?.toLowerCase()}
+            />
+            <RecipeSocialSection recipe={frontmatter} />
+          </div>
         </div>
       </article>
 
