@@ -177,7 +177,7 @@ export default function EnhancedHomeClient({
                         src={item.image}
                         alt={item.title}
                         fill
-                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
+                        sizes="100vw"
                         className="object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       {/* Elegant gradient overlay */}
@@ -229,7 +229,7 @@ export default function EnhancedHomeClient({
               >
                 <RecipeCard 
                   recipe={recipe} 
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </motion.div>
             ))}
@@ -277,7 +277,7 @@ export default function EnhancedHomeClient({
                         src={category.image}
                         alt={category.name}
                         fill
-                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
+                        sizes="100vw"
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
@@ -297,22 +297,339 @@ export default function EnhancedHomeClient({
         </div>
       </section>
 
+      {/* Welcome/About Section - SEO Rich Content */}
+      <section className="py-16 bg-white dark:bg-gray-900">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+              Välkommen till Bakstunden – Sveriges bästa receptsamling för alla tillfällen
+            </h2>
+            <div className="prose prose-lg max-w-none text-gray-700 dark:text-gray-300 text-left space-y-4">
+              <p>
+                Bakstunden är din ultimata källa för <Link href="/recept" className="text-purple-600 hover:text-purple-700 font-semibold">svenska matrecept</Link>, <strong>bakning</strong> och <strong>matlagningsguider</strong>. 
+                Vi erbjuder över <strong>{totalRecipes} testade recept</strong> som passar alla smakar och tillfällen – från 
+                snabba <Link href="/snabbmat" className="text-purple-600 hover:text-purple-700 font-semibold">vardagsmiddagar</Link> till lyxiga <strong>festmenyer</strong> och klassisk <strong>svensk bakning</strong>.
+              </p>
+              <p>
+                Oavsett om du söker efter <Link href="/kategorier/kyckling-recept" className="text-purple-600 hover:text-purple-700 font-semibold">enkla kycklingrecept</Link>, <Link href="/kategorier/vegetariska-recept" className="text-purple-600 hover:text-purple-700 font-semibold">vegetarisk mat</Link>, 
+                <strong> glutenfria alternativ</strong> eller <strong>traditionella svenska rätter</strong> som 
+                <Link href="/kategorier/pannkakor-recept" className="text-purple-600 hover:text-purple-700 font-semibold"> pannkakor</Link>, <Link href="/kategorier/kladdkaka-recept" className="text-purple-600 hover:text-purple-700 font-semibold">kladdkaka</Link> och <strong>köttbullar</strong>, hittar du allt 
+                här på Bakstunden. Våra <Link href="/recept" className="text-purple-600 hover:text-purple-700 font-semibold">recept</Link> är noggrant utvalda och testade för att garantera att du lyckas varje gång du lagar mat.
+              </p>
+              <p>
+                Vi tror på att matlagning ska vara både roligt och enkelt. Därför innehåller varje <Link href="/recept" className="text-purple-600 hover:text-purple-700 font-semibold">recept</Link> 
+                <strong> steg-för-steg instruktioner</strong>, tydliga ingredienslistor, näringsvärden och praktiska tips 
+                som hjälper dig att bli en bättre kock. Från <strong>frukost</strong> och <strong>lunch</strong> till 
+                <strong> middag</strong> och <strong>dessert</strong> – vi har <Link href="/kategorier" className="text-purple-600 hover:text-purple-700 font-semibold">recepten</Link> som gör din matlagning enklare och godare.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Bakstunden Section */}
+      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
+            Varför välja Bakstunden för dina matrecept?
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md"
+            >
+              <Utensils className="w-12 h-12 text-purple-600 mb-4" />
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Testade recept
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Alla våra <strong>matrecept</strong> är noggrant testade i vårt kök. Vi garanterar att du får perfekta resultat 
+                varje gång du följer våra steg-för-steg instruktioner för <strong>matlagning</strong> och <strong>bakning</strong>.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md"
+            >
+              <Clock className="w-12 h-12 text-purple-600 mb-4" />
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Snabba vardagsrecept
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Behöver du <strong>snabba middagar</strong> under 30 minuter? Vi har massor av <strong>enkla recept</strong> 
+                för vardagen som är perfekta när tiden är knapp men du ändå vill servera hemlagad, god mat.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md"
+            >
+              <Heart className="w-12 h-12 text-purple-600 mb-4" />
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Hälsosamma alternativ
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Upptäck våra <strong>vegetariska recept</strong>, <strong>veganska alternativ</strong> och 
+                <strong> glutenfria</strong> maträtter. Vi visar att hälsosam mat kan vara både god och enkel att laga.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md"
+            >
+              <Globe className="w-12 h-12 text-purple-600 mb-4" />
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Svenska favoriter
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Älskar du <strong>klassisk svensk mat</strong>? Vi har de bästa recepten på <strong>svenska pannkakor</strong>, 
+                <strong> köttbullar</strong>, <strong>kladdkaka</strong> och andra traditionella svenska rätter.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Cooking Tips Section */}
+      <section className="py-16 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Matlagnings tips och råd för bättre resultat
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+              Lär dig våra bästa tips för att lyckas med <strong>matlagning</strong> och <strong>bakning</strong>. 
+              Här delar vi med oss av kunskap som gör dig till en bättre kock.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg"
+            >
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 flex items-center">
+                <Zap className="w-6 h-6 text-yellow-500 mr-2" />
+                Snabba måltidstips
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300 mb-3">
+                Förbered ingredienser i förväg för att spara tid. Hacka grönsaker, marinera kött och mät upp kryddor 
+                innan du börjar laga mat. Detta gör <strong>matlagningen</strong> mycket snabbare och smidigare.
+              </p>
+              <Link href="/snabbmat" className="text-purple-600 hover:text-purple-700 font-semibold inline-flex items-center">
+                Läs mer <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg"
+            >
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 flex items-center">
+                <Star className="w-6 h-6 text-yellow-500 mr-2" />
+                Bakningstips för perfekta resultat
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300 mb-3">
+                Mät alltid ingredienserna noggrant när du <strong>bakar</strong>. Använd rumstempererade ingredienser 
+                för bästa resultat i <strong>kakor</strong>, <strong>tårtor</strong> och <strong>bröd</strong>. 
+                Förvärm ugnen i god tid innan du börjar baka.
+              </p>
+              <Link href="/kategorier/kladdkaka-recept" className="text-purple-600 hover:text-purple-700 font-semibold inline-flex items-center">
+                Se bakningsrecept <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg"
+            >
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 flex items-center">
+                <Users className="w-6 h-6 text-yellow-500 mr-2" />
+                Portionsanpassning
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300 mb-3">
+                Behöver du justera <strong>recept</strong> för fler eller färre personer? Multiplicera eller dividera 
+                ingredienserna proportionellt. Tänk på att tillagningstider kan behöva justeras vid större portioner.
+              </p>
+              <Link href="/recept" className="text-purple-600 hover:text-purple-700 font-semibold inline-flex items-center">
+                Utforska alla recept <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Stats Section */}
       <section className="py-16 bg-purple-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold text-white mb-2">{totalRecipes}</div>
-              <div className="text-purple-200">Recept</div>
+              <div className="text-4xl font-bold text-white mb-2">{totalRecipes}+</div>
+              <div className="text-purple-200">Testade recept för alla tillfällen</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-white mb-2">12</div>
-              <div className="text-purple-200">Kategorier</div>
+              <div className="text-4xl font-bold text-white mb-2">15+</div>
+              <div className="text-purple-200">Kategorier från frukost till dessert</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-white mb-2">100%</div>
-              <div className="text-purple-200">Svenska recept</div>
+              <div className="text-purple-200">Svenska recept med steg-för-steg guide</div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section - SEO Rich */}
+      <section className="py-16 bg-white dark:bg-gray-900">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
+            Vanliga frågor om matlagning och bakning
+          </h2>
+          <div className="space-y-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg"
+            >
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Vilka typer av recept finns på Bakstunden?
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300">
+                På Bakstunden hittar du över <strong>{totalRecipes} <Link href="/recept" className="text-purple-600 hover:text-purple-700 underline">matrecept</Link></strong> inom kategorier som 
+                <strong> frukost</strong>, <strong>lunch</strong>, <strong>middag</strong>, <Link href="/snabbmat" className="text-purple-600 hover:text-purple-700 underline">snabbmat</Link>, 
+                <strong> bakning</strong> och <strong>dessert</strong>. Vi har allt från <Link href="/kategorier/pannkakor-recept" className="text-purple-600 hover:text-purple-700 underline">pannkakor</Link> och 
+                <Link href="/kategorier/vafflor-recept" className="text-purple-600 hover:text-purple-700 underline"> våfflor</Link> till <Link href="/kategorier/kyckling-recept" className="text-purple-600 hover:text-purple-700 underline">kycklingrecept</Link>, <Link href="/kategorier/pasta-recept" className="text-purple-600 hover:text-purple-700 underline">pasta</Link>, 
+                <Link href="/kategorier/vegetariska-recept" className="text-purple-600 hover:text-purple-700 underline"> vegetariska rätter</Link> och klassisk <strong>svensk bakning</strong> som 
+                <Link href="/kategorier/kladdkaka-recept" className="text-purple-600 hover:text-purple-700 underline"> kladdkaka</Link> och <Link href="/kategorier/chokladbollar-recept" className="text-purple-600 hover:text-purple-700 underline">chokladbollar</Link>.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg"
+            >
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Hur hittar jag enkla recept för vardagen?
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300">
+                Använd vår <Link href="/snabbmat" className="text-purple-600 hover:text-purple-700 underline">snabbmat-sektion</Link> för att hitta <strong>snabba middagar</strong> under 30 minuter. 
+                Du kan också filtrera <Link href="/recept" className="text-purple-600 hover:text-purple-700 underline">recept</Link> på svårighetsgrad &quot;Lätt&quot; för att hitta <strong>enkla recept</strong> som passar 
+                nybörjare. Alla våra <Link href="/recept" className="text-purple-600 hover:text-purple-700 underline">vardagsrecept</Link> är enkla att följa med tydliga instruktioner och 
+                tillgängliga ingredienser från din lokala mataffär.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg"
+            >
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Finns det vegetariska och veganska recept?
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300">
+                Ja! Vi har ett stort urval av <Link href="/kategorier/vegetariska-recept" className="text-purple-600 hover:text-purple-700 underline">vegetariska recept</Link> och <strong>veganska alternativ</strong>. 
+                Använd våra filter för att hitta <Link href="/kategorier/vegetariska-recept" className="text-purple-600 hover:text-purple-700 underline">vegetarisk mat</Link>, <strong>vegansk mat</strong> eller 
+                <strong> glutenfria recept</strong>. Vi visar hur du kan laga näringsrik och god mat utan animaliska produkter, 
+                perfekt för dig som vill äta mer <strong>hälsosam mat</strong> och <strong>plantbaserad kost</strong>.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg"
+            >
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Vad gör Bakstundens recept speciella?
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300">
+                Alla våra <strong>svenska matrecept</strong> är noggrant testade och innehåller detaljerade 
+                <strong> steg-för-steg instruktioner</strong>, tydliga ingredienslistor, närings information och 
+                praktiska tips. Vi fokuserar på <strong>hemlagad mat</strong> med ingredienser du hittar i svenska 
+                mataffärer. Våra recept passar alla nivåer – från nybörjare till erfarna kockar som letar efter nya 
+                <strong> matlagningsidéer</strong> och <strong>bakningsrecept</strong>.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg"
+            >
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Hur kan jag planera min veckomeny?
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300">
+                Använd våra olika <Link href="/kategorier" className="text-purple-600 hover:text-purple-700 underline">kategorier</Link> för att skapa en varierad <strong>veckomeny</strong>. Blanda 
+                <Link href="/kategorier/kyckling-recept" className="text-purple-600 hover:text-purple-700 underline"> kycklingrecept</Link>, <Link href="/kategorier/lax-recept" className="text-purple-600 hover:text-purple-700 underline">fiskrätter</Link>, <Link href="/kategorier/pasta-recept" className="text-purple-600 hover:text-purple-700 underline">pasta</Link> och 
+                <Link href="/kategorier/vegetariska-recept" className="text-purple-600 hover:text-purple-700 underline"> vegetariska middagar</Link> för en balanserad kost. Välj några <Link href="/snabbmat" className="text-purple-600 hover:text-purple-700 underline">snabba vardagsrätter</Link> 
+                för stressiga dagar och planera en mer avancerad <strong>helgmiddag</strong> när du har mer tid. 
+                Spara dina <Link href="/recept" className="text-purple-600 hover:text-purple-700 underline">favoritrecept</Link> för att enkelt hitta dem igen när du planerar din <strong>matlagning</strong>.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-gradient-to-r from-purple-600 to-pink-600">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Börja din matlagningsresa idag
+          </h2>
+          <p className="text-xl text-purple-100 mb-8">
+            Upptäck över {totalRecipes} testade <strong>svenska recept</strong> för alla smaker och tillfällen. 
+            Från snabb <strong>vardagsmat</strong> till lyxig <strong>festmat</strong> – vi har recepten som 
+            gör din <strong>matlagning</strong> enklare och godare.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/recept"
+              className="bg-white text-purple-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
+            >
+              Utforska alla recept
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+            <Link
+              href="/kategorier"
+              className="bg-purple-700 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-purple-800 transition-colors inline-flex items-center justify-center border-2 border-white"
+            >
+              Bläddra kategorier
+            </Link>
           </div>
         </div>
       </section>
