@@ -64,9 +64,16 @@ export async function generateStaticParams() {
 // Generate comprehensive metadata
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const recipe = await getContentBySlug('recipes', slug);
+  const recipeData = await getContentBySlug('recipes', slug);
 
-  if (!recipe) return { title: 'Recept hittades inte' };
+  if (!recipeData) return { title: 'Recept hittades inte' };
+
+  // Extract frontmatter data for metadata generation
+  const recipe = {
+    ...recipeData.frontmatter,
+    slug: recipeData.slug,
+    content: recipeData.content
+  };
 
   return generateRecipeMetadata(recipe);
 }

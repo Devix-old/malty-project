@@ -50,7 +50,6 @@ export const metadata = {
   }),
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se'),
   title: {
-    template: '%s | Bakstunden',
     default: 'Bakstunden – Sveriges bästa matrecept för alla tillfällen',
   },
   applicationName: 'Bakstunden',

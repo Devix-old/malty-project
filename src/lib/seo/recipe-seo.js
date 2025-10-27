@@ -101,13 +101,11 @@ export function generateRecipeMetadata(recipe) {
 
 /**
  * Generate SEO-optimized recipe title
- * Uses the exact title from MDX file without modifications
+ * Uses the exact title from MDX file with NO modifications
  */
 function generateRecipeTitle(title = '', category = '', difficulty = '') {
-  // Use the exact title from MDX file, only add site name
-  const baseTitle = title || 'Recept';
-  
-  return `${baseTitle} | Bakstunden`;
+  // Use the exact title from MDX file with NO additions
+  return title || 'Recept';
 }
 
 /**
