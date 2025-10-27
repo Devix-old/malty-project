@@ -49,6 +49,11 @@ export const metadata = {
     keywords: 'recept, matrecept, matlagning, svenska recept, bakning, bakningsrecept, vegetariskt, veganskt, glutenfritt, frukost, lunch, middag, dessert, snabbmat, vardagsmat, kokbok, svensk mat, familjerecept, hemlagad mat, kycklingfärs recept, pannkakor recept, kycklinglårfile recept, kladdkaka recept, lasagne recept, scones recept, chokladbollar recept, våfflor recept, kanelbullar recept, köttbullar recept, carbonara recept, korvstroganoff recept, kyckling recept, sockerkaka recept, lax recept, muffins recept, äppelmos recept, äppelpaj recept, pasta recept, vegetariska recept, hälsosam mat, italiensk mat, asiatisk mat, sallader, soppor, steg-för-steg recept, enkla recept, snabba recept, vardagsrecept, helgmat, festmat',
   }),
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se'),
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+  },
   title: {
     template: '%s | Bakstunden',
     default: 'Bakstunden – Sveriges bästa matrecept för alla tillfällen',
@@ -97,7 +102,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="sv" dir="ltr">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="google-site-verification" content="73a51c1ce7036450" />
       </head>
       <body

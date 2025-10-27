@@ -306,21 +306,21 @@ export default function EnhancedHomeClient({
             </h2>
             <div className="prose prose-lg max-w-none text-gray-700 dark:text-gray-300 text-left space-y-4">
               <p>
-                Bakstunden är din ultimata källa för <Link href="/recept" className="text-purple-600 hover:text-purple-700 font-semibold">svenska matrecept</Link>, <strong>bakning</strong> och <strong>matlagningsguider</strong>. 
-                Vi erbjuder över <strong>{totalRecipes} testade recept</strong> som passar alla smakar och tillfällen – från 
-                snabba <Link href="/snabbmat" className="text-purple-600 hover:text-purple-700 font-semibold">vardagsmiddagar</Link> till lyxiga <strong>festmenyer</strong> och klassisk <strong>svensk bakning</strong>.
+                Bakstunden är din ultimata källa för <Link href="/recept" className="text-purple-600 hover:text-purple-700 font-semibold">svenska matrecept</Link>, <strong>bakning</strong> och matlagningsguider. 
+                Vi erbjuder över {totalRecipes} testade recept som passar alla smakar och tillfällen – från 
+                snabba <Link href="/snabbmat" className="text-purple-600 hover:text-purple-700 font-semibold">vardagsmiddagar</Link> till lyxiga festmenyer och klassisk svensk bakning.
               </p>
               <p>
                 Oavsett om du söker efter <Link href="/kategorier/kyckling-recept" className="text-purple-600 hover:text-purple-700 font-semibold">enkla kycklingrecept</Link>, <Link href="/kategorier/vegetariska-recept" className="text-purple-600 hover:text-purple-700 font-semibold">vegetarisk mat</Link>, 
-                <strong> glutenfria alternativ</strong> eller <strong>traditionella svenska rätter</strong> som 
-                <Link href="/kategorier/pannkakor-recept" className="text-purple-600 hover:text-purple-700 font-semibold"> pannkakor</Link>, <Link href="/kategorier/kladdkaka-recept" className="text-purple-600 hover:text-purple-700 font-semibold">kladdkaka</Link> och <strong>köttbullar</strong>, hittar du allt 
+                glutenfria alternativ eller traditionella svenska rätter som 
+                <Link href="/kategorier/pannkakor-recept" className="text-purple-600 hover:text-purple-700 font-semibold"> pannkakor</Link>, <Link href="/kategorier/kladdkaka-recept" className="text-purple-600 hover:text-purple-700 font-semibold">kladdkaka</Link> och köttbullar, hittar du allt 
                 här på Bakstunden. Våra <Link href="/recept" className="text-purple-600 hover:text-purple-700 font-semibold">recept</Link> är noggrant utvalda och testade för att garantera att du lyckas varje gång du lagar mat.
               </p>
               <p>
                 Vi tror på att matlagning ska vara både roligt och enkelt. Därför innehåller varje <Link href="/recept" className="text-purple-600 hover:text-purple-700 font-semibold">recept</Link> 
-                <strong> steg-för-steg instruktioner</strong>, tydliga ingredienslistor, näringsvärden och praktiska tips 
-                som hjälper dig att bli en bättre kock. Från <strong>frukost</strong> och <strong>lunch</strong> till 
-                <strong> middag</strong> och <strong>dessert</strong> – vi har <Link href="/kategorier" className="text-purple-600 hover:text-purple-700 font-semibold">recepten</Link> som gör din matlagning enklare och godare.
+                steg-för-steg instruktioner, tydliga ingredienslistor, näringsvärden och praktiska tips 
+                som hjälper dig att bli en bättre kock. Från frukost och lunch till 
+                middag och dessert – vi har <Link href="/kategorier" className="text-purple-600 hover:text-purple-700 font-semibold">recepten</Link> som gör din matlagning enklare och godare.
               </p>
             </div>
           </div>
@@ -346,8 +346,8 @@ export default function EnhancedHomeClient({
                 Testade recept
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Alla våra <strong>matrecept</strong> är noggrant testade i vårt kök. Vi garanterar att du får perfekta resultat 
-                varje gång du följer våra steg-för-steg instruktioner för <strong>matlagning</strong> och <strong>bakning</strong>.
+                Alla våra matrecept är noggrant testade i vårt kök. Vi garanterar att du får perfekta resultat 
+                varje gång du följer våra steg-för-steg instruktioner för matlagning och bakning.
               </p>
             </motion.div>
 
@@ -363,7 +363,7 @@ export default function EnhancedHomeClient({
                 Snabba vardagsrecept
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Behöver du <strong>snabba middagar</strong> under 30 minuter? Vi har massor av <strong>enkla recept</strong> 
+                Behöver du <strong>snabba middagar</strong> under 30 minuter? Vi har massor av enkla recept 
                 för vardagen som är perfekta när tiden är knapp men du ändå vill servera hemlagad, god mat.
               </p>
             </motion.div>
@@ -380,8 +380,8 @@ export default function EnhancedHomeClient({
                 Hälsosamma alternativ
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Upptäck våra <strong>vegetariska recept</strong>, <strong>veganska alternativ</strong> och 
-                <strong> glutenfria</strong> maträtter. Vi visar att hälsosam mat kan vara både god och enkel att laga.
+                Upptäck våra <strong>vegetariska recept</strong>, veganska alternativ och 
+                glutenfria maträtter. Vi visar att hälsosam mat kan vara både god och enkel att laga.
               </p>
             </motion.div>
 
@@ -397,8 +397,8 @@ export default function EnhancedHomeClient({
                 Svenska favoriter
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Älskar du <strong>klassisk svensk mat</strong>? Vi har de bästa recepten på <strong>svenska pannkakor</strong>, 
-                <strong> köttbullar</strong>, <strong>kladdkaka</strong> och andra traditionella svenska rätter.
+                Älskar du klassisk svensk mat? Vi har de bästa recepten på svenska pannkakor, 
+                köttbullar, kladdkaka och andra traditionella svenska rätter.
               </p>
             </motion.div>
           </div>
@@ -413,7 +413,7 @@ export default function EnhancedHomeClient({
               Matlagnings tips och råd för bättre resultat
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Lär dig våra bästa tips för att lyckas med <strong>matlagning</strong> och <strong>bakning</strong>. 
+              Lär dig våra bästa tips för att lyckas med matlagning och bakning. 
               Här delar vi med oss av kunskap som gör dig till en bättre kock.
             </p>
           </div>
@@ -431,7 +431,7 @@ export default function EnhancedHomeClient({
               </h3>
               <p className="text-gray-700 dark:text-gray-300 mb-3">
                 Förbered ingredienser i förväg för att spara tid. Hacka grönsaker, marinera kött och mät upp kryddor 
-                innan du börjar laga mat. Detta gör <strong>matlagningen</strong> mycket snabbare och smidigare.
+                innan du börjar laga mat. Detta gör matlagningen mycket snabbare och smidigare.
               </p>
               <Link href="/snabbmat" className="text-purple-600 hover:text-purple-700 font-semibold inline-flex items-center">
                 Läs mer <ArrowRight className="w-4 h-4 ml-1" />
@@ -450,8 +450,8 @@ export default function EnhancedHomeClient({
                 Bakningstips för perfekta resultat
               </h3>
               <p className="text-gray-700 dark:text-gray-300 mb-3">
-                Mät alltid ingredienserna noggrant när du <strong>bakar</strong>. Använd rumstempererade ingredienser 
-                för bästa resultat i <strong>kakor</strong>, <strong>tårtor</strong> och <strong>bröd</strong>. 
+                Mät alltid ingredienserna noggrant när du bakar. Använd rumstempererade ingredienser 
+                för bästa resultat i kakor, tårtor och bröd. 
                 Förvärm ugnen i god tid innan du börjar baka.
               </p>
               <Link href="/kategorier/kladdkaka-recept" className="text-purple-600 hover:text-purple-700 font-semibold inline-flex items-center">
@@ -471,7 +471,7 @@ export default function EnhancedHomeClient({
                 Portionsanpassning
               </h3>
               <p className="text-gray-700 dark:text-gray-300 mb-3">
-                Behöver du justera <strong>recept</strong> för fler eller färre personer? Multiplicera eller dividera 
+                Behöver du justera recept för fler eller färre personer? Multiplicera eller dividera 
                 ingredienserna proportionellt. Tänk på att tillagningstider kan behöva justeras vid större portioner.
               </p>
               <Link href="/recept" className="text-purple-600 hover:text-purple-700 font-semibold inline-flex items-center">
@@ -519,12 +519,12 @@ export default function EnhancedHomeClient({
                 Vilka typer av recept finns på Bakstunden?
               </h3>
               <p className="text-gray-700 dark:text-gray-300">
-                På Bakstunden hittar du över <strong>{totalRecipes} <Link href="/recept" className="text-purple-600 hover:text-purple-700 underline">matrecept</Link></strong> inom kategorier som 
-                <strong> frukost</strong>, <strong>lunch</strong>, <strong>middag</strong>, <Link href="/snabbmat" className="text-purple-600 hover:text-purple-700 underline">snabbmat</Link>, 
-                <strong> bakning</strong> och <strong>dessert</strong>. Vi har allt från <Link href="/kategorier/pannkakor-recept" className="text-purple-600 hover:text-purple-700 underline">pannkakor</Link> och 
-                <Link href="/kategorier/vafflor-recept" className="text-purple-600 hover:text-purple-700 underline"> våfflor</Link> till <Link href="/kategorier/kyckling-recept" className="text-purple-600 hover:text-purple-700 underline">kycklingrecept</Link>, <Link href="/kategorier/pasta-recept" className="text-purple-600 hover:text-purple-700 underline">pasta</Link>, 
-                <Link href="/kategorier/vegetariska-recept" className="text-purple-600 hover:text-purple-700 underline"> vegetariska rätter</Link> och klassisk <strong>svensk bakning</strong> som 
-                <Link href="/kategorier/kladdkaka-recept" className="text-purple-600 hover:text-purple-700 underline"> kladdkaka</Link> och <Link href="/kategorier/chokladbollar-recept" className="text-purple-600 hover:text-purple-700 underline">chokladbollar</Link>.
+                På Bakstunden hittar du över {totalRecipes} <Link href="/recept" className="text-purple-600 hover:text-purple-700 underline">matrecept</Link> inom kategorier som 
+                frukost, lunch, middag, <Link href="/snabbmat" className="text-purple-600 hover:text-purple-700 underline">snabbmat</Link>, 
+                bakning och dessert. Vi har allt från <Link href="/kategorier/pannkakor-recept" className="text-purple-600 hover:text-purple-700 underline">pannkakor</Link> och 
+                <Link href="/kategorier/vafflor-recept" className="text-purple-600 hover:text-purple-700 underline">våfflor</Link> till <Link href="/kategorier/kyckling-recept" className="text-purple-600 hover:text-purple-700 underline">kycklingrecept</Link>, <Link href="/kategorier/pasta-recept" className="text-purple-600 hover:text-purple-700 underline">pasta</Link>, 
+                <Link href="/kategorier/vegetariska-recept" className="text-purple-600 hover:text-purple-700 underline">vegetariska rätter</Link> och klassisk svensk bakning som 
+                <Link href="/kategorier/kladdkaka-recept" className="text-purple-600 hover:text-purple-700 underline">kladdkaka</Link> och <Link href="/kategorier/chokladbollar-recept" className="text-purple-600 hover:text-purple-700 underline">choklad bollar</Link>.
               </p>
             </motion.div>
 
@@ -539,8 +539,8 @@ export default function EnhancedHomeClient({
                 Hur hittar jag enkla recept för vardagen?
               </h3>
               <p className="text-gray-700 dark:text-gray-300">
-                Använd vår <Link href="/snabbmat" className="text-purple-600 hover:text-purple-700 underline">snabbmat-sektion</Link> för att hitta <strong>snabba middagar</strong> under 30 minuter. 
-                Du kan också filtrera <Link href="/recept" className="text-purple-600 hover:text-purple-700 underline">recept</Link> på svårighetsgrad &quot;Lätt&quot; för att hitta <strong>enkla recept</strong> som passar 
+                Använd vår <Link href="/snabbmat" className="text-purple-600 hover:text-purple-700 underline">snabbmat-sektion</Link> för att hitta snabba middagar under 30 minuter. 
+                Du kan också filtrera <Link href="/recept" className="text-purple-600 hover:text-purple-700 underline">recept</Link> på svårighetsgrad &quot;Lätt&quot; för att hitta enkla recept som passar 
                 nybörjare. Alla våra <Link href="/recept" className="text-purple-600 hover:text-purple-700 underline">vardagsrecept</Link> är enkla att följa med tydliga instruktioner och 
                 tillgängliga ingredienser från din lokala mataffär.
               </p>
@@ -557,10 +557,10 @@ export default function EnhancedHomeClient({
                 Finns det vegetariska och veganska recept?
               </h3>
               <p className="text-gray-700 dark:text-gray-300">
-                Ja! Vi har ett stort urval av <Link href="/kategorier/vegetariska-recept" className="text-purple-600 hover:text-purple-700 underline">vegetariska recept</Link> och <strong>veganska alternativ</strong>. 
-                Använd våra filter för att hitta <Link href="/kategorier/vegetariska-recept" className="text-purple-600 hover:text-purple-700 underline">vegetarisk mat</Link>, <strong>vegansk mat</strong> eller 
-                <strong> glutenfria recept</strong>. Vi visar hur du kan laga näringsrik och god mat utan animaliska produkter, 
-                perfekt för dig som vill äta mer <strong>hälsosam mat</strong> och <strong>plantbaserad kost</strong>.
+                Ja! Vi har ett stort urval av <Link href="/kategorier/vegetariska-recept" className="text-purple-600 hover:text-purple-700 underline">vegetariska recept</Link> och veganska alternativ. 
+                Använd våra filter för att hitta <Link href="/kategorier/vegetariska-recept" className="text-purple-600 hover:text-purple-700 underline">vegetarisk mat</Link>, vegansk mat eller 
+                glutenfria recept. Vi visar hur du kan laga näringsrik och god mat utan animaliska produkter, 
+                perfekt för dig som vill äta mer hälsosam mat och plantbaserad kost.
               </p>
             </motion.div>
 
@@ -576,10 +576,10 @@ export default function EnhancedHomeClient({
               </h3>
               <p className="text-gray-700 dark:text-gray-300">
                 Alla våra <strong>svenska matrecept</strong> är noggrant testade och innehåller detaljerade 
-                <strong> steg-för-steg instruktioner</strong>, tydliga ingredienslistor, närings information och 
-                praktiska tips. Vi fokuserar på <strong>hemlagad mat</strong> med ingredienser du hittar i svenska 
+                steg-för-steg instruktioner, tydliga ingredienslistor, näringsinformation och 
+                praktiska tips. Vi fokuserar på hemlagad mat med ingredienser du hittar i svenska 
                 mataffärer. Våra recept passar alla nivåer – från nybörjare till erfarna kockar som letar efter nya 
-                <strong> matlagningsidéer</strong> och <strong>bakningsrecept</strong>.
+                matlagningsidéer och bakningsrecept.
               </p>
             </motion.div>
 
@@ -594,11 +594,11 @@ export default function EnhancedHomeClient({
                 Hur kan jag planera min veckomeny?
               </h3>
               <p className="text-gray-700 dark:text-gray-300">
-                Använd våra olika <Link href="/kategorier" className="text-purple-600 hover:text-purple-700 underline">kategorier</Link> för att skapa en varierad <strong>veckomeny</strong>. Blanda 
-                <Link href="/kategorier/kyckling-recept" className="text-purple-600 hover:text-purple-700 underline"> kycklingrecept</Link>, <Link href="/kategorier/lax-recept" className="text-purple-600 hover:text-purple-700 underline">fiskrätter</Link>, <Link href="/kategorier/pasta-recept" className="text-purple-600 hover:text-purple-700 underline">pasta</Link> och 
-                <Link href="/kategorier/vegetariska-recept" className="text-purple-600 hover:text-purple-700 underline"> vegetariska middagar</Link> för en balanserad kost. Välj några <Link href="/snabbmat" className="text-purple-600 hover:text-purple-700 underline">snabba vardagsrätter</Link> 
-                för stressiga dagar och planera en mer avancerad <strong>helgmiddag</strong> när du har mer tid. 
-                Spara dina <Link href="/recept" className="text-purple-600 hover:text-purple-700 underline">favoritrecept</Link> för att enkelt hitta dem igen när du planerar din <strong>matlagning</strong>.
+                Använd våra olika <Link href="/kategorier" className="text-purple-600 hover:text-purple-700 underline">kategorier</Link> för att skapa en varierad veckomeny. Blanda 
+                <Link href="/kategorier/kyckling-recept" className="text-purple-600 hover:text-purple-700 underline">kycklingrecept</Link>, <Link href="/kategorier/lax-recept" className="text-purple-600 hover:text-purple-700 underline">fiskrätter</Link>, <Link href="/kategorier/pasta-recept" className="text-purple-600 hover:text-purple-700 underline">pasta</Link> och 
+                <Link href="/kategorier/vegetariska-recept" className="text-purple-600 hover:text-purple-700 underline">vegetariska middagar</Link> för en balanserad kost. Välj några <Link href="/snabbmat" className="text-purple-600 hover:text-purple-700 underline">snabba vardagsrätter</Link> 
+                för stressiga dagar och planera en mer avancerad helgmiddag när du har mer tid. 
+                Spara dina <Link href="/recept" className="text-purple-600 hover:text-purple-700 underline">favoritrecept</Link> för att enkelt hitta dem igen när du planerar din matlagning.
               </p>
             </motion.div>
           </div>
@@ -612,9 +612,9 @@ export default function EnhancedHomeClient({
             Börja din matlagningsresa idag
           </h2>
           <p className="text-xl text-purple-100 mb-8">
-            Upptäck över {totalRecipes} testade <strong>svenska recept</strong> för alla smaker och tillfällen. 
-            Från snabb <strong>vardagsmat</strong> till lyxig <strong>festmat</strong> – vi har recepten som 
-            gör din <strong>matlagning</strong> enklare och godare.
+            Upptäck över {totalRecipes} testade svenska recept för alla smaker och tillfällen. 
+            Från snabb vardagsmat till lyxig festmat – vi har recepten som 
+            gör din matlagning enklare och godare.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
