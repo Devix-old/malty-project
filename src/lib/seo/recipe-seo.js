@@ -101,25 +101,22 @@ export function generateRecipeMetadata(recipe) {
 
 /**
  * Generate SEO-optimized recipe title
+ * Uses the exact title from MDX file without modifications
  */
 function generateRecipeTitle(title = '', category = '', difficulty = '') {
+  // Use the exact title from MDX file, only add site name
   const baseTitle = title || 'Recept';
-  const categoryText = category ? ` - ${category}` : '';
-  const difficultyText = difficulty ? ` (${difficulty})` : '';
   
-  return `${baseTitle}${categoryText}${difficultyText} | Bakstunden`;
+  return `${baseTitle} | Bakstunden`;
 }
 
 /**
  * Generate SEO-optimized recipe description
+ * Uses the exact excerpt from MDX file without modifications
  */
 function generateRecipeDescription(excerpt = '', category = '', totalTimeMinutes = 0, servings = 0) {
-  const baseDescription = excerpt || '';
-  const timeText = totalTimeMinutes ? ` (${totalTimeMinutes} min)` : '';
-  const servingText = servings ? ` för ${servings} personer` : '';
-  const categoryText = category ? ` ${category}` : '';
-  
-  return `${baseDescription}${timeText}${servingText}. Lär dig att laga${categoryText} med vår steg-för-steg guide på Bakstunden.`;
+  // Use the exact excerpt from MDX file without any modifications
+  return excerpt || 'Lär dig att laga god mat med vår steg-för-steg guide på Bakstunden.';
 }
 
 /**
