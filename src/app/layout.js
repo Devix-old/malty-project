@@ -44,7 +44,7 @@ const crimson = Crimson_Text({
 export const metadata = {
   ...generateSiteMetadata({
     title: 'Bakstunden – Sveriges bästa matrecept | Matlagning & Bakning för alla tillfällen',
-    description: 'Upptäck över 60+ testade svenska matrecept! Från enkla vardagsmiddagar och snabba 30-minuters recept till klassisk svensk bakning. Hitta pannkakor, kladdkaka, kycklingrecept, pasta, vegetariska rätter och mycket mer. Steg-för-steg instruktioner för perfekta resultat.',
+    description: 'Upptäck tusentals enkla, goda recept – från klassiska pannkakor till saftiga kycklingfärsrätter. Snabba vardagsrätter och svenska favoriter för hela familjen!',
     url: '/',
     keywords: 'recept, matrecept, matlagning, svenska recept, bakning, bakningsrecept, vegetariskt, veganskt, glutenfritt, frukost, lunch, middag, dessert, snabbmat, vardagsmat, kokbok, svensk mat, familjerecept, hemlagad mat, kycklingfärs recept, pannkakor recept, kycklinglårfile recept, kladdkaka recept, lasagne recept, scones recept, chokladbollar recept, våfflor recept, kanelbullar recept, köttbullar recept, carbonara recept, korvstroganoff recept, kyckling recept, sockerkaka recept, lax recept, muffins recept, äppelmos recept, äppelpaj recept, pasta recept, vegetariska recept, hälsosam mat, italiensk mat, asiatisk mat, sallader, soppor, steg-för-steg recept, enkla recept, snabba recept, vardagsrecept, helgmat, festmat',
   }),
