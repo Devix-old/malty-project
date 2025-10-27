@@ -6,7 +6,8 @@ import { generateMetadata as generateSiteMetadata } from '@/lib/seo';
 import StructuredData from '@/components/seo/StructuredData';
 
 export async function generateMetadata({ params }) {
-  const category = getCategoryBySlug(params.slug);
+  const { slug } = await params;
+  const category = getCategoryBySlug(slug);
   
   if (!category) {
     return {
@@ -27,13 +28,14 @@ export async function generateMetadata({ params }) {
   return generateSiteMetadata({
     title: `${category.name} Recept - ${filteredRecipes.length}+ Goda Recept | Bakstunden`,
     description: `${category.description} Hitta de bästa ${category.name.toLowerCase()} recept med steg-för-steg instruktioner. ${filteredRecipes.length}+ testade recept för alla nivåer.`,
-    url: `/kategorier/${params.slug}`,
+    url: `/kategorier/${slug}`,
     keywords: `${category.name.toLowerCase()}, ${category.name.toLowerCase()} recept, goda ${category.name.toLowerCase()}, hur man lagar ${category.name.toLowerCase()}, svenska ${category.name.toLowerCase()}, ${category.name.toLowerCase()} tips, enkla ${category.name.toLowerCase()}, snabba ${category.name.toLowerCase()}`,
   });
 }
 
 export default async function CategoryPage({ params }) {
-  const category = getCategoryBySlug(params.slug);
+  const { slug } = await params;
+  const category = getCategoryBySlug(slug);
   
   if (!category) {
     notFound();
@@ -73,7 +75,7 @@ export default async function CategoryPage({ params }) {
     '@type': 'CollectionPage',
     name: `${category.name} Recept`,
     description: category.description,
-    url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se'}/kategorier/${params.slug}`,
+    url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se'}/kategorier/${slug}`,
     breadcrumb: {
       '@type': 'BreadcrumbList',
       itemListElement: [
@@ -93,7 +95,7 @@ export default async function CategoryPage({ params }) {
           '@type': 'ListItem',
           position: 3,
           name: category.name,
-          item: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se'}/kategorier/${params.slug}`
+          item: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se'}/kategorier/${slug}`
         }
       ]
     },

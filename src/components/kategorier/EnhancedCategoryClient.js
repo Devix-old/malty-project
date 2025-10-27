@@ -235,7 +235,10 @@ export default function EnhancedCategoryClient({
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
               >
-                <RecipeCard recipe={recipe} />
+                <RecipeCard 
+                  recipe={recipe} 
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
               </motion.div>
             ))}
           </div>

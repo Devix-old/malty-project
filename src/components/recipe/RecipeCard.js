@@ -8,7 +8,7 @@ import Rating from '../ui/Rating';
 import Tag from '../ui/Tag';
 import { cn } from '@/lib/utils/cn';
 
-export default function RecipeCard({ recipe, index = 0, className }) {
+export default function RecipeCard({ recipe, index = 0, className, sizes = "(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw" }) {
   const difficultyLabels = {
     'Lätt': 'Lätt',
     'Medel': 'Medel',
@@ -32,8 +32,8 @@ export default function RecipeCard({ recipe, index = 0, className }) {
               src={recipe.heroImage.src}
               alt={recipe.heroImage.alt || recipe.title}
               fill
+              sizes={sizes}
               className="object-cover group-hover:scale-105 transition-transform duration-300"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">

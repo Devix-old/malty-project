@@ -91,6 +91,7 @@ export default function EnhancedHomeClient({
             src={heroImages[currentSlide].src}
             alt={heroImages[currentSlide].alt}
             fill
+            sizes="100vw"
             className={`object-cover transition-opacity duration-1000 ${heroImages[currentSlide].positionClass || 'hero-mobile-right-desktop-center'}`}
             priority
           />
@@ -176,6 +177,7 @@ export default function EnhancedHomeClient({
                         src={item.image}
                         alt={item.title}
                         fill
+                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
                         className="object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       {/* Elegant gradient overlay */}
@@ -225,7 +227,10 @@ export default function EnhancedHomeClient({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <RecipeCard recipe={recipe} />
+                <RecipeCard 
+                  recipe={recipe} 
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                />
               </motion.div>
             ))}
           </div>
@@ -272,6 +277,7 @@ export default function EnhancedHomeClient({
                         src={category.image}
                         alt={category.name}
                         fill
+                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>

@@ -206,7 +206,12 @@ export default function RecipeListingClient({ initialRecipes, categoryName = nul
           <>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-4 md:gap-y-8 mb-16">
               {paginatedRecipes.map((recipe, index) => (
-                <RecipeCard key={`${recipe.slug}-${index}`} recipe={recipe} index={index} />
+                <RecipeCard 
+                  key={`${recipe.slug}-${index}`} 
+                  recipe={recipe} 
+                  index={index} 
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                />
               ))}
             </div>
 

@@ -1,9 +1,7 @@
 import { Inter, Playfair_Display, Lora, Crimson_Text } from "next/font/google";
-import Script from 'next/script';
 import "./globals.css";
 import HeaderWrapper from '@/components/layout/HeaderWrapper';
 import Footer from '@/components/layout/Footer';
-import CookieBanner from '@/components/ui/CookieBanner';
 import { generateMetadata as generateSiteMetadata } from '@/lib/seo';
 
 // Modern sans-serif for body text (excellent readability)
@@ -11,6 +9,8 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'arial'],
 });
 
 // Elegant serif for headings (classic, editorial feel)
@@ -18,6 +18,8 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
   display: 'swap',
+  preload: false,
+  fallback: ['Georgia', 'serif'],
 });
 
 // Sophisticated serif for blog content (warm, inviting)
@@ -25,6 +27,8 @@ const lora = Lora({
   variable: "--font-lora",
   subsets: ["latin"],
   display: 'swap',
+  preload: false,
+  fallback: ['Georgia', 'serif'],
 });
 
 // Alternative elegant serif for recipe titles
@@ -33,6 +37,8 @@ const crimson = Crimson_Text({
   weight: ['400', '600', '700'],
   subsets: ["latin"],
   display: 'swap',
+  preload: false,
+  fallback: ['Georgia', 'serif'],
 });
 
 export const metadata = {
@@ -40,7 +46,8 @@ export const metadata = {
     title: 'Bakstunden – Sveriges bästa matrecept för alla tillfällen',
     description: 'Upptäck tusentals enkla, goda recept – från klassiska pannkakor till saftiga kycklingfärsrätter. Snabba vardagsrätter och svenska favoriter för hela familjen!',
     url: '/',
-    keywords: 'recept, mat, matlagning, svenska recept, vegetariskt, veganskt, glutenfritt, frukost, lunch, middag, dessert, matrecept, kokbok, svensk mat, italiensk mat, asiatisk mat, snabbmat, vardagsmat, sallader, soppor, pasta, kött, fisk, vegetariska recept, hälsosam mat, familjerecept, kycklingfärs recept, pannkakor recept, kycklinglårfile recept, kladdkaka recept, lasagne recept, mina recept, scones recept, chokladbollar recept, våfflor recept, kanelbullar recept, köket.se recept, idag tv4 nyhetsmorgon, köttbullar recept, carbonara recept, korvstroganoff recept, kyckling recept, sockerkaka recept, 1177 recept, lax recept, muffins recept, recept äppelmos, äppelmos recept, äppelpaj recept, air fryer recept, brownie recept',  }),
+    keywords: 'recept, mat, matlagning, svenska recept, vegetariskt, veganskt, glutenfritt, frukost, lunch, middag, dessert, matrecept, kokbok, svensk mat, italiensk mat, asiatisk mat, snabbmat, vardagsmat, sallader, soppor, pasta, kött, fisk, vegetariska recept, hälsosam mat, familjerecept, kycklingfärs recept, pannkakor recept, kycklinglårfile recept, kladdkaka recept, lasagne recept, mina recept, scones recept, chokladbollar recept, våfflor recept, kanelbullar recept, köket.se recept, idag tv4 nyhetsmorgon, köttbullar recept, carbonara recept, korvstroganoff recept, kyckling recept, sockerkaka recept, 1177 recept, lax recept, muffins recept, recept äppelmos, äppelmos recept, äppelpaj recept, air fryer recept, brownie recept',
+  }),
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se'),
   title: {
     template: '%s | Bakstunden',
@@ -90,19 +97,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="sv" dir="ltr">
       <head>
-        {/* Google Tag Manager */}
-        <Script
-          id="gtm-base"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5B3M9L45');`,
-          }}
-        />
-        <script src="https://d3u598arehftfk.cloudfront.net/prebid_hb_37238_28732.js" async> </script>git a    
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="google-site-verification" content="73a51c1ce7036450" />
       </head>
@@ -110,16 +104,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         className={`${inter.variable} ${playfair.variable} ${lora.variable} ${crimson.variable} antialiased min-h-screen flex flex-col`}
         style={{ fontFamily: 'var(--font-inter)' }}
       >
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe 
-            src="https://www.googletagmanager.com/ns.html?id=GTM-5B3M9L45"
-            height="0" 
-            width="0" 
-            style={{ display: 'none', visibility: 'hidden' }}
-          />
-        </noscript>
-        
         <HeaderWrapper />
         <a 
           href="#main-content" 
@@ -131,7 +115,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           {children}
         </main>
         <Footer />
-        <CookieBanner />
       </body>
     </html>
   );

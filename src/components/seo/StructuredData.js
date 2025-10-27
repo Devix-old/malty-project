@@ -1,11 +1,17 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function StructuredData({ data }) {
+  const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
-    // Only run on client side
-    if (typeof window === 'undefined') return;
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    // Only run on client side after hydration
+    if (!isClient || typeof window === 'undefined') return;
     
     try {
       // Remove existing structured data with same data-id
@@ -24,7 +30,7 @@ export default function StructuredData({ data }) {
     } catch (error) {
       console.error('Error adding structured data:', error);
     }
-  }, [data]);
+  }, [data, isClient]);
 
   return null;
 }

@@ -144,6 +144,7 @@ export default function OmClient() {
                 src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1200&q=80"
                 alt="Bakstunden team cooking"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>
