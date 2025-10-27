@@ -115,7 +115,7 @@ export default async function Home() {
 
   return (
     <>
-      {/* Structured Data */}
+      {/* Structured Data - Schema.org JSON-LD */}
       <StructuredData data={websiteSchema} />
       <StructuredData data={organizationSchema} />
       <StructuredData data={recipeListSchema} />
