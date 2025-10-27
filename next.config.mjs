@@ -8,8 +8,7 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
   
-  // Enable SWC minification for better performance
-  swcMinify: true,
+  // SWC minification is enabled by default in Next.js 15
   
   images: {
     remotePatterns: [
@@ -47,16 +46,12 @@ const nextConfig = {
     ];
   },
 
-  // SEO: Canonical headers for additional protection
+  // SEO: Performance and security headers
   async headers() {
     return [
       {
         source: '/(.*)',
         headers: [
-          {
-            key: 'Link',
-            value: '<https://bakstunden.se/:path*>; rel="canonical"',
-          },
           // Performance headers
           {
             key: 'X-Content-Type-Options',
