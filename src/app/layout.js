@@ -38,10 +38,9 @@ const crimson = Crimson_Text({
 export const metadata = {
   ...generateSiteMetadata({
     title: 'Bakstunden – Sveriges bästa matrecept för alla tillfällen',
-    description: 'Upptäck tusentals goda recept för frukost, lunch, middag och dessert. Vegetariskt, veganskt, glutenfritt och mycket mer – hitta din perfekta mat på Bakstunden!',
+    description: 'Upptäck tusentals enkla, goda recept – från klassiska pannkakor till saftiga kycklingfärsrätter. Snabba vardagsrätter och svenska favoriter för hela familjen!',
     url: '/',
-    keywords: 'recept, mat, matlagning, svenska recept, vegetariskt, veganskt, glutenfritt, frukost, lunch, middag, dessert, matrecept, kokbok, svensk mat, italiensk mat, asiatisk mat, snabbmat, vardagsmat, sallader, soppor, pasta, kött, fisk, vegetariska recept, hälsosam mat, familjerecept',
-  }),
+    keywords: 'recept, mat, matlagning, svenska recept, vegetariskt, veganskt, glutenfritt, frukost, lunch, middag, dessert, matrecept, kokbok, svensk mat, italiensk mat, asiatisk mat, snabbmat, vardagsmat, sallader, soppor, pasta, kött, fisk, vegetariska recept, hälsosam mat, familjerecept, kycklingfärs recept, pannkakor recept, kycklinglårfile recept, kladdkaka recept, lasagne recept, mina recept, scones recept, chokladbollar recept, våfflor recept, kanelbullar recept, köket.se recept, idag tv4 nyhetsmorgon, köttbullar recept, carbonara recept, korvstroganoff recept, kyckling recept, sockerkaka recept, 1177 recept, lax recept, muffins recept, recept äppelmos, äppelmos recept, äppelpaj recept, air fryer recept, brownie recept',  }),
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se'),
   title: {
     template: '%s | Bakstunden',
@@ -64,7 +63,7 @@ export const metadata = {
     url: 'https://bakstunden.se',
     siteName: 'Bakstunden',
     title: 'Bakstunden – Sveriges bästa matrecept för alla tillfällen',
-    description: 'Upptäck tusentals goda recept för frukost, lunch, middag och dessert. Vegetariskt, veganskt, glutenfritt och mycket mer – hitta din perfekta mat på Bakstunden!',
+    description: 'Upptäck tusentals enkla, goda recept – från klassiska pannkakor till saftiga kycklingfärsrätter. Snabba vardagsrätter och svenska favoriter för hela familjen!',
     images: [
       {
         url: '/bak-stunden.png',
@@ -77,7 +76,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Bakstunden – Sveriges bästa matrecept för alla tillfällen',
-    description: 'Upptäck tusentals goda recept för frukost, lunch, middag och dessert. Vegetariskt, veganskt, glutenfritt och mycket mer – hitta din perfekta mat på Bakstunden!',
+    description: 'Upptäck tusentals enkla, goda recept – från klassiska pannkakor till saftiga kycklingfärsrätter. Snabba vardagsrätter och svenska favoriter för hela familjen!',
     images: ['/bak-stunden.png'],
   },
   manifest: '/manifest.json',
