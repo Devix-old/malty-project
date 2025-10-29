@@ -1,4 +1,5 @@
 import { Inter, Playfair_Display, Lora, Crimson_Text } from "next/font/google";
+import Script from 'next/script';
 import "./globals.css";
 import HeaderWrapper from '@/components/layout/HeaderWrapper';
 import Footer from '@/components/layout/Footer';
@@ -103,12 +104,34 @@ export default function RootLayout({ children }) {
   return (
     <html lang="sv" dir="ltr">
       <head>
+        {/* Google Tag Manager */}
+        <Script
+          id="gtm-base"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5B3M9L45');`,
+          }}
+        />
         <meta name="google-site-verification" content="73a51c1ce7036450" />
       </head>
       <body
         className={`${inter.variable} ${playfair.variable} ${lora.variable} ${crimson.variable} antialiased min-h-screen flex flex-col`}
         style={{ fontFamily: 'var(--font-inter)' }}
       >
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe 
+            src="https://www.googletagmanager.com/ns.html?id=GTM-5B3M9L45"
+            height="0" 
+            width="0" 
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        
         <HeaderWrapper />
         <a 
           href="#main-content" 
