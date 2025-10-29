@@ -3,7 +3,7 @@ import "./globals.css";
 import HeaderWrapper from '@/components/layout/HeaderWrapper';
 import Footer from '@/components/layout/Footer';
 import { generateMetadata as generateSiteMetadata } from '@/lib/seo';
-
+import { Analytics } from "@vercel/analytics/next"
 // Modern sans-serif for body text (excellent readability)
 const inter = Inter({
   variable: "--font-inter",
@@ -120,6 +120,7 @@ export default function RootLayout({ children }) {
           {children}
         </main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
