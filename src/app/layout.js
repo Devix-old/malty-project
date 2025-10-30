@@ -115,6 +115,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
         {/* End Google Tag Manager */}
         <meta name="google-site-verification" content="73a51c1ce7036450" />
+        <meta name="ahrefs-site-verification" content="22d922fdf84d019c19ae72220da6b8c4acf4889a83938c151cdbc09ee00d5aa2" />
       </head>
       <body
         className={`${inter.variable} ${playfair.variable} ${lora.variable} ${crimson.variable} antialiased min-h-screen flex flex-col`}
