@@ -51,12 +51,13 @@ export default function FeaturedRecipes({ recipes }) {
                 className="group block bg-white dark:bg-gray-800 overflow-hidden transition-all duration-300 transform hover:-translate-y-1"
               >
                 {/* Image */}
-                <div className="relative h-64 md:h-64 overflow-hidden bg-gray-200 dark:bg-gray-700">
+                <div className="relative aspect-[4/3] overflow-hidden bg-gray-200 dark:bg-gray-700">
                   {recipe.heroImage?.src ? (
                     <Image
                       src={recipe.heroImage.src}
                       alt={recipe.heroImage.alt || recipe.title}
                       fill
+                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                   ) : (

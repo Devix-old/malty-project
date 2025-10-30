@@ -26,7 +26,7 @@ export default function RecipeCard({ recipe, index = 0, className, sizes = "(max
       )}
     >
       <Link href={`/recept/${recipe.slug}`} className="block">
-        <div className="relative h-64 md:h-64 overflow-hidden bg-gray-200 dark:bg-gray-700">
+        <div className="relative aspect-[4/3] overflow-hidden bg-gray-200 dark:bg-gray-700">
           {recipe.heroImage?.src ? (
             <Image
               src={recipe.heroImage.src}

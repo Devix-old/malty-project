@@ -146,7 +146,7 @@ export default function StoriesPage() {
                     </div>
                   )}
                   
-                  <div className="relative h-64 overflow-hidden">
+                  <div className="relative aspect-[9/16] overflow-hidden">
                     <Image
                       src={story.image}
                       alt={story.title}

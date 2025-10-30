@@ -41,6 +41,22 @@ body {
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+/* Global Image Aspect Ratio Protection */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Protect images in MDX content from distortion */
+.recipe-blog-content img,
+.blog-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 2rem 0;
+}
+
 /* Enhanced Typography for Recipe Content */
 .recipe-blog-content h2 {
   font-family: var(--font-playfair);

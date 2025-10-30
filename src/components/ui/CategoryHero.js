@@ -37,12 +37,13 @@ export default function CategoryHero({ category, image, description, recipeCount
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
-          className="relative w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden mb-8 shadow-2xl"
+          className="relative w-full aspect-[21/9] md:aspect-[16/7] rounded-3xl overflow-hidden mb-8 shadow-2xl"
         >
           <Image
             src={heroImage}
             alt={category}
             fill
+            sizes="(max-width: 1200px) 100vw, 1200px"
             className="object-cover"
           />
           {/* Subtle overlay for depth */}
