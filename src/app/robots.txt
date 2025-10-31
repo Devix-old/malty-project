@@ -3,6 +3,7 @@ Allow: /
 
 # Sitemap
 Sitemap: https://bakstunden.se/sitemap.xml
+Sitemap: https://bakstunden.se/stories-sitemap
 
 # Disallow admin areas (if any)
 Disallow: /admin/
@@ -15,6 +16,7 @@ Allow: /recept/
 Allow: /blogg/
 Allow: /kategorier/
 Allow: /om/
+Allow: /stories/
 
 # Crawl delay (optional)
 Crawl-delay: 1
