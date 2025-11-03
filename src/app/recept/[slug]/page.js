@@ -274,8 +274,8 @@ export default async function RecipePage({ params }) {
                 </div>
                 <div className="p-6">
                   <IngredientsList
-                    ingredients={frontmatter.ingredients}
-                    defaultServings={frontmatter.servings}
+                    ingredients={frontmatter.ingredients || []}
+                    defaultServings={frontmatter.servings || 4}
                   />
                 </div>
               </div>
@@ -340,7 +340,7 @@ export default async function RecipePage({ params }) {
                   </h2>
                 </div>
                 <div className="p-6 md:p-8">
-                  <RecipeSteps steps={frontmatter.steps} />
+                  <RecipeSteps steps={frontmatter.steps || []} />
                 </div>
               </div>
               
@@ -364,7 +364,7 @@ export default async function RecipePage({ params }) {
                   className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white"
                   style={{ fontFamily: 'var(--font-playfair)' }}
                 >
-                  Fler {frontmatter.category.toLowerCase()} du kanske gillar
+                  Fler {frontmatter.category?.toLowerCase() || 'recept'} du kanske gillar
                 </h2>
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
