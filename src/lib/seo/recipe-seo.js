@@ -40,6 +40,13 @@ export function generateRecipeMetadata(recipe) {
   
   // Generate image URL
   const imageUrl = heroImage?.src ? `${SITE_URL}${heroImage.src}` : `${SITE_URL}/bak-stunden.png`;
+  const imageAlt = heroImage?.alt || title;
+  const imageMeta = {
+    url: imageUrl,
+    alt: imageAlt,
+    ...(heroImage?.width ? { width: heroImage.width } : {}),
+    ...(heroImage?.height ? { height: heroImage.height } : {})
+  };
 
   return {
     title: seoTitle,
@@ -51,14 +58,7 @@ export function generateRecipeMetadata(recipe) {
       description: seoDescription,
       url: canonicalUrl,
       siteName: 'Bakstunden',
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: `${title} - Bakstunden recept`,
-        },
-      ],
+      images: [imageMeta],
       locale: 'sv_SE',
       type: 'article',
       publishedTime: publishedAt,
@@ -181,12 +181,22 @@ export function generateEnhancedRecipeSchema(recipe) {
     cookingMethod
   } = recipe;
 
+  const imageObject = heroImage?.src
+    ? [{
+        '@type': 'ImageObject',
+        url: `${SITE_URL}${heroImage.src}`,
+        ...(heroImage?.width ? { width: heroImage.width } : {}),
+        ...(heroImage?.height ? { height: heroImage.height } : {}),
+        caption: heroImage?.alt || title,
+      }]
+    : undefined;
+
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Recipe',
     name: title,
     description: excerpt,
-    image: heroImage?.src ? `${SITE_URL}${heroImage.src}` : undefined,
+    image: imageObject,
     author: {
       '@type': 'Person',
       name: author || 'Bakstunden Team',
