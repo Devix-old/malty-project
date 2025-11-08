@@ -345,11 +345,14 @@ function getDifficultyDescription(difficulty) {
  * Generate related content suggestions
  */
 export function generateRelatedContentSchema(relatedRecipes, category) {
+  const safeCategory = category || 'Recept';
+  const categoryLabel = safeCategory.toLowerCase();
+
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: `Relaterade ${category} recept`,
-    description: `Fler ${category.toLowerCase()} recept du kanske gillar`,
+    name: `Relaterade ${safeCategory} recept`,
+    description: `Fler ${categoryLabel} recept du kanske gillar`,
     itemListElement: relatedRecipes.map((recipe, index) => ({
       '@type': 'ListItem',
       position: index + 1,
