@@ -8,6 +8,20 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
   
+  // Exclude SEO dashboard from production builds
+  ...(process.env.NODE_ENV === 'production' && {
+    async rewrites() {
+      return {
+        beforeFiles: [
+          {
+            source: '/seo-optiz/:path*',
+            destination: '/404',
+          },
+        ],
+      };
+    },
+  }),
+  
   // SWC minification is enabled by default in Next.js 15
   
   images: {
