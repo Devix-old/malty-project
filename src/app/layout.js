@@ -4,6 +4,7 @@ import HeaderWrapper from '@/components/layout/HeaderWrapper';
 import Footer from '@/components/layout/Footer';
 import { generateMetadata as generateSiteMetadata } from '@/lib/seo';
 import { Analytics } from "@vercel/analytics/next"
+import Script from "next/script";
 // Modern sans-serif for body text (excellent readability)
 const inter = Inter({
   variable: "--font-inter",
@@ -103,6 +104,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="sv" dir="ltr">
       <head>
+        <Script
+          src="https://d3u598arehftfk.cloudfront.net/prebid_hb_37238_28732.js"
+          strategy="beforeInteractive"
+        />
         {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
