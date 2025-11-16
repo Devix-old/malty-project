@@ -57,6 +57,12 @@ const nextConfig = {
         destination: 'https://bakstunden.se/:path*',
         permanent: true, // 301 redirect
       },
+      // Redirect /categories/* to /kategorier/* (Swedish)
+      {
+        source: '/categories/:path*',
+        destination: '/kategorier/:path*',
+        permanent: true, // 301 redirect
+      },
     ];
   },
 

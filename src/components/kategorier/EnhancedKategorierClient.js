@@ -55,7 +55,10 @@ export default function EnhancedKategorierClient({
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FFF8F3] to-white dark:from-gray-900 dark:to-gray-800">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 text-white overflow-hidden">
+      <section 
+        className="relative py-20 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 text-white overflow-hidden"
+        suppressHydrationWarning
+      >
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
@@ -63,7 +66,10 @@ export default function EnhancedKategorierClient({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 font-playfair">
+            <h1 
+              className="text-4xl md:text-6xl font-bold mb-6 font-playfair"
+              suppressHydrationWarning
+            >
               Alla Receptkategorier
             </h1>
             <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
