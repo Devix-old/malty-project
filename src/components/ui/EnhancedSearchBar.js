@@ -6,8 +6,10 @@ import Image from 'next/image';
 import { Search, X, Clock, Star, Utensils } from 'lucide-react';
 import { searchContent } from '@/lib/utils/search';
 
+const EMPTY_RECIPES = [];
+
 export default function EnhancedSearchBar({ 
-  recipes = [], 
+  recipes, 
   onSearch, 
   placeholder = "Sök recept, ingredienser eller taggar..." 
 }) {
@@ -19,6 +21,12 @@ export default function EnhancedSearchBar({
   const router = useRouter();
   const searchRef = useRef(null);
   const inputRef = useRef(null);
+  const searchableRecipes = Array.isArray(recipes) ? recipes : EMPTY_RECIPES;
+  const onSearchRef = useRef(onSearch);
+
+  useEffect(() => {
+    onSearchRef.current = onSearch;
+  }, [onSearch]);
 
   // Close search when clicking outside
   useEffect(() => {
@@ -39,27 +47,28 @@ export default function EnhancedSearchBar({
     if (query.length < 2) {
       setResults([]);
       setShowResults(false);
-      if (onSearch) {
-        onSearch('');
+      setIsLoading(false);
+      if (onSearchRef.current) {
+        onSearchRef.current('');
       }
       return;
     }
 
     setIsLoading(true);
     const timeoutId = setTimeout(() => {
-      const searchResults = searchContent(recipes, query);
+      const searchResults = searchContent(searchableRecipes, query);
       setResults(searchResults.slice(0, 8)); // Limit to 8 results
       setShowResults(true);
       setIsLoading(false);
       
       // Call onSearch callback if provided
-      if (onSearch) {
-        onSearch(query);
+      if (onSearchRef.current) {
+        onSearchRef.current(query);
       }
     }, 300);
 
     return () => clearTimeout(timeoutId);
-  }, [query, recipes, onSearch]);
+  }, [query, searchableRecipes]);
 
   const handleSearch = (e) => {
     e.preventDefault();

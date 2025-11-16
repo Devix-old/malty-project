@@ -3,7 +3,8 @@ import "./globals.css";
 import HeaderWrapper from '@/components/layout/HeaderWrapper';
 import Footer from '@/components/layout/Footer';
 import { generateMetadata as generateSiteMetadata } from '@/lib/seo';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 // Modern sans-serif for body text (excellent readability)
 const inter = Inter({
   variable: "--font-inter",
@@ -103,17 +104,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="sv" dir="ltr">
       <head>
-        {/* Google Tag Manager */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5B3M9L45');`,
-          }}
-        />
-        {/* End Google Tag Manager */}
         <meta name="google-site-verification" content="73a51c1ce7036450" />
         <meta name="ahrefs-site-verification" content="22d922fdf84d019c19ae72220da6b8c4acf4889a83938c151cdbc09ee00d5aa2" />
       </head>
@@ -139,6 +129,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         >
           Hoppa till huvudinnehåll
         </a>
+        {/* HB Agency Script */}
+        <Script
+          src="https://d3u598arehftfk.cloudfront.net/prebid_hb_37238_28732.js"
+          strategy="afterInteractive"
+        />
+        
+        {/* Google Tag Manager */}
+        <Script
+          id="google-tag-manager"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5B3M9L45');`,
+          }}
+        />
+        {/* End Google Tag Manager */}
+        
         <main id="main-content" className="flex-1">
           {children}
         </main>

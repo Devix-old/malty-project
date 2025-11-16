@@ -25,7 +25,6 @@ import Tag from '@/components/ui/Tag';
 import IngredientsList from '@/components/recipe/IngredientsList';
 import RecipeSteps from '@/components/recipe/RecipeSteps';
 import RecipeCard from '@/components/recipe/RecipeCard';
-import RecipeSEO from '@/components/seo/RecipeSEO';
 import { 
   RecipeTipsSection, 
   RecipeFAQSection, 
@@ -34,7 +33,7 @@ import {
   RecipeSocialSection 
 } from '@/components/recipe/RecipeSEOSections';
 import SmartInternalLinks, { CategoryNavigation, TrendingRecipes } from '@/components/seo/SmartInternalLinks';
-import { generateRecipeMetadata, generateEnhancedRecipeSchema, generateRecipeFAQSchema, generateRelatedContentSchema } from '@/lib/seo/recipe-seo';
+import { generateRecipeMetadata, generateEnhancedRecipeSchema, generateRelatedContentSchema } from '@/lib/seo/recipe-seo';
 import { generateInternalLinks, generateContextualLinks } from '@/lib/seo/internal-linking';
 import { getAllCategories } from '@/lib/categories';
 
@@ -152,16 +151,59 @@ export default async function RecipePage({ params }) {
     { name: frontmatter.title }
   ];
 
+  const recipeSchema = generateEnhancedRecipeSchema({
+    ...frontmatter,
+    slug,
+    content: recipe.content
+  });
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url ? `${process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se'}${item.url}` : undefined,
+    })),
+  };
+
+  const faqSchema = faqs.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  } : null;
+  const relatedSchema = relatedRecipes.length > 0 ? generateRelatedContentSchema(relatedRecipes, frontmatter.category) : null;
+
   return (
     <>
-      {/* SEO Component */}
-      <RecipeSEO 
-        recipe={frontmatter}
-        relatedRecipes={relatedRecipes}
-        faqs={faqs}
-        breadcrumbs={breadcrumbs}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(recipeSchema) }}
       />
-
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+      {relatedSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(relatedSchema) }}
+        />
+      )}
 
       {/* 🧁 HERO SECTION */}
       {frontmatter.heroImage?.src && (
@@ -274,8 +316,8 @@ export default async function RecipePage({ params }) {
                 </div>
                 <div className="p-6">
                   <IngredientsList
-                    ingredients={frontmatter.ingredients}
-                    defaultServings={frontmatter.servings}
+                    ingredients={frontmatter.ingredients || []}
+                    defaultServings={frontmatter.servings || 4}
                   />
                 </div>
               </div>
@@ -340,7 +382,7 @@ export default async function RecipePage({ params }) {
                   </h2>
                 </div>
                 <div className="p-6 md:p-8">
-                  <RecipeSteps steps={frontmatter.steps} />
+                  <RecipeSteps steps={frontmatter.steps || []} />
                 </div>
               </div>
               
@@ -364,7 +406,7 @@ export default async function RecipePage({ params }) {
                   className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white"
                   style={{ fontFamily: 'var(--font-playfair)' }}
                 >
-                  Fler {frontmatter.category.toLowerCase()} du kanske gillar
+                  Fler {frontmatter.category?.toLowerCase() || 'recept'} du kanske gillar
                 </h2>
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
