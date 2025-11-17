@@ -27,7 +27,7 @@ export default function CategoryHero({ category, image, description, recipeCount
     'default': '/images/nygräddade-kakor-med-strössel-hero-banner.webp',
   };
 
-  const heroImage = image || categoryImages[category] || categoryImages.default;
+  const imageSrc = image || categoryImages[category] || categoryImages.default;
 
   return (
     <section className="relative bg-gray-50 dark:bg-gray-900">
@@ -40,7 +40,7 @@ export default function CategoryHero({ category, image, description, recipeCount
           className="relative w-full aspect-[21/9] md:aspect-[16/7] rounded-3xl overflow-hidden mb-8 shadow-2xl"
         >
           <Image
-            src={heroImage}
+            src={imageSrc}
             alt={category}
             fill
             sizes="(max-width: 1200px) 100vw, 1200px"

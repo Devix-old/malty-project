@@ -243,7 +243,7 @@ export default function SnabbmatClient({
                   <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 border border-gray-200 dark:border-gray-700">
                     <div className="relative h-48">
                       <Image
-                        src={recipe.heroImage?.src || recipe.heroImage || '/images/placeholder-recipe.webp'}
+                        src={recipe.image?.src || recipe.image || '/images/placeholder-recipe.webp'}
                         alt={recipe.title}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

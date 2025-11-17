@@ -165,9 +165,9 @@ export default function EnhancedSearchBar({
                       >
                         <div className="flex items-center space-x-3">
                           <div className="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center overflow-hidden">
-                            {recipe.heroImage?.src ? (
+                            {recipe.image?.src ? (
                               <Image
-                                src={recipe.heroImage.src}
+                                src={recipe.image.src}
                                 alt={recipe.title}
                                 width={48}
                                 height={48}

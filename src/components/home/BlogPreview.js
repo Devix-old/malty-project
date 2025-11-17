@@ -12,7 +12,7 @@ export default function BlogPreview({ articles }) {
       slug: 'guide-1',
       title: 'Perfekta pastatempot: Guide till al dente',
       excerpt: 'Lär dig konsten att koka pasta perfekt varje gång. Tips från proffsen som gör skillnad.',
-      heroImage: { src: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800&q=80', alt: 'Pasta' },
+      image: { src: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800&q=80', alt: 'Pasta' },
       category: 'Köksguider',
       readingMinutes: 5,
       publishedAt: '2024-01-15',
@@ -21,7 +21,7 @@ export default function BlogPreview({ articles }) {
       slug: 'guide-2',
       title: 'Smaksätt som en kock: Kryddguiden',
       excerpt: 'Upptäck hur du kombinerar kryddor och örter för maximal smak. Grundläggande tekniker varje matälskare bör kunna.',
-      heroImage: { src: 'https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=800&q=80', alt: 'Kryddor' },
+      image: { src: 'https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=800&q=80', alt: 'Kryddor' },
       category: 'Tips & Tricks',
       readingMinutes: 7,
       publishedAt: '2024-01-12',
@@ -30,7 +30,7 @@ export default function BlogPreview({ articles }) {
       slug: 'guide-3',
       title: 'Säsongsinköp: December i köket',
       excerpt: 'Vilka råvaror du bör satsa på just nu. Få ut det bästa av säsongens ingredienser.',
-      heroImage: { src: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80', alt: 'Grönsaker' },
+      image: { src: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80', alt: 'Grönsaker' },
       category: 'Råvaror',
       readingMinutes: 4,
       publishedAt: '2024-01-10',
@@ -81,10 +81,10 @@ export default function BlogPreview({ articles }) {
               >
                 {/* Image */}
                 <div className="relative aspect-[16/10] overflow-hidden bg-gray-200 dark:bg-gray-700">
-                  {article.heroImage?.src ? (
+                  {article.image?.src ? (
                     <Image
-                      src={article.heroImage.src}
-                      alt={article.heroImage.alt || article.title}
+                      src={article.image.src}
+                      alt={article.image.alt || article.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />

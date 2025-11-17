@@ -95,10 +95,10 @@ export default function SeasonalInspiration({ recipes }) {
                 <div className="bg-white dark:bg-gray-800 overflow-hidden transition-all duration-300 transform hover:-translate-y-1 h-full">
                   {/* Image */}
                   <div className="relative aspect-square overflow-hidden bg-gray-200 dark:bg-gray-700 rounded-full">
-                    {recipe.heroImage?.src ? (
+                    {recipe.image?.src ? (
                       <Image
-                        src={recipe.heroImage.src}
-                        alt={recipe.heroImage.alt || recipe.title}
+                        src={recipe.image.src}
+                        alt={recipe.image.alt || recipe.title}
                         fill
                         sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-110 rounded-full"

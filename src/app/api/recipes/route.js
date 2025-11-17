@@ -15,7 +15,7 @@ export async function GET() {
       totalTimeMinutes: recipe.totalTimeMinutes,
       ratingAverage: recipe.ratingAverage,
       ratingCount: recipe.ratingCount,
-      heroImage: recipe.heroImage
+      image: recipe.image
     }));
 
     return Response.json(searchData);

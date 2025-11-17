@@ -387,7 +387,7 @@ function calculateSEOScore(frontmatter) {
   
   // Optional but valuable fields (20 points)
   if (frontmatter.tags && frontmatter.tags.length > 0) score += 5;
-  if (frontmatter.heroImage) score += 5;
+  if (frontmatter.image) score += 5;
   if (frontmatter.author) score += 5;
   if (frontmatter.difficulty) score += 5;
   

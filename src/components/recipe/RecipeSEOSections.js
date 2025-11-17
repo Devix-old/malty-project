@@ -128,11 +128,11 @@ export function RelatedRecipesSection({ relatedRecipes, category, currentRecipe 
               href={`/recept/${recipe.slug}`}
               className="group bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.02] border border-gray-100 dark:border-gray-700"
             >
-              {recipe.heroImage?.src && (
+              {recipe.image?.src && (
                 <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden">
                   <Image
-                    src={recipe.heroImage.src}
-                    alt={recipe.heroImage.alt || recipe.title}
+                    src={recipe.image.src}
+                    alt={recipe.image.alt || recipe.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                     sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"

@@ -130,7 +130,7 @@ equipment: ["Kastrull", "Visp"]
 allergens: ["Mjölk", "Ägg"]
 ratingAverage: 4.5
 ratingCount: 100
-heroImage:
+image:
   src: "/images/recipes/ditt-recept.jpg"
   alt: "Beskrivning av bilden"
 ---
@@ -159,7 +159,7 @@ publishedAt: "2024-10-15"
 category: "Tekniker"
 tags: ["Tag1", "Tag2"]
 readingMinutes: 8
-heroImage:
+image:
   src: "/images/blog/artikel.jpg"
   alt: "Bildbeskrivning"
 ---

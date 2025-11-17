@@ -20,7 +20,7 @@ export default function EnhancedHomeClient({
   const allCategories = getAllCategories();
 
   // Auto-sliding hero images
-  const heroImages = [
+  const images = [
     {
         src: '/images/kyckling-i-kramig-svampsas-recept.webp',
         alt: 'Kyckling i krämig svampsås',
@@ -46,10 +46,10 @@ export default function EnhancedHomeClient({
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+      setCurrentSlide((prev) => (prev + 1) % images.length);
     }, 7000);
     return () => clearInterval(interval);
-  }, [heroImages.length]);
+  }, [images.length]);
 
   const quickAccessItems = [
     {
@@ -88,11 +88,11 @@ export default function EnhancedHomeClient({
       <section className="relative h-[70vh] overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src={heroImages[currentSlide].src}
-            alt={heroImages[currentSlide].alt}
+            src={images[currentSlide].src}
+            alt={images[currentSlide].alt}
             fill
             sizes="100vw"
-            className={`object-cover transition-opacity duration-1000 ${heroImages[currentSlide].positionClass || 'hero-mobile-right-desktop-center'}`}
+            className={`object-cover transition-opacity duration-1000 ${images[currentSlide].positionClass || 'hero-mobile-right-desktop-center'}`}
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
@@ -108,10 +108,10 @@ export default function EnhancedHomeClient({
               className="max-w-3xl"
             >
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                {heroImages[currentSlide].title}
+                {images[currentSlide].title}
               </h1>
               <p className="text-xl md:text-2xl text-gray-200 mb-8">
-                {heroImages[currentSlide].subtitle}
+                {images[currentSlide].subtitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
@@ -134,7 +134,7 @@ export default function EnhancedHomeClient({
 
         {/* Slide Indicators */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          {heroImages.map((_, index) => (
+          {images.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}

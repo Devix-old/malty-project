@@ -52,10 +52,10 @@ export default function FeaturedRecipes({ recipes }) {
               >
                 {/* Image */}
                 <div className="relative aspect-[4/3] overflow-hidden bg-gray-200 dark:bg-gray-700">
-                  {recipe.heroImage?.src ? (
+                  {recipe.image?.src ? (
                     <Image
-                      src={recipe.heroImage.src}
-                      alt={recipe.heroImage.alt || recipe.title}
+                      src={recipe.image.src}
+                      alt={recipe.image.alt || recipe.title}
                       fill
                       sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-110"

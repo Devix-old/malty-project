@@ -71,10 +71,10 @@ export default function PopularThisWeek({ recipes }) {
               >
                 {/* Image */}
                 <div className="absolute inset-0">
-                  {featured.heroImage?.src ? (
+                  {featured.image?.src ? (
                     <Image
-                      src={featured.heroImage.src}
-                      alt={featured.heroImage.alt || featured.title}
+                      src={featured.image.src}
+                      alt={featured.image.alt || featured.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
@@ -156,10 +156,10 @@ export default function PopularThisWeek({ recipes }) {
                     className="group block relative h-[320px] overflow-hidden"
                   >
                     <div className="absolute inset-0">
-                      {recipe.heroImage?.src ? (
+                      {recipe.image?.src ? (
                         <Image
-                          src={recipe.heroImage.src}
-                          alt={recipe.heroImage.alt || recipe.title}
+                          src={recipe.image.src}
+                          alt={recipe.image.alt || recipe.title}
                           fill
                           className="object-cover transition-transform duration-700 group-hover:scale-110"
                         />
@@ -220,10 +220,10 @@ export default function PopularThisWeek({ recipes }) {
               className="group block"
             >
               <div className="relative h-[200px] md:h-[240px] overflow-hidden mb-4">
-                {recipe.heroImage?.src ? (
+                {recipe.image?.src ? (
                   <Image
-                    src={recipe.heroImage.src}
-                    alt={recipe.heroImage.alt || recipe.title}
+                    src={recipe.image.src}
+                    alt={recipe.image.alt || recipe.title}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />

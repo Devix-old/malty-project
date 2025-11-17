@@ -33,7 +33,7 @@ import {
   RecipeSocialSection 
 } from '@/components/recipe/RecipeSEOSections';
 import SmartInternalLinks, { CategoryNavigation, TrendingRecipes } from '@/components/seo/SmartInternalLinks';
-import { generateRecipeMetadata, generateEnhancedRecipeSchema, generateRelatedContentSchema } from '@/lib/seo/recipe-seo';
+import { generateRecipeMetadata, generateEnhancedRecipeSchema, generateRelatedContentSchema, generateRecipeKeywords } from '@/lib/seo/recipe-seo';
 import { generateInternalLinks, generateContextualLinks } from '@/lib/seo/internal-linking';
 import { getAllCategories } from '@/lib/categories';
 
@@ -151,11 +151,19 @@ export default async function RecipePage({ params }) {
     { name: frontmatter.title }
   ];
 
+  // CRITICAL #2: Generate keywords once and use in both metadata and schema
+  // This ensures metadata and JSON-LD use the same keywords (single source of truth)
+  const keywords = generateRecipeKeywords(
+    frontmatter.tags || [],
+    frontmatter.category || '',
+    frontmatter.title || ''
+  );
+  
   const recipeSchema = generateEnhancedRecipeSchema({
     ...frontmatter,
     slug,
     content: recipe.content
-  });
+  }, keywords);
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -206,11 +214,11 @@ export default async function RecipePage({ params }) {
       )}
 
       {/* 🧁 HERO SECTION */}
-      {frontmatter.heroImage?.src && (
+      {frontmatter.image?.src && (
         <section className="relative w-full h-[70vh] min-h-[600px] max-h-[800px]">
           <Image
-            src={frontmatter.heroImage.src}
-            alt={frontmatter.heroImage.alt || `${frontmatter.title} - Bakstunden recept`}
+            src={frontmatter.image.src}
+            alt={frontmatter.image.alt || `${frontmatter.title} - Bakstunden recept`}
             fill
             className="object-cover"
             priority
@@ -277,19 +285,19 @@ export default async function RecipePage({ params }) {
                 </div>
 
                 {/* Inline hero image */}
-                {frontmatter.heroImage?.src && (
+                {frontmatter.image?.src && (
                   <div className="float-right ml-8 mb-6 w-full md:w-1/2 lg:w-2/5">
                     <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                       <Image
-                        src={frontmatter.heroImage.src}
-                        alt={frontmatter.heroImage.alt || `${frontmatter.title} - Bakstunden recept`}
+                        src={frontmatter.image.src}
+                        alt={frontmatter.image.alt || `${frontmatter.title} - Bakstunden recept`}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     </div>
                     <p className="text-sm text-gray-500 dark:text-gray-400 italic mt-3 text-center">
-                      {frontmatter.heroImage.alt || frontmatter.title}
+                      {frontmatter.image.alt || frontmatter.title}
                     </p>
                   </div>
                 )}

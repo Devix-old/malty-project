@@ -7,12 +7,17 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se';
 
 /**
  * Generate comprehensive recipe metadata
+ * 
+ * LOW PRIORITY #10: PERFORMANCE NOTE
+ * When used in Next.js generateMetadata, this function runs on EVERY page load
+ * Ensure recipe data is cached appropriately to avoid DB queries on each request
+ * Consider using Next.js unstable_cache for production builds
  */
 export function generateRecipeMetadata(recipe) {
   const {
     title = '',
     excerpt = '',
-    heroImage,
+    image,
     author = 'Bakstunden Team',
     publishedAt,
     updatedAt,
@@ -35,30 +40,43 @@ export function generateRecipeMetadata(recipe) {
   // Generate keywords
   const keywords = generateRecipeKeywords(tags, category, title);
   
-  // Generate canonical URL
-  const canonicalUrl = `${SITE_URL}/recept/${slug}`;
+  // Generate canonical URL - use consistent pattern with seo.js
+  // Construct path first, then full URL (same pattern as seo.js: `${SITE_URL}${url}`)
+  const urlPath = `/recept/${slug}`;
+  const canonicalUrl = `${SITE_URL}${urlPath}`;
   
-  // Generate image URL
-  const imageUrl = heroImage?.src ? `${SITE_URL}${heroImage.src}` : `${SITE_URL}/bak-stunden.png`;
-  const imageAlt = heroImage?.alt || title;
-  const imageMeta = {
+  // Generate image URL - ONLY if recipe image exists
+  // Don't use fallback logo for recipe pages (Google will ignore it and pick random image)
+  const imageUrl = image?.src ? `${SITE_URL}${image.src}` : null;
+  const imageAlt = image?.alt || title;
+  
+  // Only create imageMeta if we have a valid recipe image
+  // MEDIUM PRIORITY #4: Add dimensions ONLY if available from image metadata
+  // If dimensions are not available, let OG parsers auto-detect
+  const imageMeta = imageUrl ? {
     url: imageUrl,
     alt: imageAlt,
-    ...(heroImage?.width ? { width: heroImage.width } : {}),
-    ...(heroImage?.height ? { height: heroImage.height } : {})
-  };
+    // Add dimensions ONLY if you have them from image metadata
+    ...(image.width && image.height ? {
+      width: image.width,
+      height: image.height,
+    } : {}),
+  } : null;
 
   return {
     title: seoTitle,
     description: seoDescription,
     keywords: keywords,
-    canonical: canonicalUrl,
+    // Note: Next.js canonical URLs should be in alternates.canonical, not top-level
+    // Removed top-level 'canonical' property for consistency
     openGraph: {
       title: seoTitle,
       description: seoDescription,
       url: canonicalUrl,
       siteName: 'Bakstunden',
-      images: [imageMeta],
+      // Only include images if we have a valid recipe image
+      // Empty array or missing images property is better than wrong image
+      ...(imageMeta ? { images: [imageMeta] } : {}),
       locale: 'sv_SE',
       type: 'article',
       publishedTime: publishedAt,
@@ -71,7 +89,8 @@ export function generateRecipeMetadata(recipe) {
       card: 'summary_large_image',
       title: seoTitle,
       description: seoDescription,
-      images: [imageUrl],
+      // Only include images if we have a valid recipe image
+      ...(imageUrl ? { images: [imageUrl] } : {}),
       creator: '@bakstunden',
       site: '@bakstunden',
     },
@@ -86,26 +105,30 @@ export function generateRecipeMetadata(recipe) {
         'max-snippet': -1,
       },
     },
+    // NICE-TO-HAVE #12: Add metadata for AI/LLM discovery
+    other: {
+      'article:author': author || 'Bakstunden Team',
+      // Add content accessibility hints
+      'accessibility': 'screen-reader-optimized',
+    },
     alternates: {
       canonical: canonicalUrl,
     },
-    other: {
-      'article:author': author || 'Bakstunden Team',
-      'article:section': category,
-      'article:tag': tags.join(','),
-      'article:published_time': publishedAt,
-      'article:modified_time': updatedAt || publishedAt,
-    },
+    // Note: article-specific tags are already in openGraph (publishedTime, modifiedTime, tags, section)
+    // OG parsers read from openGraph, not from metadata.other
   };
 }
 
 /**
  * Generate SEO-optimized recipe title
  * Uses the exact title from MDX file with NO modifications
+ * Safe fallback if title is missing (Issue #6)
  */
 function generateRecipeTitle(title = '', category = '', difficulty = '') {
   // Use the exact title from MDX file with NO additions
-  return title || 'Recept';
+  // Safe fallback: if title is empty, use category-based fallback
+  const trimmedTitle = title.trim();
+  return trimmedTitle !== '' ? trimmedTitle : (category ? `${category} recept` : 'Recept');
 }
 
 /**
@@ -118,9 +141,38 @@ function generateRecipeDescription(excerpt = '', category = '', totalTimeMinutes
 }
 
 /**
- * Generate comprehensive keywords
+ * Swedish stopwords that should be filtered from keywords
+ * These are common words Google ignores and can be treated as keyword spam
  */
-function generateRecipeKeywords(tags = [], category = '', title = '') {
+const SWEDISH_STOPWORDS = new Set([
+  'och', 'att', 'i', 'det', 'som', 'en', 'på', 'är', 'av', 'för', 'med',
+  'till', 'den', 'de', 'har', 'om', 'du', 'han', 'hon', 'vi', 'ni', 'så',
+  'här', 'där', 'gör', 'ska', 'kan', 'utan', 'eller', 'men', 'vad', 'hur',
+  'var', 'när', 'från', 'ut', 'in', 'all', 'alla', 'allt', 'mycket', 'lite',
+  'mer', 'få', 'något', 'några', 'just', 'bara', 'då', 'sedan', 'efter',
+  'innan', 'över', 'under', 'vid', 'mot', 'den', 'detta', 'denna', 'dessa',
+  'dig', 'mig', 'sig', 'oss', 'er', 'dem', 'sin', 'sitt', 'sina', 'vår',
+  'vårt', 'våra', 'deras', 'vars', 'vilken', 'vilket', 'vilka', 'vem',
+  // Generic adjectives that create keyword spam (WARNING #1)
+  // MINOR #5: Removed duplicate 'mycket' and 'lite' (already in line above)
+  'god', 'goda', 'super', 'extra', 'stor', 'stora', 'liten', 'små'
+]);
+
+/**
+ * Known recipe terms that should always be kept even if they match stopword patterns
+ */
+const RECIPE_TERMS = new Set([
+  'recept', 'kladdkaka', 'pannkakor', 'vafflor', 'kakor', 'tårtor',
+  'kyckling', 'pasta', 'lasagne', 'biffar', 'köttbullar', 'fisk',
+  'lax', 'vegetariskt', 'veganskt', 'glutenfritt', 'dessert', 'efterrätt'
+]);
+
+/**
+ * Generate comprehensive keywords
+ * Filters out Swedish stopwords and only keeps meaningful words
+ * CRITICAL #2: Exported to use as single source of truth
+ */
+export function generateRecipeKeywords(tags = [], category = '', title = '') {
   const baseKeywords = [
     'recept',
     'matlagning',
@@ -135,30 +187,68 @@ function generateRecipeKeywords(tags = [], category = '', title = '') {
     'Dessert': ['dessert', 'efterrätt', 'söta recept', 'bakning', 'kakor', 'tårtor'],
     'Huvudrätt': ['huvudrätt', 'middag', 'kött', 'fisk', 'kyckling', 'vegetariskt'],
     'Frukost': ['frukost', 'brunch', 'pannkakor', 'vafflor', 'morgonmat'],
-    'Förrätt': ['förrätt', 'förrätt', 'sallad', 'soppa', 'snacks'],
+    'Förrätt': ['förrätt', 'sallad', 'soppa', 'snacks'], // WARNING #3: Removed duplicate
     'Bakning': ['bakning', 'bröd', 'kakor', 'tårtor', 'fika', 'söta bakverk']
   };
   
-  const titleKeywords = title.toLowerCase().split(' ').filter(word => word.length > 3);
+  // Extract meaningful words from title
+  // Filter out: stopwords, words < 4 characters, punctuation
+  const titleKeywords = title
+    .toLowerCase()
+    .split(/[\s–\-—]+/) // Split on spaces, en-dash, em-dash, hyphen
+    .map(word => word.replace(/[.,!?;:()]/g, '')) // Remove punctuation
+    .filter(word => {
+      // Keep words that are:
+      // 1. At least 4 characters OR
+      // 2. Known recipe terms (even if short) OR
+      // 3. Not in stopword list
+      return word.length >= 4 || RECIPE_TERMS.has(word);
+    })
+    .filter(word => {
+      // Remove stopwords, but keep recipe terms
+      return !SWEDISH_STOPWORDS.has(word) || RECIPE_TERMS.has(word);
+    })
+    .filter(word => word.length > 0); // Remove empty strings
+  
+  // Filter tags through stopwords (Issue #2)
+  // Remove stopwords and short words from tags, same as title keywords
+  const filteredTags = tags
+    .map(tag => tag.toLowerCase().trim())
+    .filter(tag => {
+      // Keep tags that are at least 4 characters OR are recipe terms
+      return tag.length >= 4 || RECIPE_TERMS.has(tag);
+    })
+    .filter(tag => {
+      // Remove stopwords, but keep recipe terms
+      return !SWEDISH_STOPWORDS.has(tag) || RECIPE_TERMS.has(tag);
+    });
   
   const allKeywords = [
     ...baseKeywords,
     ...(categoryKeywords[category] || []),
-    ...tags,
+    ...filteredTags,
     ...titleKeywords
   ];
   
+  // Remove duplicates and join
   return [...new Set(allKeywords)].join(', ');
 }
 
 /**
  * Generate enhanced recipe schema with all modern features
+ * CRITICAL #2: Accept keywords parameter to use single source of truth
  */
-export function generateEnhancedRecipeSchema(recipe) {
+export function generateEnhancedRecipeSchema(recipe, keywords = null) {
+  // MEDIUM PRIORITY #7: Validate required fields to prevent errors
+  if (!recipe || !recipe.title || !recipe.slug) {
+    console.error('Invalid recipe data for schema generation:', recipe);
+    return null;
+  }
+
   const {
     title,
     excerpt,
-    heroImage,
+    image,
     author,
     publishedAt,
     updatedAt,
@@ -177,18 +267,20 @@ export function generateEnhancedRecipeSchema(recipe) {
     caloriesPerServing,
     allergens = [],
     cuisine,
-    mealType,
-    cookingMethod
+    mealType, // WARNING #5: Defined but unused - kept for future use
+    cookingMethod,
+    slug = ''
   } = recipe;
+  
+  // CRITICAL #2: Use provided keywords or generate (single source of truth)
+  const schemaKeywords = keywords !== null 
+    ? keywords 
+    : generateRecipeKeywords(tags, category, title);
 
-  const imageObject = heroImage?.src
-    ? [{
-        '@type': 'ImageObject',
-        url: `${SITE_URL}${heroImage.src}`,
-        ...(heroImage?.width ? { width: heroImage.width } : {}),
-        ...(heroImage?.height ? { height: heroImage.height } : {}),
-        caption: heroImage?.alt || title,
-      }]
+  // CRITICAL #3: Google Recipe schema requires image as simple URL array
+  // Use array of URLs only - mixing with ImageObject can cause validation issues
+  const imageArray = image?.src
+    ? [`${SITE_URL}${image.src}`]
     : undefined;
 
   const schema = {
@@ -196,7 +288,12 @@ export function generateEnhancedRecipeSchema(recipe) {
     '@type': 'Recipe',
     name: title,
     description: excerpt,
-    image: imageObject,
+    image: imageArray,
+    // Issue #4: Add mainEntityOfPage to associate recipe with exact URL
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}/recept/${slug}`,
+    },
     author: {
       '@type': 'Person',
       name: author || 'Bakstunden Team',
@@ -216,22 +313,41 @@ export function generateEnhancedRecipeSchema(recipe) {
     prepTime: prepTimeMinutes ? `PT${prepTimeMinutes}M` : undefined,
     cookTime: cookTimeMinutes ? `PT${cookTimeMinutes}M` : undefined,
     totalTime: totalTimeMinutes ? `PT${totalTimeMinutes}M` : undefined,
-    recipeYield: servings ? `${servings} portioner` : undefined,
-    recipeCategory: category || 'Dessert',
+    // CRITICAL #2: Use English for recipeYield for international visibility
+    recipeYield: servings ? `${servings} servings` : undefined,
+    // CRITICAL #2: Don't default to 'Dessert' - use undefined if category missing
+    recipeCategory: category || undefined,
     recipeCuisine: cuisine || 'Swedish',
-    keywords: tags.join(', '),
-    recipeInstructions: steps.map((step, index) => ({
-      '@type': 'HowToStep',
-      position: index + 1,
-      name: step.title || `Steg ${index + 1}`,
-      text: step.description,
-      image: step.image ? `${SITE_URL}${step.image}` : undefined,
-    })),
+    // CRITICAL #2: Use single source of truth for keywords (passed from generateRecipeMetadata)
+    keywords: schemaKeywords,
+    recipeInstructions: steps.map((step, index) => {
+      // HIGH PRIORITY #4: Enhanced HowToStep with URL anchors and proper ImageObject
+      const stepSchema = {
+        '@type': 'HowToStep',
+        position: index + 1,
+        name: step.title || `Steg ${index + 1}`,
+        text: step.description,
+        // Add anchor link for better navigation and SEO
+        url: `${SITE_URL}/recept/${slug}#step-${index + 1}`,
+      };
+      // Add image with proper ImageObject format if it exists
+      if (step.image) {
+        stepSchema.image = {
+          '@type': 'ImageObject',
+          url: `${SITE_URL}${step.image}`,
+        };
+      }
+      return stepSchema;
+    }),
     recipeIngredient: ingredients.flatMap(section => section.items || []),
     suitableForDiet: generateDietaryInfo(allergens, tags),
     cookingMethod: cookingMethod,
-    recipeDifficulty: difficulty,
-    recipeServings: servings,
+    // MINOR #1: recipeDifficulty is not officially supported by Google Recipe schema
+    // Kept for potential future use but Google ignores it
+    // recipeDifficulty: difficulty,
+    // MINOR #2: recipeServings is not an official Schema.org property
+    // Google prefers recipeYield (already included above) and servingSize (in nutrition)
+    // recipeServings: servings,
   };
 
   // Add rating if available
@@ -245,28 +361,78 @@ export function generateEnhancedRecipeSchema(recipe) {
     };
   }
 
-  // Add nutrition information
+  // MEDIUM PRIORITY #8: Add Review schema support if individual reviews exist
+  // This can significantly boost CTR in search results
+  if (recipe.reviews && Array.isArray(recipe.reviews) && recipe.reviews.length > 0) {
+    schema.review = recipe.reviews.map(review => ({
+      '@type': 'Review',
+      author: {
+        '@type': 'Person',
+        name: review.author || 'Anonymous',
+      },
+      datePublished: review.date || publishedAt,
+      reviewBody: review.text || review.reviewBody || '',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: review.rating || ratingAverage || 5,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    }));
+  }
+
+  // MEDIUM PRIORITY #7: Improved nutrition schema with English and proper property mapping
   if (nutrition.length > 0 || caloriesPerServing) {
+    // Map Swedish nutrition names to Schema.org property names
+    const propertyMap = {
+      'kalorier': 'calories',
+      'fett': 'fatContent',
+      'protein': 'proteinContent',
+      'kolhydrater': 'carbohydrateContent',
+      'socker': 'sugarContent',
+      'fiber': 'fiberContent',
+      'natrium': 'sodiumContent',
+      'kalcium': 'calciumContent',
+      'järn': 'ironContent',
+    };
+    
     schema.nutrition = {
       '@type': 'NutritionInformation',
-      calories: caloriesPerServing ? `${caloriesPerServing} kalorier` : undefined,
+      // Use English for calories for international visibility
+      calories: caloriesPerServing ? `${caloriesPerServing} calories` : undefined,
+      servingSize: servings ? `1 serving` : undefined,
+      // Map nutrition properties to Schema.org standard names
+      // MINOR #3: Remove space between value and unit for better Google compliance ("5g" vs "5 g")
       ...nutrition.reduce((acc, item) => {
-        acc[item.name] = `${item.value}${item.unit || ''}`;
+        const propertyName = propertyMap[item.name.toLowerCase()] || item.name;
+        const unit = item.unit || 'g';
+        acc[propertyName] = `${item.value}${unit}`;
         return acc;
       }, {}),
     };
   }
 
-  // Add video if available
+  // Add video if available (NICE-TO-HAVE #11: Enhanced with interaction stats)
   if (recipe.video) {
     schema.video = {
       '@type': 'VideoObject',
       name: `${title} - Videoguide`,
-      description: `Lär dig att laga ${title} med vår videoguide`,
-      thumbnailUrl: heroImage?.src ? `${SITE_URL}${heroImage.src}` : undefined,
+      description: `Lär dig att laga ${title} med vår steg-för-steg videoguide`,
+      thumbnailUrl: image?.src ? `${SITE_URL}${image.src}` : undefined,
       contentUrl: recipe.video.url,
       embedUrl: recipe.video.embedUrl,
+      uploadDate: publishedAt,
+      // MEDIUM PRIORITY #6: Duration must be in ISO 8601 format (e.g., "PT1M33S" for 1 min 33 sec)
+      // Ensure recipe.video.duration is already in ISO 8601 format!
       duration: recipe.video.duration,
+      // Add interaction statistics if available
+      ...(recipe.video.views ? {
+        interactionStatistic: {
+          '@type': 'InteractionCounter',
+          interactionType: 'https://schema.org/WatchAction',
+          userInteractionCount: recipe.video.views,
+        },
+      } : {}),
     };
   }
 
@@ -291,8 +457,15 @@ function generateDietaryInfo(allergens, tags) {
 
 /**
  * Generate FAQ schema for recipe
+ * MEDIUM PRIORITY #9: Enhanced with dynamic FAQs based on tags/allergens
+ * HIGH PRIORITY #3: Added validation to prevent invalid FAQs
  */
 export function generateRecipeFAQSchema(recipe) {
+  // HIGH PRIORITY #3: Validate required data exists
+  if (!recipe || !recipe.title || !recipe.totalTimeMinutes || !recipe.servings) {
+    return null; // Don't generate FAQ if critical data is missing
+  }
+
   const faqs = [
     {
       question: `Hur lång tid tar det att laga ${recipe.title}?`,
@@ -308,6 +481,7 @@ export function generateRecipeFAQSchema(recipe) {
     }
   ];
 
+  // Add allergen FAQ if allergens exist
   if (recipe.allergens && recipe.allergens.length > 0) {
     faqs.push({
       question: `Innehåller ${recipe.title} allergener?`,
@@ -315,10 +489,49 @@ export function generateRecipeFAQSchema(recipe) {
     });
   }
 
+  // Add dynamic FAQs based on tags
+  if (recipe.tags && Array.isArray(recipe.tags)) {
+    if (recipe.tags.includes('Vegetariskt')) {
+      faqs.push({
+        question: `Är ${recipe.title} vegetariskt?`,
+        answer: `Ja, detta recept är helt vegetariskt och innehåller inga kött- eller fiskprodukter.`
+      });
+    }
+    
+    if (recipe.tags.includes('Veganskt')) {
+      faqs.push({
+        question: `Är ${recipe.title} veganskt?`,
+        answer: `Ja, detta recept är helt veganskt och innehåller inga animaliska produkter.`
+      });
+    }
+    
+    if (recipe.tags.includes('Glutenfritt')) {
+      faqs.push({
+        question: `Är ${recipe.title} glutenfritt?`,
+        answer: `Ja, detta recept är glutenfritt och använder inga glutenhaltiga ingredienser.`
+      });
+    }
+  }
+
+  // Add storage tips FAQ if available
+  if (recipe.storageTips) {
+    faqs.push({
+      question: `Hur förvarar jag ${recipe.title}?`,
+      answer: recipe.storageTips
+    });
+  }
+
+  // Filter out undefined items and return schema
+  const validFaqs = faqs.filter(Boolean);
+  
+  if (validFaqs.length === 0) {
+    return null; // Don't return empty FAQ schema
+  }
+
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faqs.map(faq => ({
+    mainEntity: validFaqs.map(faq => ({
       '@type': 'Question',
       name: faq.question,
       acceptedAnswer: {
@@ -353,16 +566,124 @@ export function generateRelatedContentSchema(relatedRecipes, category) {
     '@type': 'ItemList',
     name: `Relaterade ${safeCategory} recept`,
     description: `Fler ${categoryLabel} recept du kanske gillar`,
-    itemListElement: relatedRecipes.map((recipe, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      item: {
+    itemListElement: relatedRecipes.map((recipe, index) => {
+      // CRITICAL #1: Use optional chaining to prevent runtime errors
+      // WARNING #4: Use array format for image (Google prefers this)
+      const item = {
         '@type': 'Recipe',
         name: recipe.title,
         url: `${SITE_URL}/recept/${recipe.slug}`,
-        image: recipe.heroImage?.src ? `${SITE_URL}${recipe.heroImage.src}` : undefined,
         description: recipe.excerpt,
+      };
+      
+      // Only add image if it exists, in array format
+      if (recipe.image?.src) {
+        item.image = [`${SITE_URL}${recipe.image.src}`];
+      }
+      
+      return {
+        '@type': 'ListItem',
+        position: index + 1,
+        item,
+      };
+    }),
+  };
+}
+
+/**
+ * HIGH PRIORITY #5: Generate BreadcrumbList schema for recipe pages
+ * Helps Google understand site structure and improves navigation in search results
+ */
+export function generateRecipeBreadcrumbSchema(recipe, category) {
+  const itemListElement = [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Hem',
+      item: SITE_URL,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Recept',
+      item: `${SITE_URL}/recept`,
+    },
+  ];
+
+  // Add category breadcrumb if available
+  // HIGH PRIORITY #2: Use proper category routes if available
+  // Note: Currently using query params. Consider using /kategorier/[slug] if category slug is available
+  if (category) {
+    itemListElement.push({
+      '@type': 'ListItem',
+      position: 3,
+      name: category,
+      // Use query params for now - can be improved to use /kategorier/[slug] if slug mapping exists
+      item: `${SITE_URL}/recept?category=${encodeURIComponent(category)}`,
+    });
+  }
+
+  // Add recipe as final breadcrumb
+  itemListElement.push({
+    '@type': 'ListItem',
+    position: category ? 4 : 3,
+    name: recipe.title,
+    item: `${SITE_URL}/recept/${recipe.slug}`,
+  });
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement,
+  };
+}
+
+/**
+ * HIGH PRIORITY #6: Generate Organization schema
+ * Use once on homepage or in root layout
+ */
+export function generateOrganizationSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Bakstunden',
+    url: SITE_URL,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/bak-stunden.png`,
+      width: 512,
+      height: 512,
+    },
+    // MEDIUM PRIORITY #5: Add social media profiles when available
+    // MINOR #4: Social media links boost E-E-A-T and brand authenticity
+    sameAs: [
+      // TODO: Add social media profiles once accounts are created
+      // Uncomment and update with actual social media URLs:
+      // 'https://www.instagram.com/bakstunden',
+      // 'https://www.facebook.com/bakstunden',
+      // 'https://twitter.com/bakstunden',
+      // 'https://pinterest.com/bakstunden',
+    ].filter(Boolean), // Remove empty entries
+  };
+}
+
+/**
+ * LOW PRIORITY #10: Generate WebSite schema with Search Action
+ * Enables Google search box in search results
+ */
+export function generateWebsiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Bakstunden',
+    url: SITE_URL,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_URL}/sok?q={search_term_string}`,
       },
-    })),
+      'query-input': 'required name=search_term_string',
+    },
   };
 }

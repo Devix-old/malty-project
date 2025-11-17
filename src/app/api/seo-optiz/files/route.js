@@ -49,7 +49,7 @@ function analyzeFrontmatter(data, fallbackTitle) {
 
     // Optional but valuable fields
     if (!data?.tags || (Array.isArray(data.tags) && data.tags.length === 0)) warnings.push('no-tags');
-    if (!data?.heroImage) warnings.push('no-hero-image');
+    if (!data?.image) warnings.push('no-hero-image');
     if (!data?.author) warnings.push('no-author');
 
     return {

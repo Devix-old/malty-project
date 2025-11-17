@@ -212,7 +212,7 @@ Primary: "kycklingfärsbiffar recept snabbt"
 
 ### Fix 1: Alt Text
 ```yaml
-heroImage:
+image:
   src: "/images/recipes/kycklingfarsbiffar-recept.webp"
   alt: "Kycklingfärsbiffar recept - saftiga kycklingfärsbiffar med kryddor stekta gyllene serverade på tallrik med potatismos och grönsaker"
 ```

@@ -33,11 +33,11 @@ export default function SmartInternalLinks({ links, currentRecipe }) {
                     className="group bg-gray-50 dark:bg-gray-700 rounded-lg p-4 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-all duration-300 hover:scale-105"
                   >
                     <div className="flex items-start space-x-3">
-                      {recipe.heroImage?.src && (
+                      {recipe.image?.src && (
                         <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
                           <Image
-                            src={recipe.heroImage.src}
-                            alt={recipe.heroImage.alt || recipe.title}
+                            src={recipe.image.src}
+                            alt={recipe.image.alt || recipe.title}
                             fill
                             className="object-cover group-hover:scale-110 transition-transform duration-300"
                             sizes="64px"
@@ -188,11 +188,11 @@ export function TrendingRecipes({ recipes, title = "Populära recept just nu" })
               href={`/recept/${recipe.slug}`}
               className="group bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 border border-gray-100 dark:border-gray-700"
             >
-              {recipe.heroImage?.src && (
+              {recipe.image?.src && (
                 <div className="relative h-48 overflow-hidden">
                   <Image
-                    src={recipe.heroImage.src}
-                    alt={recipe.heroImage.alt || recipe.title}
+                    src={recipe.image.src}
+                    alt={recipe.image.alt || recipe.title}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-300"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

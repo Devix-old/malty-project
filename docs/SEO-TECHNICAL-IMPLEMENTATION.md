@@ -29,11 +29,11 @@ export default async function sitemap() {
         changeFrequency: changeFreq,
         priority: priority,
         // Add image data for image sitemap
-        images: recipe.heroImage?.src ? [
+        images: recipe.image?.src ? [
           {
-            loc: `${baseUrl}${recipe.heroImage.src}`,
-            title: recipe.heroImage.alt || recipe.title,
-            caption: recipe.heroImage.alt || recipe.title,
+            loc: `${baseUrl}${recipe.image.src}`,
+            title: recipe.image.alt || recipe.title,
+            caption: recipe.image.alt || recipe.title,
           }
         ] : [],
       };
@@ -62,11 +62,11 @@ export default async function imagesSitemap() {
   const recipes = await getAllContent('recipes');
 
   const imageEntries = recipes
-    .filter(r => r.heroImage?.src)
+    .filter(r => r.image?.src)
     .map(recipe => ({
-      loc: `${baseUrl}${recipe.heroImage.src}`,
-      title: recipe.heroImage.alt || recipe.title,
-      caption: recipe.heroImage.alt || recipe.title,
+      loc: `${baseUrl}${recipe.image.src}`,
+      title: recipe.image.alt || recipe.title,
+      caption: recipe.image.alt || recipe.title,
     }));
 
   return imageEntries;
@@ -87,9 +87,9 @@ export function generateEnhancedRecipeSchema(recipe) {
     // ... existing fields ...
     
     // Add image array (not just single image)
-    image: recipe.heroImage?.src 
+    image: recipe.image?.src 
       ? [
-          `${SITE_URL}${recipe.heroImage.src}`,
+          `${SITE_URL}${recipe.image.src}`,
           // Add step images if available
           ...(recipe.steps?.filter(s => s.image).map(s => `${SITE_URL}${s.image}`) || [])
         ]
@@ -124,7 +124,7 @@ export function generateEnhancedRecipeSchema(recipe) {
  * Generate SEO-optimized alt text for recipe images
  */
 export function generateRecipeAltText(recipe, imageType = 'hero') {
-  const { title, category, heroImage } = recipe;
+  const { title, category, image } = recipe;
   
   // Extract primary keyword from title (usually first 2-3 words)
   const primaryKeyword = title.split(' ').slice(0, 3).join(' ');
@@ -134,7 +134,7 @@ export function generateRecipeAltText(recipe, imageType = 'hero') {
   
   if (imageType === 'hero') {
     // Add visual description
-    altText += ` - ${heroImage?.alt || title}`;
+    altText += ` - ${image?.alt || title}`;
     
     // Add serving context if available
     if (recipe.servings) {
@@ -366,7 +366,7 @@ export function validateRecipeContent(recipe) {
   }
   
   // Check alt text
-  if (!recipe.heroImage?.alt || recipe.heroImage.alt.length < 30) {
+  if (!recipe.image?.alt || recipe.image.alt.length < 30) {
     issues.push({
       type: 'alt_text',
       severity: 'error',

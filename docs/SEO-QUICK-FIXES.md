@@ -16,7 +16,7 @@
 
 **Action:** 
 - [ ] Audit all 78+ recipe files
-- [ ] Update heroImage.alt in frontmatter
+- [ ] Update image.alt in frontmatter
 - [ ] Ensure primary keyword included naturally
 
 ### 2. Add H2 Headings to All Recipe Content

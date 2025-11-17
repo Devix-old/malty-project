@@ -27,10 +27,10 @@ export default function RecipeCard({ recipe, index = 0, className, sizes = "(max
     >
       <Link href={`/recept/${recipe.slug}`} className="block">
         <div className="relative aspect-[4/3] overflow-hidden bg-gray-200 dark:bg-gray-700">
-          {recipe.heroImage?.src ? (
+          {recipe.image?.src ? (
             <Image
-              src={recipe.heroImage.src}
-              alt={recipe.heroImage.alt || recipe.title}
+              src={recipe.image.src}
+              alt={recipe.image.alt || recipe.title}
               fill
               sizes={sizes}
               className="object-cover group-hover:scale-105 transition-transform duration-300"

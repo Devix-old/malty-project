@@ -85,7 +85,7 @@ export default async function SnabbmatPage() {
           '@type': 'Recipe',
           name: recipe.title,
           url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se'}/recept/${recipe.slug}`,
-          image: recipe.heroImage?.src || recipe.heroImage,
+          image: recipe.image?.src || recipe.image,
           description: recipe.excerpt,
           totalTime: `PT${recipe.totalTimeMinutes || 30}M`
         }
