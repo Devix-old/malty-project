@@ -1,15 +1,16 @@
-# Bakstunden Robots.txt
-
 User-agent: *
 Allow: /
+Allow: /_next/
+Allow: /_next/image/
+Allow: /images/
+Allow: /images/recipes/
 
-# Disallow admin/private areas (if any in future)
-Disallow: /api/
+# Block ONLY dangerous areas
 Disallow: /admin/
+Disallow: /api/internal
+Disallow: /api/admin
+Disallow: /private/
 
-# Sitemap location
+# Sitemap
 Sitemap: https://bakstunden.se/sitemap.xml
-
-# Crawl-delay for politeness (optional)
-Crawl-delay: 1
-
+Sitemap: https://bakstunden.se/stories-sitemap

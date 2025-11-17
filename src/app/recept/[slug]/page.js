@@ -192,6 +192,13 @@ export default async function RecipePage({ params }) {
 
   return (
     <>
+      {/* Add image_src link tag for better social media image recognition */}
+      {frontmatter.image?.src && (
+        <link 
+          rel="image_src" 
+          href={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://bakstunden.se'}${frontmatter.image.src}`} 
+        />
+      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(recipeSchema) }}
@@ -214,6 +221,7 @@ export default async function RecipePage({ params }) {
       )}
 
       {/* 🧁 HERO SECTION */}
+      {/* CRITICAL: Hero image appears EARLY in HTML with priority={true} to force Google to use it */}
       {frontmatter.image?.src && (
         <section className="relative w-full h-[70vh] min-h-[600px] max-h-[800px]">
           <Image
@@ -221,7 +229,7 @@ export default async function RecipePage({ params }) {
             alt={frontmatter.image.alt || `${frontmatter.title} - Bakstunden recept`}
             fill
             className="object-cover"
-            priority
+            priority={true}
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900/95 via-gray-900/50 to-transparent"></div>
@@ -284,7 +292,7 @@ export default async function RecipePage({ params }) {
                 <div className="flex items-center gap-3 mb-8">
                 </div>
 
-                {/* Inline hero image */}
+                {/* Inline hero image - also set priority to ensure Google recognizes it */}
                 {frontmatter.image?.src && (
                   <div className="float-right ml-8 mb-6 w-full md:w-1/2 lg:w-2/5">
                     <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
@@ -293,6 +301,7 @@ export default async function RecipePage({ params }) {
                         alt={frontmatter.image.alt || `${frontmatter.title} - Bakstunden recept`}
                         fill
                         className="object-cover"
+                        priority={true}
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     </div>
