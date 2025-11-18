@@ -42,3 +42,6 @@ next-env.d.ts
 
 # SEO Audit Dashboard (optional - uncomment if you want to exclude from git)
 # /src/app/seo-optiz
+
+# robots.txt in app directory (use public/robots.txt instead)
+src/app/robots.txt
