@@ -315,6 +315,13 @@ export default async function RecipePage({ params }) {
                   <MDXRemote source={content} />
                 </div>
 
+                {/* HB Agency Ad - In-page */}
+                <div className="hb-ad-inpage my-8">
+                  <div className="hb-ad-inner"> 
+                    <div className="hbagency_cls hbagency_space_241545"></div>
+                  </div> 
+                </div>
+
                 <div className="clear-both"></div>
               </div>
             </section>
