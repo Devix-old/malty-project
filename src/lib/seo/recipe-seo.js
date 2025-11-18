@@ -611,15 +611,28 @@ export function generateRecipeBreadcrumbSchema(recipe, category) {
   ];
 
   // Add category breadcrumb if available
-  // HIGH PRIORITY #2: Use proper category routes if available
-  // Note: Currently using query params. Consider using /kategorier/[slug] if category slug is available
+  // Use proper category routes /kategorier/[slug]
   if (category) {
+    // Try to find category slug from categories
+    let categorySlug = null;
+    try {
+      const { getAllCategories } = require('@/lib/categories');
+      const allCategories = getAllCategories();
+      const categoryObj = allCategories.find(cat => cat.name === category);
+      categorySlug = categoryObj ? categoryObj.slug : null;
+    } catch (e) {
+      // Fallback if categories not available
+    }
+    
+    const categoryUrl = categorySlug 
+      ? `${SITE_URL}/kategorier/${categorySlug}`
+      : `${SITE_URL}/recept?category=${encodeURIComponent(category)}`;
+    
     itemListElement.push({
       '@type': 'ListItem',
       position: 3,
       name: category,
-      // Use query params for now - can be improved to use /kategorier/[slug] if slug mapping exists
-      item: `${SITE_URL}/recept?category=${encodeURIComponent(category)}`,
+      item: categoryUrl,
     });
   }
 

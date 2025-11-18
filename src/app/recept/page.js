@@ -3,6 +3,8 @@ import RecipeListingClient from '@/components/recipe/RecipeListingClient';
 import { Suspense } from 'react';
 import StructuredData from '@/components/seo/StructuredData';
 import { generateItemListSchema } from '@/lib/seo';
+import { getAllCategories } from '@/lib/categories';
+import { redirect } from 'next/navigation';
 
 export const metadata = {
   title: 'Alla recept - Matrecept för alla tillfällen',
@@ -29,7 +31,18 @@ export const metadata = {
   },
 };
 
-export default async function RecipesPage() {
+export default async function RecipesPage({ searchParams }) {
+  // Redirect /recept?category=... to /kategorier/[slug]
+  if (searchParams?.category) {
+    const categoryName = searchParams.category;
+    const allCategories = getAllCategories();
+    const categoryObj = allCategories.find(cat => cat.name === categoryName);
+    
+    if (categoryObj) {
+      redirect(`/kategorier/${categoryObj.slug}`);
+    }
+  }
+
   // Load all recipes from MDX files
   const recipes = await getAllContent('recipes');
 

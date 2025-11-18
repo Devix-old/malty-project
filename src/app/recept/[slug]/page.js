@@ -35,7 +35,9 @@ import {
 import SmartInternalLinks, { CategoryNavigation, TrendingRecipes } from '@/components/seo/SmartInternalLinks';
 import { generateRecipeMetadata, generateEnhancedRecipeSchema, generateRelatedContentSchema, generateRecipeKeywords } from '@/lib/seo/recipe-seo';
 import { generateInternalLinks, generateContextualLinks } from '@/lib/seo/internal-linking';
-import { getAllCategories } from '@/lib/categories';
+import { getAllCategories, getCategoryBySlug } from '@/lib/categories';
+import AdLeaderboard from '@/components/ads/AdLeaderboard';
+import AdInPage from '@/components/ads/AdInPage';
 
 // Icon mapping function
 function getIconComponent(iconName) {
@@ -97,6 +99,11 @@ export default async function RecipePage({ params }) {
   // Get all categories for navigation
   const allCategories = getAllCategories();
 
+  // Find category slug for breadcrumb
+  const categoryObj = allCategories.find(cat => cat.name === frontmatter.category);
+  const categorySlug = categoryObj ? categoryObj.slug : null;
+  const categoryUrl = categorySlug ? `/kategorier/${categorySlug}` : `/recept?category=${encodeURIComponent(frontmatter.category)}`;
+
   // Generate internal links
   const internalLinks = await generateInternalLinks(frontmatter);
   const contextualLinks = generateContextualLinks(frontmatter, internalLinks);
@@ -147,7 +154,7 @@ export default async function RecipePage({ params }) {
   const breadcrumbs = [
     { name: 'Hem', url: '/' },
     { name: 'Recept', url: '/recept' },
-    { name: frontmatter.category, url: `/kategorier/${frontmatter.category?.toLowerCase()}-recept` },
+    { name: frontmatter.category, url: categoryUrl },
     { name: frontmatter.title }
   ];
 
@@ -237,7 +244,7 @@ export default async function RecipePage({ params }) {
           {/* Category Badge - moved to bottom right */}
           <div className="absolute bottom-6 right-6 md:bottom-8 md:right-8">
             <Link
-              href={`/recept?category=${encodeURIComponent(frontmatter.category)}`}
+              href={categoryUrl}
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/95 backdrop-blur-md text-gray-900 rounded-full text-sm font-semibold shadow-xl hover:bg-white hover:shadow-2xl transition-all duration-300 hover:scale-105"
             >
               <ChefHat className="w-4 h-4" />
@@ -272,13 +279,17 @@ export default async function RecipePage({ params }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs
             items={[
-              { name: 'Recept', url: '/recept' },
-              { name: frontmatter.category, url: `/recept?category=${frontmatter.category}` },
+              { name: frontmatter.category, url: categoryUrl },
               { name: frontmatter.title },
             ]}
           />
         </div>
       </section>
+
+      {/* Leaderboard Ad - Top (728x90) */}
+      <div className="bg-gray-50 dark:bg-gray-950 py-6">
+        <AdLeaderboard />
+      </div>
 
       {/* 📝 MAIN RECIPE CONTENT */}
       <article className="bg-gray-50 dark:bg-gray-950 pb-12">
@@ -316,11 +327,7 @@ export default async function RecipePage({ params }) {
                 </div>
 
                 {/* HB Agency Ad - In-page */}
-                <div className="hb-ad-inpage my-8">
-                  <div className="hb-ad-inner"> 
-                    <div className="hbagency_cls hbagency_space_241545"></div>
-                  </div> 
-                </div>
+                <AdInPage />
 
                 <div className="clear-both"></div>
               </div>
@@ -413,11 +420,17 @@ export default async function RecipePage({ params }) {
             </div>
           </section>
 
+          {/* Leaderboard Ad - After Recipe Steps (728x90) */}
+          <AdLeaderboard />
+
           {/* SEO Sections - Placed FIRST after recipe steps for optimal SEO */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <RecipeTipsSection recipe={frontmatter} tips={tips} />
             <RecipeFAQSection recipe={frontmatter} faqs={faqs} />
           </div>
+
+          {/* Leaderboard Ad - Before Related Recipes (728x90) */}
+          <AdLeaderboard />
 
           {/* Related Recipes - Placed after SEO sections */}
           {relatedRecipes.length > 0 && (

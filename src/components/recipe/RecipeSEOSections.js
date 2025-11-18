@@ -175,7 +175,17 @@ export function RelatedRecipesSection({ relatedRecipes, category, currentRecipe 
         {relatedRecipes.length > 8 && (
           <div className="mt-4 sm:mt-6 text-center">
             <Link
-              href={`/kategorier/${category?.toLowerCase()}-recept`}
+              href={(() => {
+                // Find category slug
+                try {
+                  const { getAllCategories } = require('@/lib/categories');
+                  const allCategories = getAllCategories();
+                  const categoryObj = allCategories.find(cat => cat.name === category);
+                  return categoryObj ? `/kategorier/${categoryObj.slug}` : `/recept?category=${encodeURIComponent(category)}`;
+                } catch (e) {
+                  return `/recept?category=${encodeURIComponent(category)}`;
+                }
+              })()}
               className="inline-flex items-center px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-lg hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors text-sm font-medium"
             >
               Se alla {category} recept

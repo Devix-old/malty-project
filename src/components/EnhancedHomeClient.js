@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { Clock, Users, Star, ArrowRight, Utensils, Heart, Globe, Zap } from 'lucide-react';
 import RecipeCard from '@/components/recipe/RecipeCard';
 import { getAllCategories } from '@/lib/categories';
+import AdLeaderboard from '@/components/ads/AdLeaderboard';
 
 export default function EnhancedHomeClient({
   popularCategories,
@@ -146,6 +147,9 @@ export default function EnhancedHomeClient({
         </div>
       </section>
 
+      {/* Leaderboard Ad - After Hero */}
+      <AdLeaderboard />
+
       {/* Quick Access */}
       <section className="py-16 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -206,6 +210,8 @@ export default function EnhancedHomeClient({
         </div>
       </section>
 
+      {/* Leaderboard Ad - After Quick Access */}
+      <AdLeaderboard />
 
       {/* Featured Recipes */}
       <section className="py-16 bg-white dark:bg-gray-900">
@@ -501,6 +507,9 @@ export default function EnhancedHomeClient({
           </div>
         </div>
       </section>
+
+      {/* Leaderboard Ad - Before FAQ */}
+      <AdLeaderboard />
 
       {/* FAQ Section - SEO Rich */}
       <section className="py-16 bg-white dark:bg-gray-900">
