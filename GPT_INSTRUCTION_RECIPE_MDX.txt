@@ -208,7 +208,6 @@ Kalorier (kcal), Protein (g), Kolhydrater (g), Fett (g), Fiber (g)
 - Complete file is non-negotiable
 
 **Content MUST rank top 1-10. Quality + completeness + SEO = rankings.**
-
 ---
 
 ## COMPLETE MDX EXAMPLE
@@ -349,3 +348,4 @@ Att avsluta en måltid eller fikastund med chokladkaféets kladdkaka är att unn
 - 7 FAQs × ~100-150 words each
 - 6 steps × ~100-150 words each
 - All sections complete and SEO-optimized
+
