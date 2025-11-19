@@ -20,7 +20,6 @@ import {
   Sparkles,
   CheckCircle
 } from 'lucide-react';
-import AdLeaderboard from '@/components/ads/AdLeaderboard';
 
 export default function EnhancedKategorierClient({
   allCategories,
@@ -96,9 +95,6 @@ export default function EnhancedKategorierClient({
           </motion.div>
         </div>
       </section>
-
-      {/* Leaderboard Ad - After Hero */}
-      <AdLeaderboard />
 
       {/* Search and Filter Section */}
       <section className="py-8 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
@@ -220,9 +216,6 @@ export default function EnhancedKategorierClient({
         </div>
       </section>
 
-      {/* Leaderboard Ad - After Popular Categories */}
-      <AdLeaderboard />
-
       {/* All Categories Section */}
       <section className="py-16 bg-gray-50 dark:bg-gray-800/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -333,9 +326,6 @@ export default function EnhancedKategorierClient({
           )}
         </div>
       </section>
-
-      {/* Leaderboard Ad - Before FAQ */}
-      <AdLeaderboard />
 
       {/* FAQ Section */}
       <section className="py-16">

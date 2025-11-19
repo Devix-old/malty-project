@@ -8,7 +8,6 @@ import EnhancedSearchBar from '@/components/ui/EnhancedSearchBar';
 import Pagination from '@/components/ui/Pagination';
 import CategoryHero from '@/components/ui/CategoryHero';
 import Tag from '@/components/ui/Tag';
-import AdLeaderboard from '@/components/ads/AdLeaderboard';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { searchContent, filterRecipes, sortRecipes, getUniqueFilterValues } from '@/lib/utils/search';
@@ -127,9 +126,6 @@ export default function RecipeListingClient({ initialRecipes, categoryName = nul
           </div>
         )}
 
-        {/* Leaderboard Ad - After Header */}
-        <AdLeaderboard />
-
         {/* Search and Filter */}
         <div className="bg-white dark:bg-gray-800 p-6 md:p-8 mb-12 border border-gray-100 dark:border-gray-700">
           <div className="flex flex-col md:flex-row gap-4 mb-6">
@@ -218,9 +214,6 @@ export default function RecipeListingClient({ initialRecipes, categoryName = nul
                 />
               ))}
             </div>
-
-            {/* Leaderboard Ad - After Recipe Grid */}
-            <AdLeaderboard />
 
             {/* Pagination */}
             {totalPages > 1 && (

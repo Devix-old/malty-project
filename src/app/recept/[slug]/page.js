@@ -36,8 +36,6 @@ import SmartInternalLinks, { CategoryNavigation, TrendingRecipes } from '@/compo
 import { generateRecipeMetadata, generateEnhancedRecipeSchema, generateRelatedContentSchema, generateRecipeKeywords } from '@/lib/seo/recipe-seo';
 import { generateInternalLinks, generateContextualLinks } from '@/lib/seo/internal-linking';
 import { getAllCategories, getCategoryBySlug } from '@/lib/categories';
-import AdLeaderboard from '@/components/ads/AdLeaderboard';
-import AdInPage from '@/components/ads/AdInPage';
 
 // Icon mapping function
 function getIconComponent(iconName) {
@@ -286,11 +284,6 @@ export default async function RecipePage({ params }) {
         </div>
       </section>
 
-      {/* Leaderboard Ad - Top (728x90) */}
-      <div className="bg-gray-50 dark:bg-gray-950 py-6">
-        <AdLeaderboard />
-      </div>
-
       {/* 📝 MAIN RECIPE CONTENT */}
       <article className="bg-gray-50 dark:bg-gray-950 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -325,9 +318,6 @@ export default async function RecipePage({ params }) {
                 <div className="recipe-blog-content">
                   <MDXRemote source={content} />
                 </div>
-
-                {/* HB Agency Ad - In-page */}
-                <AdInPage />
 
                 <div className="clear-both"></div>
               </div>
@@ -420,17 +410,11 @@ export default async function RecipePage({ params }) {
             </div>
           </section>
 
-          {/* Leaderboard Ad - After Recipe Steps (728x90) */}
-          <AdLeaderboard />
-
           {/* SEO Sections - Placed FIRST after recipe steps for optimal SEO */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <RecipeTipsSection recipe={frontmatter} tips={tips} />
             <RecipeFAQSection recipe={frontmatter} faqs={faqs} />
           </div>
-
-          {/* Leaderboard Ad - Before Related Recipes (728x90) */}
-          <AdLeaderboard />
 
           {/* Related Recipes - Placed after SEO sections */}
           {relatedRecipes.length > 0 && (
